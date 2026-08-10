@@ -4,16 +4,17 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'La Première Guerre mondiale (1914-1918)',
   motsCles:['1914','1918','guerre de tranchées','Verdun','génocide arménien','armistice','guerre totale','poilus'],
   contenu:{
-    objectifs:['Comprendre la notion de guerre totale.','Situer les grandes phases du conflit.'],
+    objectifs:['Situer précisément les trois grandes phases du conflit.','Expliquer la notion de guerre totale avec des exemples.','Connaître le bilan humain et le règlement de la guerre.'],
     notions:[
-      {terme:'Guerre totale', def:'mobilisation de tous : soldats, économie, société, colonies.'},
-      {terme:'Guerre de position', def:'à partir de 1915, front figé dans les tranchées (ex. Verdun, 1916).'},
-      {terme:'Génocide arménien', def:'extermination des Arméniens par l’Empire ottoman (1915-1916).'},
-      {terme:'Armistice', def:'11 novembre 1918, fin des combats.'}
+      {terme:'Les camps', def:'la Triple-Entente (France, Royaume-Uni, Russie, puis États-Unis en 1917) contre les Empires centraux (Allemagne, Autriche-Hongrie, Empire ottoman).'},
+      {terme:'Guerre totale', def:'mobilisation de tous les moyens : soldats du front, économie de guerre (usines, emprunts), femmes à l’arrière (« munitionnettes »), colonies et propagande.'},
+      {terme:'Guerre de position', def:'de fin 1914 à 1918, le front se fige dans les tranchées ; ex. bataille de Verdun (février–décembre 1916, ~700 000 morts et blessés).'},
+      {terme:'Génocide arménien', def:'extermination des Arméniens par l’Empire ottoman en 1915-1916 (environ 1,2 million de victimes).'},
+      {terme:'Armistice', def:'signé le 11 novembre 1918, il met fin aux combats.'}
     ],
-    essentiel:'<p>La « <b>Grande Guerre</b> » oppose la Triple-Entente aux Empires centraux. Après une guerre de mouvement, le front se fige : c’est la <b>guerre des tranchées</b>, très meurtrière (<b>Verdun</b>). C’est une <b>guerre totale</b> qui bouleverse les sociétés.</p>',
-    exemple:'<p>1917 : entrée en guerre des États-Unis et révolutions russes → tournant du conflit.</p>',
-    retenir:'Traité de <b>Versailles</b> (1919) : l’Allemagne, jugée responsable, est lourdement sanctionnée.'
+    essentiel:'<p>Déclenchée après l’attentat de <b>Sarajevo</b> (28 juin 1914), la « <b>Grande Guerre</b> » connaît trois phases : une <b>guerre de mouvement</b> (août–novembre 1914), une longue <b>guerre de position</b> dans les <b>tranchées</b> (1915-1917, ex. <b>Verdun</b> en 1916), puis une <b>guerre de mouvement finale</b> en 1918.</p><p>C’est une <b>guerre totale</b> et industrielle, d’une violence de masse extrême, qui mobilise sociétés, économies et colonies. Le bilan est d’environ <b>10 millions de morts</b> et de nombreux « gueules cassées » (mutilés).</p>',
+    exemple:'<p><b>1917, année charnière :</b> entrée en guerre des <b>États-Unis</b> (avril), <b>révolutions russes</b> (février puis octobre) menant au retrait de la Russie, et <b>mutineries</b> dans l’armée française après l’échec du Chemin des Dames.</p>',
+    retenir:'Dates clés : <b>28 juin 1914</b> (Sarajevo) · <b>1916</b> (Verdun) · <b>1917</b> (USA + révolutions russes) · <b>11 nov. 1918</b> (armistice) · <b>28 juin 1919</b> (traité de Versailles : l’Allemagne, jugée responsable, est lourdement sanctionnée).'
   }
 },
 {
