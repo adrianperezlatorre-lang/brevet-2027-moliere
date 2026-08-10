@@ -197,6 +197,29 @@ function redacBlock(f){
   </div>`;
 }
 
+/* ---- Vidéos de révision (recherche YouTube ciblée par matière/chaîne) ---- */
+const VIDEO_CHAINE = {
+  svt:'Mme SVT',           // chaîne de révision SVT collège
+  maths:'maths',
+  francais:'français brevet',
+  histoire:'histoire brevet',
+  geographie:'géographie brevet',
+  emc:'EMC brevet',
+  physique:'physique chimie brevet',
+  techno:'technologie brevet'
+};
+function videoBlock(f){
+  // recherche YouTube préremplie : toujours valide, jamais de lien mort
+  const chaine = VIDEO_CHAINE[f.matiereKey] || 'brevet';
+  const requete = `${chaine} ${f.titre} ${f.niveau}`;
+  const url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(requete);
+  const label = f.matiereKey==='svt' ? 'Voir les vidéos (Mme SVT) ↗' : 'Voir des vidéos de révision ↗';
+  return `<div class="block"><h2>📺 Vidéos de révision</h2>
+    <a class="btn-video" href="${url}" target="_blank" rel="noopener">▶ ${label}</a>
+    <p class="video-note">Ouvre une sélection de vidéos YouTube sur ce thème${f.matiereKey==='svt'?' (chaîne Mme SVT)':''}.</p>
+  </div>`;
+}
+
 /* ---- Contenu d'une fiche ---- */
 function ficheFull(f, {compact=false}={}){
   const m = M_BY_KEY[f.matiereKey];
@@ -228,6 +251,7 @@ function ficheFull(f, {compact=false}={}){
       ${block('Exemple','✏️',exemple)}
       ${retenir}
       ${redacBlock(f)}
+      ${videoBlock(f)}
       ${block('Mots-clés','🔖',`<div class="chips">${chips}</div>`)}
     </div>
     <div class="fiche-foot">
