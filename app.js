@@ -267,9 +267,65 @@ function renderRecherche(q){
 function renderNav(active){
   $('#subjectnav').innerHTML =
     `<a href="#accueil" class="${active==='accueil'?'active':''}">🏠 Accueil</a>` +
+    `<a href="#pratique" class="navpratique ${active==='pratique'?'active':''}">📝 Pratique</a>` +
     MATIERES.map(m =>
       `<a href="#matiere/${m.key}" class="${active===m.key?'active':''}">${m.emoji} ${m.nom}</a>`
     ).join('');
+}
+
+/* ---- Pratique : annales « centre étranger – groupe 1 » 2026 ---- */
+const PRATIQUE = window.PRATIQUE || [];
+
+function renderPratiqueList(){
+  const cards = PRATIQUE.map(ex => {
+    const m = M_BY_KEY[ex.matiereKey];
+    const themes = ex.themes.map(t=>`<span>${t}</span>`).join('');
+    return `<div class="prat-card" style="--c:${m.color}" data-goto="pratique/${ex.id}">
+      <div class="tags"><span class="tag matiere" style="--c:${m.color}">${m.emoji} ${ex.matiere}</span>
+        <span class="tag niveau">${ex.date}</span></div>
+      <h3>${ex.titre}</h3>
+      <div class="prat-themes">${themes}</div>
+    </div>`;
+  }).join('');
+  app.innerHTML = `
+    <div class="section-title"><h1>📝 Pratique</h1>
+      <span class="count">Annales 2026 · Centre étranger — groupe 1</span></div>
+    <p class="lead">Les épreuves telles qu’elles sont tombées au Lycée Molière (groupe 1, mi-juin 2026).
+      Entraîne-toi sur les <b>thèmes officiels</b> : chaque question a sa <b>correction en vert</b> juste en dessous.
+      Le <b>sujet officiel complet</b> (avec le corrigé) est lié dans chaque épreuve.</p>
+    <div class="fiche-grid">${cards}</div>`;
+}
+
+function renderPratiqueExam(id){
+  const ex = PRATIQUE.find(x=>x.id===id);
+  if(!ex){ renderPratiqueList(); return; }
+  const m = M_BY_KEY[ex.matiereKey];
+  let qn = 0;
+  const exos = ex.exercices.map(exo => {
+    const qs = exo.questions.map(item => {
+      qn++;
+      return `<div class="prat-q">
+        <p class="prat-enonce"><span class="prat-num">${qn}</span> ${item.q}</p>
+        <div class="prat-sol"><span class="prat-sol-lbl">✅ Correction</span> ${item.sol}</div>
+      </div>`;
+    }).join('');
+    return `<div class="prat-exo"><h2>${exo.titre}</h2>${qs}</div>`;
+  }).join('');
+  app.innerHTML = `
+    <div class="backlink" data-goto="pratique">← Toutes les épreuves</div>
+    <article class="fiche prat" style="--c:${m.color}">
+      <div class="fiche-head">
+        <div class="tags"><span class="tag matiere" style="--c:${m.color}">${m.emoji} ${ex.matiere}</span>
+          <span class="tag niveau">${ex.date} · groupe 1</span></div>
+        <h1>${ex.titre} — Brevet 2026</h1>
+      </div>
+      <div class="fiche-body">
+        <p>${ex.intro}</p>
+        <p><a class="prat-officiel" href="${ex.officiel}" target="_blank" rel="noopener">📄 Sujet officiel + corrigé complet ↗</a></p>
+        <div class="prat-toolbar"><button class="btn btn-ghost" data-toggle-sol>🙈 Masquer les corrections</button></div>
+        <div class="prat-exos">${exos}</div>
+      </div>
+    </article>`;
 }
 
 function route(){
@@ -277,6 +333,8 @@ function route(){
   window.scrollTo(0,0);
   if(hash.startsWith('matiere/')){ const k=hash.split('/')[1]; renderNav(k); renderMatiere(k); }
   else if(hash.startsWith('fiche/')){ renderNav(''); renderFiche(hash.split('/')[1]); }
+  else if(hash.startsWith('pratique/')){ renderNav('pratique'); renderPratiqueExam(hash.split('/')[1]); }
+  else if(hash==='pratique'){ renderNav('pratique'); renderPratiqueList(); }
   else if(hash.startsWith('q/')){ renderNav(''); renderRecherche(hash.slice(2)); }
   else { renderNav('accueil'); renderAccueil(); }
 }
@@ -305,6 +363,13 @@ document.addEventListener('click', e => {
 
   const kw = e.target.closest('[data-kw]');
   if(kw){ location.hash = 'q/' + encodeURIComponent(kw.dataset.kw); return; }
+
+  const tsol = e.target.closest('[data-toggle-sol]');
+  if(tsol){
+    const hidden = document.querySelector('.prat-exos')?.classList.toggle('hide-sol');
+    tsol.textContent = hidden ? '👁 Afficher les corrections' : '🙈 Masquer les corrections';
+    return;
+  }
 
   const check = e.target.closest('[data-check]');
   if(check){
