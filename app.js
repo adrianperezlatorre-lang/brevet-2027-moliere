@@ -197,26 +197,29 @@ function redacBlock(f){
   </div>`;
 }
 
-/* ---- Vidéos de révision (recherche YouTube ciblée par matière/chaîne) ---- */
+/* ---- Vidéos de révision : un·e YouTubeur·euse français·e de référence par matière.
+   La recherche est préremplie (chaîne + thème) : toujours valide, jamais de lien mort. ---- */
 const VIDEO_CHAINE = {
-  svt:'Mme SVT',           // chaîne de révision SVT collège
-  maths:'maths',
-  francais:'français brevet',
-  histoire:'histoire brevet',
-  geographie:'géographie brevet',
-  emc:'EMC brevet',
-  physique:'physique chimie brevet',
-  techno:'technologie brevet'
+  maths:      { nom:'Yvan Monka',    q:'Yvan Monka' },              // M@ths et tiques
+  francais:   { nom:'Les Bons Profs', q:'Les Bons Profs français' },
+  histoire:   { nom:'Les Bons Profs', q:'Les Bons Profs histoire' },
+  geographie: { nom:'Les Bons Profs', q:'Les Bons Profs géographie' },
+  emc:        { nom:'Les Bons Profs', q:'Les Bons Profs EMC' },
+  svt:        { nom:'Mme SVT',        q:'Mme SVT' },
+  physique:   { nom:'Mathrix',        q:'Mathrix physique chimie' },
+  techno:     { nom:'',               q:'technologie collège brevet' }
 };
 function videoBlock(f){
-  // recherche YouTube préremplie : toujours valide, jamais de lien mort
-  const chaine = VIDEO_CHAINE[f.matiereKey] || 'brevet';
-  const requete = `${chaine} ${f.titre} ${f.niveau}`;
+  const c = VIDEO_CHAINE[f.matiereKey] || { nom:'', q:'brevet' };
+  const requete = `${c.q} ${f.titre} ${f.niveau}`;
   const url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(requete);
-  const label = f.matiereKey==='svt' ? 'Voir les vidéos (Mme SVT) ↗' : 'Voir des vidéos de révision ↗';
+  const label = c.nom ? `Voir une vidéo de ${c.nom} ↗` : 'Voir des vidéos de révision ↗';
+  const note = c.nom
+    ? `Ouvre une recherche YouTube d’une vidéo de <b>${c.nom}</b> sur ce thème.`
+    : `Ouvre une recherche YouTube de vidéos de technologie sur ce thème.`;
   return `<div class="block"><h2>📺 Vidéos de révision</h2>
     <a class="btn-video" href="${url}" target="_blank" rel="noopener">▶ ${label}</a>
-    <p class="video-note">Ouvre une sélection de vidéos YouTube sur ce thème${f.matiereKey==='svt'?' (chaîne Mme SVT)':''}.</p>
+    <p class="video-note">${note}</p>
   </div>`;
 }
 
