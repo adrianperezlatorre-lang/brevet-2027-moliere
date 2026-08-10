@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Révisions Brevet 2027 · Lycée Français Molière de Saragosse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="#accueil" class="brand">
+        <span class="brand-logo">M</span>
+        <span class="brand-text">
+          <strong>Révisions Brevet 2027</strong>
+          <small>Lycée Français International Molière · Saragosse</small>
+        </span>
+      </a>
+      <form class="search" id="searchForm" role="search">
+        <input id="searchInput" type="search" placeholder="Rechercher un thème, un mot-clé…"
+               autocomplete="off" aria-label="Rechercher une fiche" />
+        <button type="submit" aria-label="Rechercher">🔍</button>
+      </form>
+    </div>
+    <nav class="subjectnav" id="subjectnav"></nav>
+  </header>
+
+  <main id="app" class="container"></main>
+
+  <footer class="footer">
+    <p>Fiches de révision · programmes du cycle 4 (5<sup>e</sup>–4<sup>e</sup>–3<sup>e</sup>) · session 2027.
+       Centre étranger — groupe 1.</p>
+  </footer>
+
+  <!-- Données : chaque fichier ajoute ses fiches à window.FICHES -->
+  <script src="data/maths.js"></script>
+  <script src="data/francais.js"></script>
+  <script src="data/histoire.js"></script>
+  <script src="data/geographie.js"></script>
+  <script src="data/emc.js"></script>
+  <script src="data/svt.js"></script>
+  <script src="data/physique-chimie.js"></script>
+  <script src="data/technologie.js"></script>
+  <!-- Application -->
+  <script src="app.js"></script>
+</body>
+</html>
