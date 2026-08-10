@@ -175,6 +175,28 @@ function renderMatiere(key){
   draw();
 }
 
+/* ---- Conseil de rédaction (nouveau barème 2026 : la qualité de la langue compte) ---- */
+const REDAC_FAMILLE = {
+  maths:'Justifie chaque réponse par une <b>propriété</b> ou un <b>théorème</b> (« d’après…, donc… »), détaille les <b>étapes du calcul</b> et n’oublie pas les <b>unités</b> et une phrase de conclusion.',
+  francais:'Appuie-toi sur le texte : <b>cite entre guillemets</b>, <b>nomme les procédés</b> et explique leur <b>effet</b>. Rédige des paragraphes organisés par des <b>connecteurs logiques</b>.',
+  histoire:'<b>Situe</b> dans le temps et l’espace, donne des <b>exemples précis</b> (dates, lieux, acteurs, chiffres) et <b>explique</b> chaque idée en une phrase développée.',
+  geographie:'<b>Localise</b> et <b>situe</b>, appuie-toi sur des <b>exemples précis</b> (lieux, chiffres, acteurs) et rédige une réponse <b>organisée</b> et justifiée.',
+  emc:'Emploie le <b>vocabulaire civique</b>, donne des <b>exemples concrets</b> et <b>argumente</b> ton point de vue de façon nuancée.',
+  svt:'Suis la démarche <b>observation → interprétation → conclusion</b>, utilise le <b>vocabulaire scientifique</b> exact et <b>justifie</b> avec les données du document.',
+  physique:'Explique ta <b>démarche</b>, écris les <b>relations utilisées</b> (formules), justifie avec les <b>données</b> et conclus par une phrase avec les <b>unités</b>.',
+  techno:'Explique le <b>fonctionnement</b> avec le <b>vocabulaire technique</b> exact, justifie tes choix et rédige des réponses <b>claires et structurées</b>.'
+};
+function redacBlock(f){
+  const c = f.contenu || {};
+  const conseil = c.redac || REDAC_FAMILLE[f.matiereKey] || '';
+  const vocab = (f.motsCles||[]).map(k=>`<span>${k}</span>`).join('');
+  return `<div class="redac"><h2>✍️ Rédiger &amp; justifier</h2>
+    <p><b>Nouveau barème :</b> la <b>qualité de la rédaction</b> compte. Fais des <b>phrases complètes</b>, <b>justifie</b> tes réponses et soigne l’<b>orthographe</b> et la <b>syntaxe</b>.</p>
+    <p>${conseil}</p>
+    <div class="redac-vocab"><span class="lbl">Vocabulaire attendu :</span> ${vocab}</div>
+  </div>`;
+}
+
 /* ---- Contenu d'une fiche ---- */
 function ficheFull(f, {compact=false}={}){
   const m = M_BY_KEY[f.matiereKey];
@@ -205,6 +227,7 @@ function ficheFull(f, {compact=false}={}){
       ${block('Méthode','🛠️',methode)}
       ${block('Exemple','✏️',exemple)}
       ${retenir}
+      ${redacBlock(f)}
       ${block('Mots-clés','🔖',`<div class="chips">${chips}</div>`)}
     </div>
     <div class="fiche-foot">

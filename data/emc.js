@@ -148,5 +148,65 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Protéger la planète est une responsabilité <b>collective</b> et <b>individuelle</b>. L’<b>écocitoyen</b> adopte des gestes durables et peut s’<b>engager</b> (associations, projets).</p>',
     retenir:'Développement durable = concilier <b>économie</b>, <b>société</b> et <b>environnement</b>.'
   }
+},
+{
+  id:'emc-harcelement', matiereKey:'emc', matiere:'EMC', niveau:'5e',
+  titre:'Le respect d’autrui et la lutte contre le harcèlement',
+  motsCles:['respect','harcèlement','cyberharcèlement','empathie','victime','témoin','école','signaler'],
+  contenu:{
+    objectifs:['Comprendre ce qu’est le harcèlement.','Savoir réagir en tant que témoin ou victime.'],
+    notions:[
+      {terme:'Harcèlement', def:'violences répétées (moqueries, insultes, exclusion) contre une personne.'},
+      {terme:'Cyberharcèlement', def:'harcèlement via internet et les réseaux sociaux.'},
+      {terme:'Témoin', def:'peut aider en refusant de rire, en soutenant la victime et en alertant un adulte.'}
+    ],
+    essentiel:'<p>Le <b>respect d’autrui</b> est une base de la vie en société. Le <b>harcèlement</b> est interdit et puni. Chacun, surtout le <b>témoin</b>, peut agir en <b>signalant</b> et en soutenant la <b>victime</b>.</p>',
+    retenir:'Face au harcèlement : <b>ne pas rester seul</b>, en parler à un adulte (numéro <b>3018</b>).'
+  }
+},
+{
+  id:'emc-libertes', matiereKey:'emc', matiere:'EMC', niveau:'4e',
+  titre:'Les libertés fondamentales',
+  motsCles:['liberté','expression','conscience','presse','droits','déclaration','limites','loi'],
+  contenu:{
+    objectifs:['Connaître les grandes libertés.','Comprendre leurs limites.'],
+    notions:[
+      {terme:'Libertés individuelles', def:'aller et venir, penser, croire (liberté de conscience).'},
+      {terme:'Libertés collectives', def:'réunion, association, manifestation, presse.'},
+      {terme:'Limites', def:'la liberté s’arrête là où commence celle des autres ; la loi encadre (pas d’injure, de racisme…).'}
+    ],
+    essentiel:'<p>Les <b>libertés fondamentales</b> sont garanties en démocratie (expression, conscience, presse…). Mais elles ont des <b>limites</b> fixées par la <b>loi</b> pour protéger autrui.</p>',
+    retenir:'La liberté n’est pas totale : elle est <b>encadrée par la loi</b> et le respect des autres.'
+  }
+},
+{
+  id:'emc-regle-loi', matiereKey:'emc', matiere:'EMC', niveau:'5e',
+  titre:'La règle, la loi et le règlement intérieur',
+  motsCles:['règle','loi','règlement intérieur','sanction','vivre ensemble','collège','citoyenneté'],
+  contenu:{
+    objectifs:['Comprendre l’utilité des règles.','Distinguer règle et loi.'],
+    notions:[
+      {terme:'Règle', def:'norme qui organise la vie d’un groupe (classe, sport…).'},
+      {terme:'Règlement intérieur', def:'ensemble des règles du collège, connu de tous.'},
+      {terme:'Loi', def:'règle votée par les représentants, valable pour tous les citoyens.'}
+    ],
+    essentiel:'<p>Les <b>règles</b> et la <b>loi</b> permettent le « <b>vivre ensemble</b> » en protégeant chacun. Le <b>règlement intérieur</b> applique ce principe au collège ; ne pas le respecter expose à des <b>sanctions</b>.</p>',
+    retenir:'Les règles protègent la <b>liberté de tous</b> ; la <b>loi</b> s’impose à chacun.'
+  }
+},
+{
+  id:'emc-vie-privee', matiereKey:'emc', matiere:'EMC', niveau:'4e',
+  titre:'Identité, vie privée et données personnelles',
+  motsCles:['vie privée','données personnelles','internet','identité numérique','réseaux sociaux','droit à l’image','cnil'],
+  contenu:{
+    objectifs:['Protéger sa vie privée en ligne.','Comprendre l’identité numérique.'],
+    notions:[
+      {terme:'Données personnelles', def:'informations qui permettent de t’identifier (nom, photo, localisation…).'},
+      {terme:'Identité numérique', def:'traces laissées en ligne, difficiles à effacer.'},
+      {terme:'Droit à l’image', def:'on ne peut pas publier la photo de quelqu’un sans son accord.'}
+    ],
+    essentiel:'<p>La <b>vie privée</b> est protégée par la loi, aussi sur <b>internet</b>. Il faut protéger ses <b>données personnelles</b> et respecter celles des autres (<b>droit à l’image</b>), car les traces en ligne sont durables.</p>',
+    retenir:'Ce qu’on publie en ligne <b>reste</b> : protège tes <b>données</b> et respecte celles des autres.'
+  }
 }
 ]);

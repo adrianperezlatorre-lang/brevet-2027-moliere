@@ -223,5 +223,81 @@ window.FICHES = (window.FICHES || []).concat([
     exemple:'<p>On ne peut plus dissoudre de sel dans l’eau une fois la <b>saturation</b> atteinte : le surplus se dépose.</p>',
     retenir:'Dissoudre <b>ne fait pas disparaître</b> la matière : la masse se conserve.'
   }
+},
+{
+  id:'pc-combustion', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'4e',
+  titre:'La combustion',
+  motsCles:['combustion','combustible','comburant','dioxygène','triangle du feu','transformation chimique','co2'],
+  contenu:{
+    objectifs:['Identifier les éléments d’une combustion.','Reconnaître réactifs et produits.'],
+    notions:[
+      {terme:'Combustible', def:'ce qui brûle (bois, gaz, papier…).'},
+      {terme:'Comburant', def:'le dioxygène (O₂) de l’air, nécessaire à la combustion.'},
+      {terme:'Triangle du feu', def:'combustible + comburant + énergie d’activation (chaleur).'}
+    ],
+    essentiel:'<p>Une <b>combustion</b> est une <b>transformation chimique</b> qui nécessite un <b>combustible</b>, un <b>comburant</b> (le dioxygène) et une source de chaleur. Elle produit souvent du <b>CO₂</b> et de l’eau.</p>',
+    exemple:'<p>Combustion du carbone : C + O₂ → CO₂. Retirer un côté du <b>triangle du feu</b> éteint la flamme.</p>',
+    retenir:'Pas de feu sans les <b>3 éléments</b> : combustible + dioxygène + chaleur.'
+  }
+},
+{
+  id:'pc-conducteurs-circuits', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'5e',
+  titre:'Circuits électriques : conducteurs, série et dérivation',
+  motsCles:['conducteur','isolant','circuit','série','dérivation','court-circuit','courant','sécurité'],
+  contenu:{
+    objectifs:['Distinguer conducteurs et isolants.','Comparer circuit série et circuit en dérivation.'],
+    notions:[
+      {terme:'Conducteur', def:'laisse passer le courant (métaux).'},
+      {terme:'Isolant', def:'ne laisse pas passer le courant (plastique, verre).'},
+      {terme:'Série / dérivation', def:'en série, tout est sur une boucle ; en dérivation, plusieurs branches.'}
+    ],
+    essentiel:'<p>Le courant ne circule que dans un circuit <b>fermé</b> fait de <b>conducteurs</b>. En <b>série</b>, si une lampe s’éteint tout s’arrête ; en <b>dérivation</b>, les lampes sont indépendantes.</p>',
+    retenir:'Un <b>court-circuit</b> est dangereux (échauffement) : d’où fusibles et disjoncteurs.'
+  }
+},
+{
+  id:'pc-lumiere-ombres', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'5e',
+  titre:'Lumière, ombres et système Soleil-Terre-Lune',
+  motsCles:['ombre','lumière','soleil','terre','lune','phases','éclipse','jour et nuit'],
+  contenu:{
+    objectifs:['Expliquer la formation des ombres.','Comprendre jour/nuit et phases de la Lune.'],
+    notions:[
+      {terme:'Ombre', def:'zone sans lumière derrière un objet opaque éclairé.'},
+      {terme:'Jour / nuit', def:'dus à la rotation de la Terre sur elle-même.'},
+      {terme:'Phases de la Lune', def:'on voit la partie éclairée de la Lune selon sa position.'}
+    ],
+    essentiel:'<p>La lumière se propageant en <b>ligne droite</b>, un objet <b>opaque</b> crée une <b>ombre</b>. La rotation de la <b>Terre</b> explique le <b>jour et la nuit</b> ; les positions relatives Soleil-Terre-Lune expliquent les <b>phases</b> et les <b>éclipses</b>.</p>',
+    retenir:'Ombre = lumière <b>bloquée</b> par un objet opaque (propagation rectiligne).'
+  }
+},
+{
+  id:'pc-air', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'4e',
+  titre:'L’air : composition et masse',
+  motsCles:['air','gaz','diazote','dioxygène','masse','pression','atmosphère','compressible'],
+  contenu:{
+    objectifs:['Connaître la composition de l’air.','Montrer que l’air a une masse.'],
+    notions:[
+      {terme:'Composition', def:'≈ 78 % de diazote (N₂) et 21 % de dioxygène (O₂).'},
+      {terme:'L’air a une masse', def:'un gaz possède une masse (1 L d’air ≈ 1,2 g).'},
+      {terme:'Compressible', def:'contrairement aux liquides, un gaz peut être comprimé.'}
+    ],
+    essentiel:'<p>L’<b>air</b> est un mélange de <b>gaz</b> (surtout diazote et dioxygène). Comme toute matière, l’air possède une <b>masse</b>. Un gaz est <b>compressible</b> et <b>expansible</b>.</p>',
+    retenir:'Air ≈ <b>78 % diazote + 21 % dioxygène</b> ; un gaz a une <b>masse</b>.'
+  }
+},
+{
+  id:'pc-systeme-solaire', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'4e',
+  titre:'Le système solaire et la gravitation',
+  motsCles:['système solaire','planète','soleil','gravitation','orbite','attraction','univers','satellite'],
+  contenu:{
+    objectifs:['Décrire le système solaire.','Comprendre le rôle de la gravitation.'],
+    notions:[
+      {terme:'Système solaire', def:'le Soleil et les 8 planètes qui tournent autour.'},
+      {terme:'Gravitation', def:'attraction entre les objets qui ont une masse ; elle maintient les planètes en orbite.'},
+      {terme:'Orbite', def:'trajectoire d’une planète autour du Soleil (d’un satellite autour d’une planète).'}
+    ],
+    essentiel:'<p>Le <b>système solaire</b> est organisé autour du <b>Soleil</b>. La <b>gravitation</b> attire les planètes et les maintient sur leur <b>orbite</b>. C’est la même force qui fait tomber les objets sur Terre.</p>',
+    retenir:'La <b>gravitation</b> gouverne aussi bien la chute des corps que le mouvement des planètes.'
+  }
 }
 ]);

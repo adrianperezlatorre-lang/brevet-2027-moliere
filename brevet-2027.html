@@ -229,6 +229,13 @@ a{color:inherit;text-decoration:none}
 .retenir{background:linear-gradient(135deg,#fffbeb,#fef6d8);border:1px solid #fde68a;border-radius:16px;padding:16px 18px}
 .retenir h2{color:#a15c00}
 .exemple{background:linear-gradient(135deg,#f0f6ff,#eaf1ff);border:1px solid #d6e4ff;border-radius:16px;padding:16px 18px}
+.redac{background:linear-gradient(135deg,#ecfdf5,#e0f2f1);border:1px solid #a7e8d5;border-radius:16px;padding:16px 18px;margin-bottom:24px}
+.redac h2{color:#0f766e;font-size:13px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.06em;font-weight:800}
+.redac p{margin:0 0 10px}
+.redac-vocab{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.redac-vocab .lbl{font-weight:700;color:#0f766e;font-size:13px;margin-right:2px}
+.redac-vocab span:not(.lbl){background:#fff;border:1px solid #a7e8d5;color:#0f766e;
+  font-size:12.5px;font-weight:600;padding:4px 11px;border-radius:999px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips span{background:color-mix(in srgb,var(--c,#666) 10%,#fff);color:color-mix(in srgb,var(--c,#666) 65%,#333);
   font-size:13px;font-weight:600;padding:6px 13px;border-radius:999px;cursor:pointer;transition:.16s;
@@ -1333,6 +1340,111 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Au <b>XIXᵉ siècle</b>, les puissances européennes bâtissent de vastes <b>empires coloniaux</b>. Les populations colonisées sont <b>exploitées</b> et dominées par les colons.</p>',
     retenir:'Colonisation = <b>domination</b> et <b>exploitation</b> de territoires par une métropole.'
   }
+},
+{
+  id:'hist-moyen-age', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'La société féodale au Moyen Âge',
+  motsCles:['féodalité','seigneur','paysan','vassal','château','serf','moyen âge','société'],
+  contenu:{
+    objectifs:['Comprendre l’organisation de la société féodale.','Décrire les rapports seigneurs-paysans.'],
+    notions:[
+      {terme:'Féodalité', def:'système de liens personnels entre seigneurs (vassal / suzerain).'},
+      {terme:'Seigneurie', def:'domaine du seigneur où travaillent les paysans.'},
+      {terme:'Trois ordres', def:'ceux qui prient (clergé), qui combattent (nobles), qui travaillent (paysans).'}
+    ],
+    essentiel:'<p>Au <b>Moyen Âge</b>, la société est <b>hiérarchisée</b>. Les <b>seigneurs</b> dominent les <b>paysans</b> qui travaillent leurs terres, en échange de protection. L’Église occupe une place centrale.</p>',
+    retenir:'Société des <b>trois ordres</b> : ceux qui prient, combattent et travaillent.'
+  }
+},
+{
+  id:'hist-islam-medieval', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'L’islam et la Méditerranée médiévale',
+  motsCles:['islam','musulmans','méditerranée','échanges','coran','byzance','commerce','civilisations'],
+  contenu:{
+    objectifs:['Situer la naissance de l’islam.','Comprendre les échanges en Méditerranée médiévale.'],
+    notions:[
+      {terme:'Islam', def:'religion apparue au VIIᵉ siècle en Arabie ; se diffuse rapidement.'},
+      {terme:'Méditerranée', def:'espace de contacts entre chrétiens (latins, byzantins) et musulmans.'},
+      {terme:'Échanges', def:'commerce, savoirs (mathématiques, médecine), mais aussi conflits.'}
+    ],
+    essentiel:'<p>Au Moyen Âge, la <b>Méditerranée</b> est un carrefour entre trois civilisations (chrétienne latine, <b>byzantine</b> et <b>musulmane</b>). Malgré les <b>conflits</b>, les <b>échanges</b> commerciaux et culturels sont intenses.</p>',
+    retenir:'La Méditerranée médiévale : à la fois <b>conflits</b> et <b>échanges</b> entre civilisations.'
+  }
+},
+{
+  id:'hist-renaissance', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'Humanisme, Renaissance et Réformes',
+  motsCles:['renaissance','humanisme','imprimerie','réforme','art','léonard de vinci','protestantisme','xvie siècle'],
+  contenu:{
+    objectifs:['Définir humanisme et Renaissance.','Comprendre les Réformes religieuses.'],
+    notions:[
+      {terme:'Humanisme', def:'mouvement plaçant l’Homme et le savoir au centre (XVᵉ-XVIᵉ s.).'},
+      {terme:'Renaissance', def:'renouveau des arts et des sciences, inspiré de l’Antiquité.'},
+      {terme:'Réformes', def:'naissance du protestantisme (Luther), division de la chrétienté.'}
+    ],
+    essentiel:'<p>Aux <b>XVᵉ-XVIᵉ siècles</b>, l’<b>humanisme</b> et la <b>Renaissance</b> transforment les arts, les sciences et la pensée, favorisés par l’<b>imprimerie</b>. Les <b>Réformes</b> religieuses bouleversent l’Europe chrétienne.</p>',
+    retenir:'L’<b>imprimerie</b> (Gutenberg) diffuse largement les idées nouvelles.'
+  }
+},
+{
+  id:'hist-grandes-decouvertes', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'Le « Nouveau Monde » et les grandes découvertes',
+  motsCles:['grandes découvertes','christophe colomb','amérique','1492','conquête','empire colonial','caravelle'],
+  contenu:{
+    objectifs:['Comprendre l’expansion européenne du XVIᵉ siècle.','Mesurer les conséquences pour les peuples américains.'],
+    notions:[
+      {terme:'Grandes découvertes', def:'explorations maritimes européennes (Portugal, Espagne) dès le XVᵉ s.'},
+      {terme:'1492', def:'Christophe Colomb atteint l’Amérique.'},
+      {terme:'Conséquences', def:'conquêtes, domination et effondrement des civilisations amérindiennes.'}
+    ],
+    essentiel:'<p>À partir de <b>1492</b>, les Européens explorent puis conquièrent de nouveaux territoires. Ces <b>grandes découvertes</b> enrichissent l’Europe mais entraînent la <b>domination</b> et le déclin des peuples amérindiens.</p>',
+    retenir:'1492 : Colomb atteint l’<b>Amérique</b> → début de la domination européenne du monde.'
+  }
+},
+{
+  id:'hist-louis-xiv', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'Louis XIV et la monarchie absolue',
+  motsCles:['louis xiv','monarchie absolue','versailles','roi soleil','pouvoir','droit divin','xviie siècle'],
+  contenu:{
+    objectifs:['Définir la monarchie absolue.','Comprendre comment Louis XIV contrôle le pouvoir.'],
+    notions:[
+      {terme:'Monarchie absolue', def:'le roi détient tous les pouvoirs, sans partage.'},
+      {terme:'Droit divin', def:'le roi tient son pouvoir de Dieu.'},
+      {terme:'Versailles', def:'château où Louis XIV contrôle la noblesse et met en scène son pouvoir.'}
+    ],
+    essentiel:'<p>Au <b>XVIIᵉ siècle</b>, <b>Louis XIV</b> incarne la <b>monarchie absolue</b> : il gouverne seul, « de <b>droit divin</b> ». <b>Versailles</b> symbolise et renforce sa puissance.</p>',
+    retenir:'Monarchie absolue = <b>tous les pouvoirs</b> concentrés dans les mains du roi.'
+  }
+},
+{
+  id:'hist-lumieres', matiereKey:'histoire', matiere:'Histoire', niveau:'4e',
+  titre:'L’Europe des Lumières (XVIIIᵉ)',
+  motsCles:['lumières','philosophe','voltaire','rousseau','encyclopédie','raison','liberté','tolérance'],
+  contenu:{
+    objectifs:['Définir le mouvement des Lumières.','Comprendre ses idées nouvelles.'],
+    notions:[
+      {terme:'Lumières', def:'mouvement d’idées du XVIIIᵉ s. fondé sur la raison et l’esprit critique.'},
+      {terme:'Philosophes', def:'Voltaire, Rousseau, Montesquieu, Diderot…'},
+      {terme:'Idées', def:'liberté, égalité, tolérance, critique de l’absolutisme.'}
+    ],
+    essentiel:'<p>Au <b>XVIIIᵉ siècle</b>, les <b>philosophes des Lumières</b> défendent la <b>raison</b>, la <b>liberté</b> et la <b>tolérance</b>. Ils critiquent la monarchie absolue et préparent la Révolution.</p>',
+    retenir:'Les Lumières diffusent leurs idées par l’<b>Encyclopédie</b> et les salons.'
+  }
+},
+{
+  id:'hist-traite-esclavage', matiereKey:'histoire', matiere:'Histoire', niveau:'4e',
+  titre:'La traite négrière et l’esclavage',
+  motsCles:['traite négrière','esclavage','commerce triangulaire','abolition','colonies','plantations','atlantique'],
+  contenu:{
+    objectifs:['Comprendre le commerce triangulaire.','Connaître l’esclavage colonial et son abolition.'],
+    notions:[
+      {terme:'Traite', def:'commerce d’êtres humains déportés d’Afrique vers les colonies d’Amérique.'},
+      {terme:'Commerce triangulaire', def:'Europe → Afrique (produits) → Amérique (esclaves) → Europe (sucre, coton).'},
+      {terme:'Abolition', def:'en France, esclavage définitivement aboli en 1848.'}
+    ],
+    essentiel:'<p>Au <b>XVIIIᵉ siècle</b>, le <b>commerce triangulaire</b> déporte des millions d’Africains réduits en <b>esclavage</b> dans les plantations. L’esclavage est <b>aboli</b> en France en <b>1848</b>.</p>',
+    retenir:'Commerce triangulaire entre <b>Europe, Afrique et Amérique</b> ; abolition en <b>1848</b>.'
+  }
 }
 ]);
 
@@ -1503,6 +1615,81 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Un produit est aujourd’hui conçu, fabriqué et vendu dans <b>plusieurs pays</b>. Les <b>firmes transnationales</b> organisent cette production mondiale pour réduire les <b>coûts</b>.</p>',
     retenir:'Un même produit mobilise <b>plusieurs pays</b> : c’est la division internationale du travail.'
   }
+},
+{
+  id:'geo-demographie', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'La croissance démographique et le défi alimentaire',
+  motsCles:['démographie','population','croissance','nourrir','agriculture','sous-nutrition','développement durable'],
+  contenu:{
+    objectifs:['Comprendre la croissance de la population mondiale.','Relier population et besoins alimentaires.'],
+    notions:[
+      {terme:'Croissance démographique', def:'augmentation de la population mondiale (plus de 8 milliards).'},
+      {terme:'Défi alimentaire', def:'nourrir tous les habitants alors que la population augmente.'},
+      {terme:'Inégalités', def:'sous-nutrition dans certains pays, surconsommation dans d’autres.'}
+    ],
+    essentiel:'<p>La <b>population mondiale</b> augmente fortement. Il faut donc <b>nourrir</b> davantage d’habitants, de façon <b>durable</b>, alors que l’accès à l’alimentation reste très <b>inégal</b> selon les régions.</p>',
+    retenir:'Nourrir l’humanité = un enjeu de <b>quantité</b> mais aussi de <b>durabilité</b> et d’<b>égalité</b>.'
+  }
+},
+{
+  id:'geo-inegalites-developpement', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Richesse et pauvreté dans le monde',
+  motsCles:['développement','inégalités','pays riches','pays pauvres','idh','pauvreté','richesse'],
+  contenu:{
+    objectifs:['Mesurer les inégalités de développement.','Utiliser l’IDH.'],
+    notions:[
+      {terme:'Développement', def:'capacité d’un pays à assurer le bien-être de sa population.'},
+      {terme:'IDH', def:'Indice de Développement Humain (santé, éducation, revenu).'},
+      {terme:'Inégalités', def:'écarts de richesse entre pays et à l’intérieur d’un même pays.'}
+    ],
+    essentiel:'<p>Le monde est marqué par de fortes <b>inégalités de développement</b>. L’<b>IDH</b> permet de les mesurer (santé, éducation, revenu). Ces écarts existent <b>entre</b> pays mais aussi <b>à l’intérieur</b> de chaque pays.</p>',
+    retenir:'L’<b>IDH</b> mesure le développement humain, pas seulement la richesse économique.'
+  }
+},
+{
+  id:'geo-ressources', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Gérer les ressources (eau, énergie, alimentation)',
+  motsCles:['ressources','eau','énergie','gestion durable','pénurie','renouvelable','consommation'],
+  contenu:{
+    objectifs:['Comprendre les enjeux des ressources.','Définir la gestion durable.'],
+    notions:[
+      {terme:'Ressource', def:'élément utile prélevé dans la nature (eau, énergie, sols…).'},
+      {terme:'Gestion durable', def:'utiliser une ressource sans l’épuiser pour les générations futures.'},
+      {terme:'Tensions', def:'pénuries et conflits liés au partage inégal des ressources.'}
+    ],
+    essentiel:'<p>La hausse de la <b>consommation</b> menace certaines <b>ressources</b> (eau, énergie). Il faut les <b>gérer durablement</b> pour éviter les <b>pénuries</b> et les tensions, surtout là où elles sont rares.</p>',
+    retenir:'Gestion durable = répondre aux besoins <b>sans épuiser</b> la ressource.'
+  }
+},
+{
+  id:'geo-changement-climatique', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Le changement climatique : effets et adaptation',
+  motsCles:['changement climatique','réchauffement','risques','adaptation','montée des eaux','vulnérabilité','environnement'],
+  contenu:{
+    objectifs:['Comprendre les effets du changement climatique.','Distinguer atténuation et adaptation.'],
+    notions:[
+      {terme:'Effets', def:'hausse des températures, montée des océans, événements extrêmes.'},
+      {terme:'Vulnérabilité', def:'les populations pauvres sont souvent les plus exposées.'},
+      {terme:'Adaptation', def:'aménagements pour limiter les conséquences (digues, cultures adaptées…).'}
+    ],
+    essentiel:'<p>Le <b>changement climatique</b> a des effets inégaux : certaines régions et populations sont plus <b>vulnérables</b>. Les sociétés doivent à la fois <b>réduire</b> leurs émissions et <b>s’adapter</b>.</p>',
+    retenir:'Deux réponses : <b>atténuer</b> (réduire le CO₂) et <b>s’adapter</b> aux effets.'
+  }
+},
+{
+  id:'geo-risques', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Prévenir les risques naturels et technologiques',
+  motsCles:['risque','aléa','prévention','catastrophe','séisme','inondation','vulnérabilité','industriel'],
+  contenu:{
+    objectifs:['Distinguer aléa et risque.','Comprendre la prévention.'],
+    notions:[
+      {terme:'Aléa', def:'phénomène dangereux possible (séisme, inondation, accident industriel).'},
+      {terme:'Risque', def:'aléa qui menace des populations ou des biens.'},
+      {terme:'Prévention', def:'informer, aménager et anticiper pour limiter les dégâts.'}
+    ],
+    essentiel:'<p>Un <b>risque</b> naît de la rencontre entre un <b>aléa</b> et une population exposée. Face aux risques <b>naturels</b> (séismes, inondations) et <b>technologiques</b> (industries), la <b>prévention</b> réduit les dommages.</p>',
+    retenir:'<b>Risque = aléa + enjeux humains</b> ; la prévention protège les populations.'
+  }
 }
 ]);
 
@@ -1657,6 +1844,66 @@ window.FICHES = (window.FICHES || []).concat([
     ],
     essentiel:'<p>Protéger la planète est une responsabilité <b>collective</b> et <b>individuelle</b>. L’<b>écocitoyen</b> adopte des gestes durables et peut s’<b>engager</b> (associations, projets).</p>',
     retenir:'Développement durable = concilier <b>économie</b>, <b>société</b> et <b>environnement</b>.'
+  }
+},
+{
+  id:'emc-harcelement', matiereKey:'emc', matiere:'EMC', niveau:'5e',
+  titre:'Le respect d’autrui et la lutte contre le harcèlement',
+  motsCles:['respect','harcèlement','cyberharcèlement','empathie','victime','témoin','école','signaler'],
+  contenu:{
+    objectifs:['Comprendre ce qu’est le harcèlement.','Savoir réagir en tant que témoin ou victime.'],
+    notions:[
+      {terme:'Harcèlement', def:'violences répétées (moqueries, insultes, exclusion) contre une personne.'},
+      {terme:'Cyberharcèlement', def:'harcèlement via internet et les réseaux sociaux.'},
+      {terme:'Témoin', def:'peut aider en refusant de rire, en soutenant la victime et en alertant un adulte.'}
+    ],
+    essentiel:'<p>Le <b>respect d’autrui</b> est une base de la vie en société. Le <b>harcèlement</b> est interdit et puni. Chacun, surtout le <b>témoin</b>, peut agir en <b>signalant</b> et en soutenant la <b>victime</b>.</p>',
+    retenir:'Face au harcèlement : <b>ne pas rester seul</b>, en parler à un adulte (numéro <b>3018</b>).'
+  }
+},
+{
+  id:'emc-libertes', matiereKey:'emc', matiere:'EMC', niveau:'4e',
+  titre:'Les libertés fondamentales',
+  motsCles:['liberté','expression','conscience','presse','droits','déclaration','limites','loi'],
+  contenu:{
+    objectifs:['Connaître les grandes libertés.','Comprendre leurs limites.'],
+    notions:[
+      {terme:'Libertés individuelles', def:'aller et venir, penser, croire (liberté de conscience).'},
+      {terme:'Libertés collectives', def:'réunion, association, manifestation, presse.'},
+      {terme:'Limites', def:'la liberté s’arrête là où commence celle des autres ; la loi encadre (pas d’injure, de racisme…).'}
+    ],
+    essentiel:'<p>Les <b>libertés fondamentales</b> sont garanties en démocratie (expression, conscience, presse…). Mais elles ont des <b>limites</b> fixées par la <b>loi</b> pour protéger autrui.</p>',
+    retenir:'La liberté n’est pas totale : elle est <b>encadrée par la loi</b> et le respect des autres.'
+  }
+},
+{
+  id:'emc-regle-loi', matiereKey:'emc', matiere:'EMC', niveau:'5e',
+  titre:'La règle, la loi et le règlement intérieur',
+  motsCles:['règle','loi','règlement intérieur','sanction','vivre ensemble','collège','citoyenneté'],
+  contenu:{
+    objectifs:['Comprendre l’utilité des règles.','Distinguer règle et loi.'],
+    notions:[
+      {terme:'Règle', def:'norme qui organise la vie d’un groupe (classe, sport…).'},
+      {terme:'Règlement intérieur', def:'ensemble des règles du collège, connu de tous.'},
+      {terme:'Loi', def:'règle votée par les représentants, valable pour tous les citoyens.'}
+    ],
+    essentiel:'<p>Les <b>règles</b> et la <b>loi</b> permettent le « <b>vivre ensemble</b> » en protégeant chacun. Le <b>règlement intérieur</b> applique ce principe au collège ; ne pas le respecter expose à des <b>sanctions</b>.</p>',
+    retenir:'Les règles protègent la <b>liberté de tous</b> ; la <b>loi</b> s’impose à chacun.'
+  }
+},
+{
+  id:'emc-vie-privee', matiereKey:'emc', matiere:'EMC', niveau:'4e',
+  titre:'Identité, vie privée et données personnelles',
+  motsCles:['vie privée','données personnelles','internet','identité numérique','réseaux sociaux','droit à l’image','cnil'],
+  contenu:{
+    objectifs:['Protéger sa vie privée en ligne.','Comprendre l’identité numérique.'],
+    notions:[
+      {terme:'Données personnelles', def:'informations qui permettent de t’identifier (nom, photo, localisation…).'},
+      {terme:'Identité numérique', def:'traces laissées en ligne, difficiles à effacer.'},
+      {terme:'Droit à l’image', def:'on ne peut pas publier la photo de quelqu’un sans son accord.'}
+    ],
+    essentiel:'<p>La <b>vie privée</b> est protégée par la loi, aussi sur <b>internet</b>. Il faut protéger ses <b>données personnelles</b> et respecter celles des autres (<b>droit à l’image</b>), car les traces en ligne sont durables.</p>',
+    retenir:'Ce qu’on publie en ligne <b>reste</b> : protège tes <b>données</b> et respecte celles des autres.'
   }
 }
 ]);
@@ -1937,6 +2184,97 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Une <b>alimentation équilibrée</b> apporte tous les <b>nutriments</b> nécessaires, en quantités adaptées aux <b>besoins</b>. Un mauvais équilibre nuit à la <b>santé</b>.</p>',
     retenir:'Équilibre = <b>variété</b> + quantités adaptées à l’<b>activité physique</b>.'
   }
+},
+{
+  id:'svt-classification', matiereKey:'svt', matiere:'SVT', niveau:'5e',
+  titre:'Classer les êtres vivants',
+  motsCles:['classification','espèce','groupes emboîtés','caractères','parenté','biodiversité','vertébrés'],
+  contenu:{
+    objectifs:['Classer un être vivant selon ses caractères.','Comprendre les groupes emboîtés.'],
+    notions:[
+      {terme:'Classification', def:'regrouper les êtres vivants selon leurs caractères communs.'},
+      {terme:'Groupes emboîtés', def:'chaque groupe est inclus dans un plus grand (ex. vertébrés ⊃ mammifères).'},
+      {terme:'Parenté', def:'des caractères communs révèlent un ancêtre commun.'}
+    ],
+    essentiel:'<p>On <b>classe</b> les êtres vivants d’après leurs <b>caractères communs</b>, en <b>groupes emboîtés</b>. Cette classification traduit des liens de <b>parenté</b> et l’histoire évolutive.</p>',
+    retenir:'On classe par <b>ce que les êtres vivants ont</b>, pas par ce qu’ils n’ont pas.'
+  }
+},
+{
+  id:'svt-chaines-alimentaires', matiereKey:'svt', matiere:'SVT', niveau:'6e',
+  titre:'Chaînes et réseaux alimentaires',
+  motsCles:['chaîne alimentaire','réseau alimentaire','producteur','consommateur','prédateur','maillon','écosystème'],
+  contenu:{
+    objectifs:['Construire une chaîne alimentaire.','Comprendre les relations dans un milieu.'],
+    notions:[
+      {terme:'Chaîne alimentaire', def:'suite d’êtres vivants qui se mangent (« est mangé par »).'},
+      {terme:'Producteurs', def:'les végétaux, au début de la chaîne.'},
+      {terme:'Consommateurs', def:'animaux qui mangent d’autres êtres vivants.'}
+    ],
+    essentiel:'<p>Dans un milieu, les êtres vivants sont reliés par des <b>relations alimentaires</b>. Une <b>chaîne alimentaire</b> commence toujours par un <b>végétal</b> (producteur) ; plusieurs chaînes forment un <b>réseau</b>.</p>',
+    exemple:'<p>Herbe → sauterelle → grenouille → couleuvre.</p>',
+    retenir:'La flèche « → » se lit « <b>est mangé par</b> » ; tout part des <b>végétaux</b>.'
+  }
+},
+{
+  id:'svt-sol-recyclage', matiereKey:'svt', matiere:'SVT', niveau:'5e',
+  titre:'Le sol et le recyclage de la matière',
+  motsCles:['sol','décomposeur','matière organique','humus','recyclage','ver de terre','champignon','micro-organisme'],
+  contenu:{
+    objectifs:['Comprendre le recyclage de la matière.','Connaître le rôle des décomposeurs.'],
+    notions:[
+      {terme:'Matière organique', def:'restes d’êtres vivants (feuilles mortes, cadavres).'},
+      {terme:'Décomposeurs', def:'vers, champignons, bactéries qui transforment cette matière.'},
+      {terme:'Recyclage', def:'la matière est transformée en éléments réutilisables par les plantes.'}
+    ],
+    essentiel:'<p>Dans le <b>sol</b>, les <b>décomposeurs</b> transforment la <b>matière organique</b> morte en éléments minéraux. Cette matière est ainsi <b>recyclée</b> et sert de nouveau aux végétaux.</p>',
+    retenir:'Rien ne se perd : les <b>décomposeurs</b> recyclent la matière dans le sol.'
+  }
+},
+{
+  id:'svt-squelette-muscles', matiereKey:'svt', matiere:'SVT', niveau:'4e',
+  titre:'Squelette, muscles et articulations',
+  motsCles:['squelette','muscle','articulation','os','tendon','mouvement','levier','locomotion'],
+  contenu:{
+    objectifs:['Décrire ce qui permet le mouvement du corps.','Comprendre le rôle des articulations.'],
+    notions:[
+      {terme:'Squelette', def:'ensemble des os qui soutient le corps.'},
+      {terme:'Articulation', def:'zone de contact entre deux os qui permet le mouvement.'},
+      {terme:'Muscles', def:'reliés aux os par des tendons, ils se contractent pour produire le mouvement.'}
+    ],
+    essentiel:'<p>Le <b>mouvement</b> repose sur le <b>squelette</b>, les <b>articulations</b> et les <b>muscles</b>. En se contractant, un muscle tire sur l’<b>os</b> par un <b>tendon</b> et provoque le mouvement.</p>',
+    retenir:'Muscle contracté = il <b>tire</b> sur l’os (il ne pousse jamais) ; les muscles agissent par paires.'
+  }
+},
+{
+  id:'svt-erosion-paysages', matiereKey:'svt', matiere:'SVT', niveau:'5e',
+  titre:'L’érosion et l’évolution des paysages',
+  motsCles:['érosion','paysage','roche','eau','transport','sédiment','altération','géologie'],
+  contenu:{
+    objectifs:['Comprendre comment évolue un paysage.','Décrire les étapes de l’érosion.'],
+    notions:[
+      {terme:'Érosion', def:'usure des roches par l’eau, le vent, le gel, la végétation.'},
+      {terme:'Transport', def:'les débris (sédiments) sont emportés, souvent par l’eau.'},
+      {terme:'Sédimentation', def:'les débris se déposent plus loin et forment de nouvelles roches.'}
+    ],
+    essentiel:'<p>Les <b>paysages</b> évoluent lentement sous l’effet de l’<b>érosion</b> : les roches sont <b>altérées</b>, les débris <b>transportés</b> par l’eau puis <b>déposés</b> ailleurs.</p>',
+    retenir:'Trois étapes : <b>altération → transport → sédimentation</b>.'
+  }
+},
+{
+  id:'svt-reproduction-plantes', matiereKey:'svt', matiere:'SVT', niveau:'6e',
+  titre:'La reproduction des plantes à fleurs',
+  motsCles:['fleur','pollinisation','fruit','graine','pollen','fécondation','abeille','reproduction végétale'],
+  contenu:{
+    objectifs:['Comprendre la reproduction des plantes à fleurs.','Connaître le rôle de la pollinisation.'],
+    notions:[
+      {terme:'Pollinisation', def:'transport du pollen (par le vent ou les insectes) vers le pistil.'},
+      {terme:'Fécondation', def:'union du pollen et de l’ovule → formation d’une graine.'},
+      {terme:'Fruit', def:'issu de la transformation de la fleur ; il protège les graines.'}
+    ],
+    essentiel:'<p>La <b>fleur</b> est l’organe de reproduction. Après la <b>pollinisation</b> et la <b>fécondation</b>, elle se transforme en <b>fruit</b> contenant des <b>graines</b> qui donneront de nouvelles plantes.</p>',
+    retenir:'Fleur → pollinisation → fécondation → <b>fruit + graines</b>.'
+  }
 }
 ]);
 
@@ -2167,6 +2505,82 @@ window.FICHES = (window.FICHES || []).concat([
     exemple:'<p>On ne peut plus dissoudre de sel dans l’eau une fois la <b>saturation</b> atteinte : le surplus se dépose.</p>',
     retenir:'Dissoudre <b>ne fait pas disparaître</b> la matière : la masse se conserve.'
   }
+},
+{
+  id:'pc-combustion', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'4e',
+  titre:'La combustion',
+  motsCles:['combustion','combustible','comburant','dioxygène','triangle du feu','transformation chimique','co2'],
+  contenu:{
+    objectifs:['Identifier les éléments d’une combustion.','Reconnaître réactifs et produits.'],
+    notions:[
+      {terme:'Combustible', def:'ce qui brûle (bois, gaz, papier…).'},
+      {terme:'Comburant', def:'le dioxygène (O₂) de l’air, nécessaire à la combustion.'},
+      {terme:'Triangle du feu', def:'combustible + comburant + énergie d’activation (chaleur).'}
+    ],
+    essentiel:'<p>Une <b>combustion</b> est une <b>transformation chimique</b> qui nécessite un <b>combustible</b>, un <b>comburant</b> (le dioxygène) et une source de chaleur. Elle produit souvent du <b>CO₂</b> et de l’eau.</p>',
+    exemple:'<p>Combustion du carbone : C + O₂ → CO₂. Retirer un côté du <b>triangle du feu</b> éteint la flamme.</p>',
+    retenir:'Pas de feu sans les <b>3 éléments</b> : combustible + dioxygène + chaleur.'
+  }
+},
+{
+  id:'pc-conducteurs-circuits', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'5e',
+  titre:'Circuits électriques : conducteurs, série et dérivation',
+  motsCles:['conducteur','isolant','circuit','série','dérivation','court-circuit','courant','sécurité'],
+  contenu:{
+    objectifs:['Distinguer conducteurs et isolants.','Comparer circuit série et circuit en dérivation.'],
+    notions:[
+      {terme:'Conducteur', def:'laisse passer le courant (métaux).'},
+      {terme:'Isolant', def:'ne laisse pas passer le courant (plastique, verre).'},
+      {terme:'Série / dérivation', def:'en série, tout est sur une boucle ; en dérivation, plusieurs branches.'}
+    ],
+    essentiel:'<p>Le courant ne circule que dans un circuit <b>fermé</b> fait de <b>conducteurs</b>. En <b>série</b>, si une lampe s’éteint tout s’arrête ; en <b>dérivation</b>, les lampes sont indépendantes.</p>',
+    retenir:'Un <b>court-circuit</b> est dangereux (échauffement) : d’où fusibles et disjoncteurs.'
+  }
+},
+{
+  id:'pc-lumiere-ombres', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'5e',
+  titre:'Lumière, ombres et système Soleil-Terre-Lune',
+  motsCles:['ombre','lumière','soleil','terre','lune','phases','éclipse','jour et nuit'],
+  contenu:{
+    objectifs:['Expliquer la formation des ombres.','Comprendre jour/nuit et phases de la Lune.'],
+    notions:[
+      {terme:'Ombre', def:'zone sans lumière derrière un objet opaque éclairé.'},
+      {terme:'Jour / nuit', def:'dus à la rotation de la Terre sur elle-même.'},
+      {terme:'Phases de la Lune', def:'on voit la partie éclairée de la Lune selon sa position.'}
+    ],
+    essentiel:'<p>La lumière se propageant en <b>ligne droite</b>, un objet <b>opaque</b> crée une <b>ombre</b>. La rotation de la <b>Terre</b> explique le <b>jour et la nuit</b> ; les positions relatives Soleil-Terre-Lune expliquent les <b>phases</b> et les <b>éclipses</b>.</p>',
+    retenir:'Ombre = lumière <b>bloquée</b> par un objet opaque (propagation rectiligne).'
+  }
+},
+{
+  id:'pc-air', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'4e',
+  titre:'L’air : composition et masse',
+  motsCles:['air','gaz','diazote','dioxygène','masse','pression','atmosphère','compressible'],
+  contenu:{
+    objectifs:['Connaître la composition de l’air.','Montrer que l’air a une masse.'],
+    notions:[
+      {terme:'Composition', def:'≈ 78 % de diazote (N₂) et 21 % de dioxygène (O₂).'},
+      {terme:'L’air a une masse', def:'un gaz possède une masse (1 L d’air ≈ 1,2 g).'},
+      {terme:'Compressible', def:'contrairement aux liquides, un gaz peut être comprimé.'}
+    ],
+    essentiel:'<p>L’<b>air</b> est un mélange de <b>gaz</b> (surtout diazote et dioxygène). Comme toute matière, l’air possède une <b>masse</b>. Un gaz est <b>compressible</b> et <b>expansible</b>.</p>',
+    retenir:'Air ≈ <b>78 % diazote + 21 % dioxygène</b> ; un gaz a une <b>masse</b>.'
+  }
+},
+{
+  id:'pc-systeme-solaire', matiereKey:'physique', matiere:'Physique-Chimie', niveau:'4e',
+  titre:'Le système solaire et la gravitation',
+  motsCles:['système solaire','planète','soleil','gravitation','orbite','attraction','univers','satellite'],
+  contenu:{
+    objectifs:['Décrire le système solaire.','Comprendre le rôle de la gravitation.'],
+    notions:[
+      {terme:'Système solaire', def:'le Soleil et les 8 planètes qui tournent autour.'},
+      {terme:'Gravitation', def:'attraction entre les objets qui ont une masse ; elle maintient les planètes en orbite.'},
+      {terme:'Orbite', def:'trajectoire d’une planète autour du Soleil (d’un satellite autour d’une planète).'}
+    ],
+    essentiel:'<p>Le <b>système solaire</b> est organisé autour du <b>Soleil</b>. La <b>gravitation</b> attire les planètes et les maintient sur leur <b>orbite</b>. C’est la même force qui fait tomber les objets sur Terre.</p>',
+    retenir:'La <b>gravitation</b> gouverne aussi bien la chute des corps que le mouvement des planètes.'
+  }
 }
 ]);
 
@@ -2325,6 +2739,83 @@ window.FICHES = (window.FICHES || []).concat([
     ],
     essentiel:'<p>Chaque produit a un <b>cycle de vie</b> qui consomme des ressources et génère des <b>déchets</b>. L’<b>écoconception</b> vise à réduire cet <b>impact</b> à toutes les étapes.</p>',
     retenir:'Penser un objet, c’est aussi penser sa <b>fin de vie</b> (réparation, recyclage).'
+  }
+},
+{
+  id:'tech-analyse-besoin', matiereKey:'techno', matiere:'Technologie', niveau:'5e',
+  titre:'Analyser le besoin (bête à cornes, pieuvre)',
+  motsCles:['besoin','bête à cornes','diagramme pieuvre','fonction','contrainte','utilisateur','analyse fonctionnelle'],
+  contenu:{
+    objectifs:['Identifier le besoin auquel répond un objet.','Utiliser les outils d’analyse fonctionnelle.'],
+    notions:[
+      {terme:'Bête à cornes', def:'outil qui exprime le besoin : à qui l’objet rend service, sur quoi il agit, dans quel but.'},
+      {terme:'Diagramme pieuvre', def:'représente les fonctions de service reliant l’objet à son environnement.'},
+      {terme:'Contrainte', def:'exigence à respecter (coût, sécurité, dimensions…).'}
+    ],
+    essentiel:'<p>Avant de concevoir un objet, on <b>analyse le besoin</b>. La <b>bête à cornes</b> précise le but ; le <b>diagramme pieuvre</b> liste les <b>fonctions</b> et les <b>contraintes</b> liées à l’environnement.</p>',
+    retenir:'On conçoit un objet à partir d’un <b>besoin</b> précis, pas l’inverse.'
+  }
+},
+{
+  id:'tech-representer-objet', matiereKey:'techno', matiere:'Technologie', niveau:'5e',
+  titre:'Représenter un objet (croquis, schéma, dessin technique)',
+  motsCles:['croquis','schéma','dessin technique','cotation','échelle','représentation','plan','vues'],
+  contenu:{
+    objectifs:['Distinguer les modes de représentation.','Comprendre échelle et cotation.'],
+    notions:[
+      {terme:'Croquis', def:'dessin rapide à main levée pour exprimer une idée.'},
+      {terme:'Schéma', def:'représentation simplifiée du fonctionnement.'},
+      {terme:'Dessin technique', def:'plan précis, à l’échelle, avec cotation (dimensions).'}
+    ],
+    essentiel:'<p>Pour communiquer une idée d’objet, on utilise le <b>croquis</b> (idée), le <b>schéma</b> (fonctionnement) ou le <b>dessin technique</b> (plan précis à l’<b>échelle</b> avec <b>cotation</b>).</p>',
+    retenir:'Une <b>échelle</b> indique le rapport entre le dessin et l’objet réel.'
+  }
+},
+{
+  id:'tech-transmission-mouvement', matiereKey:'techno', matiere:'Technologie', niveau:'4e',
+  titre:'La transmission de mouvement',
+  motsCles:['engrenage','poulie','courroie','transmission','mouvement','rotation','vitesse','mécanisme'],
+  contenu:{
+    objectifs:['Décrire des systèmes de transmission.','Comprendre l’effet sur la vitesse.'],
+    notions:[
+      {terme:'Engrenages', def:'roues dentées qui transmettent la rotation (sens inversé).'},
+      {terme:'Poulies-courroie', def:'transmettent le mouvement à distance (même sens).'},
+      {terme:'Rapport', def:'selon la taille des roues, on modifie la vitesse et la force.'}
+    ],
+    essentiel:'<p>Les <b>mécanismes</b> (engrenages, poulies-courroie, chaîne) <b>transmettent</b> un mouvement d’une pièce à une autre. En changeant la taille des roues, on modifie la <b>vitesse</b> de rotation.</p>',
+    exemple:'<p>Sur un vélo, la chaîne relie le pédalier à la roue ; changer de plateau change la vitesse.</p>',
+    retenir:'Petite roue menant une grande roue → la grande tourne <b>moins vite</b>.'
+  }
+},
+{
+  id:'tech-ordinateur', matiereKey:'techno', matiere:'Technologie', niveau:'4e',
+  titre:'Le fonctionnement d’un ordinateur',
+  motsCles:['ordinateur','processeur','mémoire','entrée','sortie','composant','binaire','stockage'],
+  contenu:{
+    objectifs:['Identifier les composants d’un ordinateur.','Comprendre entrées et sorties.'],
+    notions:[
+      {terme:'Processeur (CPU)', def:'exécute les instructions, « cerveau » de l’ordinateur.'},
+      {terme:'Mémoire', def:'stocke les données (RAM temporaire, disque pour le stockage durable).'},
+      {terme:'Entrées / sorties', def:'entrées (clavier, souris) ; sorties (écran, imprimante).'}
+    ],
+    essentiel:'<p>Un <b>ordinateur</b> reçoit des données par ses <b>entrées</b>, les traite avec le <b>processeur</b> et la <b>mémoire</b>, puis renvoie un résultat par ses <b>sorties</b>. Les données sont codées en <b>binaire</b> (0 et 1).</p>',
+    retenir:'Schéma : <b>entrée → traitement (processeur) → sortie</b>.'
+  }
+},
+{
+  id:'tech-capteurs-actionneurs', matiereKey:'techno', matiere:'Technologie', niveau:'4e',
+  titre:'Capteurs et actionneurs',
+  motsCles:['capteur','actionneur','information','signal','moteur','automatisme','commande','système'],
+  contenu:{
+    objectifs:['Distinguer capteur et actionneur.','Situer leur rôle dans un système automatisé.'],
+    notions:[
+      {terme:'Capteur', def:'détecte une information (température, lumière, présence) et l’envoie au système.'},
+      {terme:'Actionneur', def:'agit sur le réel (moteur, lampe, buzzer).'},
+      {terme:'Programme', def:'traite l’information du capteur pour commander l’actionneur.'}
+    ],
+    essentiel:'<p>Dans un système automatisé, le <b>capteur</b> fournit une <b>information</b>, le <b>programme</b> décide, et l’<b>actionneur</b> exécute l’action. C’est la base de tout automatisme.</p>',
+    exemple:'<p>Éclairage automatique : capteur de luminosité → programme → lampe (actionneur).</p>',
+    retenir:'Capteur = <b>il mesure</b> ; actionneur = <b>il agit</b>.'
   }
 }
 ]);
@@ -2509,6 +3000,28 @@ function renderMatiere(key){
   draw();
 }
 
+/* ---- Conseil de rédaction (nouveau barème 2026 : la qualité de la langue compte) ---- */
+const REDAC_FAMILLE = {
+  maths:'Justifie chaque réponse par une <b>propriété</b> ou un <b>théorème</b> (« d’après…, donc… »), détaille les <b>étapes du calcul</b> et n’oublie pas les <b>unités</b> et une phrase de conclusion.',
+  francais:'Appuie-toi sur le texte : <b>cite entre guillemets</b>, <b>nomme les procédés</b> et explique leur <b>effet</b>. Rédige des paragraphes organisés par des <b>connecteurs logiques</b>.',
+  histoire:'<b>Situe</b> dans le temps et l’espace, donne des <b>exemples précis</b> (dates, lieux, acteurs, chiffres) et <b>explique</b> chaque idée en une phrase développée.',
+  geographie:'<b>Localise</b> et <b>situe</b>, appuie-toi sur des <b>exemples précis</b> (lieux, chiffres, acteurs) et rédige une réponse <b>organisée</b> et justifiée.',
+  emc:'Emploie le <b>vocabulaire civique</b>, donne des <b>exemples concrets</b> et <b>argumente</b> ton point de vue de façon nuancée.',
+  svt:'Suis la démarche <b>observation → interprétation → conclusion</b>, utilise le <b>vocabulaire scientifique</b> exact et <b>justifie</b> avec les données du document.',
+  physique:'Explique ta <b>démarche</b>, écris les <b>relations utilisées</b> (formules), justifie avec les <b>données</b> et conclus par une phrase avec les <b>unités</b>.',
+  techno:'Explique le <b>fonctionnement</b> avec le <b>vocabulaire technique</b> exact, justifie tes choix et rédige des réponses <b>claires et structurées</b>.'
+};
+function redacBlock(f){
+  const c = f.contenu || {};
+  const conseil = c.redac || REDAC_FAMILLE[f.matiereKey] || '';
+  const vocab = (f.motsCles||[]).map(k=>`<span>${k}</span>`).join('');
+  return `<div class="redac"><h2>✍️ Rédiger &amp; justifier</h2>
+    <p><b>Nouveau barème :</b> la <b>qualité de la rédaction</b> compte. Fais des <b>phrases complètes</b>, <b>justifie</b> tes réponses et soigne l’<b>orthographe</b> et la <b>syntaxe</b>.</p>
+    <p>${conseil}</p>
+    <div class="redac-vocab"><span class="lbl">Vocabulaire attendu :</span> ${vocab}</div>
+  </div>`;
+}
+
 /* ---- Contenu d'une fiche ---- */
 function ficheFull(f, {compact=false}={}){
   const m = M_BY_KEY[f.matiereKey];
@@ -2539,6 +3052,7 @@ function ficheFull(f, {compact=false}={}){
       ${block('Méthode','🛠️',methode)}
       ${block('Exemple','✏️',exemple)}
       ${retenir}
+      ${redacBlock(f)}
       ${block('Mots-clés','🔖',`<div class="chips">${chips}</div>`)}
     </div>
     <div class="fiche-foot">

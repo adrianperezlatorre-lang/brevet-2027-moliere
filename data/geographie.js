@@ -163,5 +163,80 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Un produit est aujourd’hui conçu, fabriqué et vendu dans <b>plusieurs pays</b>. Les <b>firmes transnationales</b> organisent cette production mondiale pour réduire les <b>coûts</b>.</p>',
     retenir:'Un même produit mobilise <b>plusieurs pays</b> : c’est la division internationale du travail.'
   }
+},
+{
+  id:'geo-demographie', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'La croissance démographique et le défi alimentaire',
+  motsCles:['démographie','population','croissance','nourrir','agriculture','sous-nutrition','développement durable'],
+  contenu:{
+    objectifs:['Comprendre la croissance de la population mondiale.','Relier population et besoins alimentaires.'],
+    notions:[
+      {terme:'Croissance démographique', def:'augmentation de la population mondiale (plus de 8 milliards).'},
+      {terme:'Défi alimentaire', def:'nourrir tous les habitants alors que la population augmente.'},
+      {terme:'Inégalités', def:'sous-nutrition dans certains pays, surconsommation dans d’autres.'}
+    ],
+    essentiel:'<p>La <b>population mondiale</b> augmente fortement. Il faut donc <b>nourrir</b> davantage d’habitants, de façon <b>durable</b>, alors que l’accès à l’alimentation reste très <b>inégal</b> selon les régions.</p>',
+    retenir:'Nourrir l’humanité = un enjeu de <b>quantité</b> mais aussi de <b>durabilité</b> et d’<b>égalité</b>.'
+  }
+},
+{
+  id:'geo-inegalites-developpement', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Richesse et pauvreté dans le monde',
+  motsCles:['développement','inégalités','pays riches','pays pauvres','idh','pauvreté','richesse'],
+  contenu:{
+    objectifs:['Mesurer les inégalités de développement.','Utiliser l’IDH.'],
+    notions:[
+      {terme:'Développement', def:'capacité d’un pays à assurer le bien-être de sa population.'},
+      {terme:'IDH', def:'Indice de Développement Humain (santé, éducation, revenu).'},
+      {terme:'Inégalités', def:'écarts de richesse entre pays et à l’intérieur d’un même pays.'}
+    ],
+    essentiel:'<p>Le monde est marqué par de fortes <b>inégalités de développement</b>. L’<b>IDH</b> permet de les mesurer (santé, éducation, revenu). Ces écarts existent <b>entre</b> pays mais aussi <b>à l’intérieur</b> de chaque pays.</p>',
+    retenir:'L’<b>IDH</b> mesure le développement humain, pas seulement la richesse économique.'
+  }
+},
+{
+  id:'geo-ressources', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Gérer les ressources (eau, énergie, alimentation)',
+  motsCles:['ressources','eau','énergie','gestion durable','pénurie','renouvelable','consommation'],
+  contenu:{
+    objectifs:['Comprendre les enjeux des ressources.','Définir la gestion durable.'],
+    notions:[
+      {terme:'Ressource', def:'élément utile prélevé dans la nature (eau, énergie, sols…).'},
+      {terme:'Gestion durable', def:'utiliser une ressource sans l’épuiser pour les générations futures.'},
+      {terme:'Tensions', def:'pénuries et conflits liés au partage inégal des ressources.'}
+    ],
+    essentiel:'<p>La hausse de la <b>consommation</b> menace certaines <b>ressources</b> (eau, énergie). Il faut les <b>gérer durablement</b> pour éviter les <b>pénuries</b> et les tensions, surtout là où elles sont rares.</p>',
+    retenir:'Gestion durable = répondre aux besoins <b>sans épuiser</b> la ressource.'
+  }
+},
+{
+  id:'geo-changement-climatique', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Le changement climatique : effets et adaptation',
+  motsCles:['changement climatique','réchauffement','risques','adaptation','montée des eaux','vulnérabilité','environnement'],
+  contenu:{
+    objectifs:['Comprendre les effets du changement climatique.','Distinguer atténuation et adaptation.'],
+    notions:[
+      {terme:'Effets', def:'hausse des températures, montée des océans, événements extrêmes.'},
+      {terme:'Vulnérabilité', def:'les populations pauvres sont souvent les plus exposées.'},
+      {terme:'Adaptation', def:'aménagements pour limiter les conséquences (digues, cultures adaptées…).'}
+    ],
+    essentiel:'<p>Le <b>changement climatique</b> a des effets inégaux : certaines régions et populations sont plus <b>vulnérables</b>. Les sociétés doivent à la fois <b>réduire</b> leurs émissions et <b>s’adapter</b>.</p>',
+    retenir:'Deux réponses : <b>atténuer</b> (réduire le CO₂) et <b>s’adapter</b> aux effets.'
+  }
+},
+{
+  id:'geo-risques', matiereKey:'geographie', matiere:'Géographie', niveau:'5e',
+  titre:'Prévenir les risques naturels et technologiques',
+  motsCles:['risque','aléa','prévention','catastrophe','séisme','inondation','vulnérabilité','industriel'],
+  contenu:{
+    objectifs:['Distinguer aléa et risque.','Comprendre la prévention.'],
+    notions:[
+      {terme:'Aléa', def:'phénomène dangereux possible (séisme, inondation, accident industriel).'},
+      {terme:'Risque', def:'aléa qui menace des populations ou des biens.'},
+      {terme:'Prévention', def:'informer, aménager et anticiper pour limiter les dégâts.'}
+    ],
+    essentiel:'<p>Un <b>risque</b> naît de la rencontre entre un <b>aléa</b> et une population exposée. Face aux risques <b>naturels</b> (séismes, inondations) et <b>technologiques</b> (industries), la <b>prévention</b> réduit les dommages.</p>',
+    retenir:'<b>Risque = aléa + enjeux humains</b> ; la prévention protège les populations.'
+  }
 }
 ]);

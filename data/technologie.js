@@ -152,5 +152,82 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Chaque produit a un <b>cycle de vie</b> qui consomme des ressources et génère des <b>déchets</b>. L’<b>écoconception</b> vise à réduire cet <b>impact</b> à toutes les étapes.</p>',
     retenir:'Penser un objet, c’est aussi penser sa <b>fin de vie</b> (réparation, recyclage).'
   }
+},
+{
+  id:'tech-analyse-besoin', matiereKey:'techno', matiere:'Technologie', niveau:'5e',
+  titre:'Analyser le besoin (bête à cornes, pieuvre)',
+  motsCles:['besoin','bête à cornes','diagramme pieuvre','fonction','contrainte','utilisateur','analyse fonctionnelle'],
+  contenu:{
+    objectifs:['Identifier le besoin auquel répond un objet.','Utiliser les outils d’analyse fonctionnelle.'],
+    notions:[
+      {terme:'Bête à cornes', def:'outil qui exprime le besoin : à qui l’objet rend service, sur quoi il agit, dans quel but.'},
+      {terme:'Diagramme pieuvre', def:'représente les fonctions de service reliant l’objet à son environnement.'},
+      {terme:'Contrainte', def:'exigence à respecter (coût, sécurité, dimensions…).'}
+    ],
+    essentiel:'<p>Avant de concevoir un objet, on <b>analyse le besoin</b>. La <b>bête à cornes</b> précise le but ; le <b>diagramme pieuvre</b> liste les <b>fonctions</b> et les <b>contraintes</b> liées à l’environnement.</p>',
+    retenir:'On conçoit un objet à partir d’un <b>besoin</b> précis, pas l’inverse.'
+  }
+},
+{
+  id:'tech-representer-objet', matiereKey:'techno', matiere:'Technologie', niveau:'5e',
+  titre:'Représenter un objet (croquis, schéma, dessin technique)',
+  motsCles:['croquis','schéma','dessin technique','cotation','échelle','représentation','plan','vues'],
+  contenu:{
+    objectifs:['Distinguer les modes de représentation.','Comprendre échelle et cotation.'],
+    notions:[
+      {terme:'Croquis', def:'dessin rapide à main levée pour exprimer une idée.'},
+      {terme:'Schéma', def:'représentation simplifiée du fonctionnement.'},
+      {terme:'Dessin technique', def:'plan précis, à l’échelle, avec cotation (dimensions).'}
+    ],
+    essentiel:'<p>Pour communiquer une idée d’objet, on utilise le <b>croquis</b> (idée), le <b>schéma</b> (fonctionnement) ou le <b>dessin technique</b> (plan précis à l’<b>échelle</b> avec <b>cotation</b>).</p>',
+    retenir:'Une <b>échelle</b> indique le rapport entre le dessin et l’objet réel.'
+  }
+},
+{
+  id:'tech-transmission-mouvement', matiereKey:'techno', matiere:'Technologie', niveau:'4e',
+  titre:'La transmission de mouvement',
+  motsCles:['engrenage','poulie','courroie','transmission','mouvement','rotation','vitesse','mécanisme'],
+  contenu:{
+    objectifs:['Décrire des systèmes de transmission.','Comprendre l’effet sur la vitesse.'],
+    notions:[
+      {terme:'Engrenages', def:'roues dentées qui transmettent la rotation (sens inversé).'},
+      {terme:'Poulies-courroie', def:'transmettent le mouvement à distance (même sens).'},
+      {terme:'Rapport', def:'selon la taille des roues, on modifie la vitesse et la force.'}
+    ],
+    essentiel:'<p>Les <b>mécanismes</b> (engrenages, poulies-courroie, chaîne) <b>transmettent</b> un mouvement d’une pièce à une autre. En changeant la taille des roues, on modifie la <b>vitesse</b> de rotation.</p>',
+    exemple:'<p>Sur un vélo, la chaîne relie le pédalier à la roue ; changer de plateau change la vitesse.</p>',
+    retenir:'Petite roue menant une grande roue → la grande tourne <b>moins vite</b>.'
+  }
+},
+{
+  id:'tech-ordinateur', matiereKey:'techno', matiere:'Technologie', niveau:'4e',
+  titre:'Le fonctionnement d’un ordinateur',
+  motsCles:['ordinateur','processeur','mémoire','entrée','sortie','composant','binaire','stockage'],
+  contenu:{
+    objectifs:['Identifier les composants d’un ordinateur.','Comprendre entrées et sorties.'],
+    notions:[
+      {terme:'Processeur (CPU)', def:'exécute les instructions, « cerveau » de l’ordinateur.'},
+      {terme:'Mémoire', def:'stocke les données (RAM temporaire, disque pour le stockage durable).'},
+      {terme:'Entrées / sorties', def:'entrées (clavier, souris) ; sorties (écran, imprimante).'}
+    ],
+    essentiel:'<p>Un <b>ordinateur</b> reçoit des données par ses <b>entrées</b>, les traite avec le <b>processeur</b> et la <b>mémoire</b>, puis renvoie un résultat par ses <b>sorties</b>. Les données sont codées en <b>binaire</b> (0 et 1).</p>',
+    retenir:'Schéma : <b>entrée → traitement (processeur) → sortie</b>.'
+  }
+},
+{
+  id:'tech-capteurs-actionneurs', matiereKey:'techno', matiere:'Technologie', niveau:'4e',
+  titre:'Capteurs et actionneurs',
+  motsCles:['capteur','actionneur','information','signal','moteur','automatisme','commande','système'],
+  contenu:{
+    objectifs:['Distinguer capteur et actionneur.','Situer leur rôle dans un système automatisé.'],
+    notions:[
+      {terme:'Capteur', def:'détecte une information (température, lumière, présence) et l’envoie au système.'},
+      {terme:'Actionneur', def:'agit sur le réel (moteur, lampe, buzzer).'},
+      {terme:'Programme', def:'traite l’information du capteur pour commander l’actionneur.'}
+    ],
+    essentiel:'<p>Dans un système automatisé, le <b>capteur</b> fournit une <b>information</b>, le <b>programme</b> décide, et l’<b>actionneur</b> exécute l’action. C’est la base de tout automatisme.</p>',
+    exemple:'<p>Éclairage automatique : capteur de luminosité → programme → lampe (actionneur).</p>',
+    retenir:'Capteur = <b>il mesure</b> ; actionneur = <b>il agit</b>.'
+  }
 }
 ]);

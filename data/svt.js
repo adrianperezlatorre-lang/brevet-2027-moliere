@@ -272,5 +272,96 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Une <b>alimentation équilibrée</b> apporte tous les <b>nutriments</b> nécessaires, en quantités adaptées aux <b>besoins</b>. Un mauvais équilibre nuit à la <b>santé</b>.</p>',
     retenir:'Équilibre = <b>variété</b> + quantités adaptées à l’<b>activité physique</b>.'
   }
+},
+{
+  id:'svt-classification', matiereKey:'svt', matiere:'SVT', niveau:'5e',
+  titre:'Classer les êtres vivants',
+  motsCles:['classification','espèce','groupes emboîtés','caractères','parenté','biodiversité','vertébrés'],
+  contenu:{
+    objectifs:['Classer un être vivant selon ses caractères.','Comprendre les groupes emboîtés.'],
+    notions:[
+      {terme:'Classification', def:'regrouper les êtres vivants selon leurs caractères communs.'},
+      {terme:'Groupes emboîtés', def:'chaque groupe est inclus dans un plus grand (ex. vertébrés ⊃ mammifères).'},
+      {terme:'Parenté', def:'des caractères communs révèlent un ancêtre commun.'}
+    ],
+    essentiel:'<p>On <b>classe</b> les êtres vivants d’après leurs <b>caractères communs</b>, en <b>groupes emboîtés</b>. Cette classification traduit des liens de <b>parenté</b> et l’histoire évolutive.</p>',
+    retenir:'On classe par <b>ce que les êtres vivants ont</b>, pas par ce qu’ils n’ont pas.'
+  }
+},
+{
+  id:'svt-chaines-alimentaires', matiereKey:'svt', matiere:'SVT', niveau:'6e',
+  titre:'Chaînes et réseaux alimentaires',
+  motsCles:['chaîne alimentaire','réseau alimentaire','producteur','consommateur','prédateur','maillon','écosystème'],
+  contenu:{
+    objectifs:['Construire une chaîne alimentaire.','Comprendre les relations dans un milieu.'],
+    notions:[
+      {terme:'Chaîne alimentaire', def:'suite d’êtres vivants qui se mangent (« est mangé par »).'},
+      {terme:'Producteurs', def:'les végétaux, au début de la chaîne.'},
+      {terme:'Consommateurs', def:'animaux qui mangent d’autres êtres vivants.'}
+    ],
+    essentiel:'<p>Dans un milieu, les êtres vivants sont reliés par des <b>relations alimentaires</b>. Une <b>chaîne alimentaire</b> commence toujours par un <b>végétal</b> (producteur) ; plusieurs chaînes forment un <b>réseau</b>.</p>',
+    exemple:'<p>Herbe → sauterelle → grenouille → couleuvre.</p>',
+    retenir:'La flèche « → » se lit « <b>est mangé par</b> » ; tout part des <b>végétaux</b>.'
+  }
+},
+{
+  id:'svt-sol-recyclage', matiereKey:'svt', matiere:'SVT', niveau:'5e',
+  titre:'Le sol et le recyclage de la matière',
+  motsCles:['sol','décomposeur','matière organique','humus','recyclage','ver de terre','champignon','micro-organisme'],
+  contenu:{
+    objectifs:['Comprendre le recyclage de la matière.','Connaître le rôle des décomposeurs.'],
+    notions:[
+      {terme:'Matière organique', def:'restes d’êtres vivants (feuilles mortes, cadavres).'},
+      {terme:'Décomposeurs', def:'vers, champignons, bactéries qui transforment cette matière.'},
+      {terme:'Recyclage', def:'la matière est transformée en éléments réutilisables par les plantes.'}
+    ],
+    essentiel:'<p>Dans le <b>sol</b>, les <b>décomposeurs</b> transforment la <b>matière organique</b> morte en éléments minéraux. Cette matière est ainsi <b>recyclée</b> et sert de nouveau aux végétaux.</p>',
+    retenir:'Rien ne se perd : les <b>décomposeurs</b> recyclent la matière dans le sol.'
+  }
+},
+{
+  id:'svt-squelette-muscles', matiereKey:'svt', matiere:'SVT', niveau:'4e',
+  titre:'Squelette, muscles et articulations',
+  motsCles:['squelette','muscle','articulation','os','tendon','mouvement','levier','locomotion'],
+  contenu:{
+    objectifs:['Décrire ce qui permet le mouvement du corps.','Comprendre le rôle des articulations.'],
+    notions:[
+      {terme:'Squelette', def:'ensemble des os qui soutient le corps.'},
+      {terme:'Articulation', def:'zone de contact entre deux os qui permet le mouvement.'},
+      {terme:'Muscles', def:'reliés aux os par des tendons, ils se contractent pour produire le mouvement.'}
+    ],
+    essentiel:'<p>Le <b>mouvement</b> repose sur le <b>squelette</b>, les <b>articulations</b> et les <b>muscles</b>. En se contractant, un muscle tire sur l’<b>os</b> par un <b>tendon</b> et provoque le mouvement.</p>',
+    retenir:'Muscle contracté = il <b>tire</b> sur l’os (il ne pousse jamais) ; les muscles agissent par paires.'
+  }
+},
+{
+  id:'svt-erosion-paysages', matiereKey:'svt', matiere:'SVT', niveau:'5e',
+  titre:'L’érosion et l’évolution des paysages',
+  motsCles:['érosion','paysage','roche','eau','transport','sédiment','altération','géologie'],
+  contenu:{
+    objectifs:['Comprendre comment évolue un paysage.','Décrire les étapes de l’érosion.'],
+    notions:[
+      {terme:'Érosion', def:'usure des roches par l’eau, le vent, le gel, la végétation.'},
+      {terme:'Transport', def:'les débris (sédiments) sont emportés, souvent par l’eau.'},
+      {terme:'Sédimentation', def:'les débris se déposent plus loin et forment de nouvelles roches.'}
+    ],
+    essentiel:'<p>Les <b>paysages</b> évoluent lentement sous l’effet de l’<b>érosion</b> : les roches sont <b>altérées</b>, les débris <b>transportés</b> par l’eau puis <b>déposés</b> ailleurs.</p>',
+    retenir:'Trois étapes : <b>altération → transport → sédimentation</b>.'
+  }
+},
+{
+  id:'svt-reproduction-plantes', matiereKey:'svt', matiere:'SVT', niveau:'6e',
+  titre:'La reproduction des plantes à fleurs',
+  motsCles:['fleur','pollinisation','fruit','graine','pollen','fécondation','abeille','reproduction végétale'],
+  contenu:{
+    objectifs:['Comprendre la reproduction des plantes à fleurs.','Connaître le rôle de la pollinisation.'],
+    notions:[
+      {terme:'Pollinisation', def:'transport du pollen (par le vent ou les insectes) vers le pistil.'},
+      {terme:'Fécondation', def:'union du pollen et de l’ovule → formation d’une graine.'},
+      {terme:'Fruit', def:'issu de la transformation de la fleur ; il protège les graines.'}
+    ],
+    essentiel:'<p>La <b>fleur</b> est l’organe de reproduction. Après la <b>pollinisation</b> et la <b>fécondation</b>, elle se transforme en <b>fruit</b> contenant des <b>graines</b> qui donneront de nouvelles plantes.</p>',
+    retenir:'Fleur → pollinisation → fécondation → <b>fruit + graines</b>.'
+  }
 }
 ]);

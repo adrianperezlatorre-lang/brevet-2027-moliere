@@ -241,5 +241,110 @@ window.FICHES = (window.FICHES || []).concat([
     essentiel:'<p>Au <b>XIXᵉ siècle</b>, les puissances européennes bâtissent de vastes <b>empires coloniaux</b>. Les populations colonisées sont <b>exploitées</b> et dominées par les colons.</p>',
     retenir:'Colonisation = <b>domination</b> et <b>exploitation</b> de territoires par une métropole.'
   }
+},
+{
+  id:'hist-moyen-age', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'La société féodale au Moyen Âge',
+  motsCles:['féodalité','seigneur','paysan','vassal','château','serf','moyen âge','société'],
+  contenu:{
+    objectifs:['Comprendre l’organisation de la société féodale.','Décrire les rapports seigneurs-paysans.'],
+    notions:[
+      {terme:'Féodalité', def:'système de liens personnels entre seigneurs (vassal / suzerain).'},
+      {terme:'Seigneurie', def:'domaine du seigneur où travaillent les paysans.'},
+      {terme:'Trois ordres', def:'ceux qui prient (clergé), qui combattent (nobles), qui travaillent (paysans).'}
+    ],
+    essentiel:'<p>Au <b>Moyen Âge</b>, la société est <b>hiérarchisée</b>. Les <b>seigneurs</b> dominent les <b>paysans</b> qui travaillent leurs terres, en échange de protection. L’Église occupe une place centrale.</p>',
+    retenir:'Société des <b>trois ordres</b> : ceux qui prient, combattent et travaillent.'
+  }
+},
+{
+  id:'hist-islam-medieval', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'L’islam et la Méditerranée médiévale',
+  motsCles:['islam','musulmans','méditerranée','échanges','coran','byzance','commerce','civilisations'],
+  contenu:{
+    objectifs:['Situer la naissance de l’islam.','Comprendre les échanges en Méditerranée médiévale.'],
+    notions:[
+      {terme:'Islam', def:'religion apparue au VIIᵉ siècle en Arabie ; se diffuse rapidement.'},
+      {terme:'Méditerranée', def:'espace de contacts entre chrétiens (latins, byzantins) et musulmans.'},
+      {terme:'Échanges', def:'commerce, savoirs (mathématiques, médecine), mais aussi conflits.'}
+    ],
+    essentiel:'<p>Au Moyen Âge, la <b>Méditerranée</b> est un carrefour entre trois civilisations (chrétienne latine, <b>byzantine</b> et <b>musulmane</b>). Malgré les <b>conflits</b>, les <b>échanges</b> commerciaux et culturels sont intenses.</p>',
+    retenir:'La Méditerranée médiévale : à la fois <b>conflits</b> et <b>échanges</b> entre civilisations.'
+  }
+},
+{
+  id:'hist-renaissance', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'Humanisme, Renaissance et Réformes',
+  motsCles:['renaissance','humanisme','imprimerie','réforme','art','léonard de vinci','protestantisme','xvie siècle'],
+  contenu:{
+    objectifs:['Définir humanisme et Renaissance.','Comprendre les Réformes religieuses.'],
+    notions:[
+      {terme:'Humanisme', def:'mouvement plaçant l’Homme et le savoir au centre (XVᵉ-XVIᵉ s.).'},
+      {terme:'Renaissance', def:'renouveau des arts et des sciences, inspiré de l’Antiquité.'},
+      {terme:'Réformes', def:'naissance du protestantisme (Luther), division de la chrétienté.'}
+    ],
+    essentiel:'<p>Aux <b>XVᵉ-XVIᵉ siècles</b>, l’<b>humanisme</b> et la <b>Renaissance</b> transforment les arts, les sciences et la pensée, favorisés par l’<b>imprimerie</b>. Les <b>Réformes</b> religieuses bouleversent l’Europe chrétienne.</p>',
+    retenir:'L’<b>imprimerie</b> (Gutenberg) diffuse largement les idées nouvelles.'
+  }
+},
+{
+  id:'hist-grandes-decouvertes', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'Le « Nouveau Monde » et les grandes découvertes',
+  motsCles:['grandes découvertes','christophe colomb','amérique','1492','conquête','empire colonial','caravelle'],
+  contenu:{
+    objectifs:['Comprendre l’expansion européenne du XVIᵉ siècle.','Mesurer les conséquences pour les peuples américains.'],
+    notions:[
+      {terme:'Grandes découvertes', def:'explorations maritimes européennes (Portugal, Espagne) dès le XVᵉ s.'},
+      {terme:'1492', def:'Christophe Colomb atteint l’Amérique.'},
+      {terme:'Conséquences', def:'conquêtes, domination et effondrement des civilisations amérindiennes.'}
+    ],
+    essentiel:'<p>À partir de <b>1492</b>, les Européens explorent puis conquièrent de nouveaux territoires. Ces <b>grandes découvertes</b> enrichissent l’Europe mais entraînent la <b>domination</b> et le déclin des peuples amérindiens.</p>',
+    retenir:'1492 : Colomb atteint l’<b>Amérique</b> → début de la domination européenne du monde.'
+  }
+},
+{
+  id:'hist-louis-xiv', matiereKey:'histoire', matiere:'Histoire', niveau:'5e',
+  titre:'Louis XIV et la monarchie absolue',
+  motsCles:['louis xiv','monarchie absolue','versailles','roi soleil','pouvoir','droit divin','xviie siècle'],
+  contenu:{
+    objectifs:['Définir la monarchie absolue.','Comprendre comment Louis XIV contrôle le pouvoir.'],
+    notions:[
+      {terme:'Monarchie absolue', def:'le roi détient tous les pouvoirs, sans partage.'},
+      {terme:'Droit divin', def:'le roi tient son pouvoir de Dieu.'},
+      {terme:'Versailles', def:'château où Louis XIV contrôle la noblesse et met en scène son pouvoir.'}
+    ],
+    essentiel:'<p>Au <b>XVIIᵉ siècle</b>, <b>Louis XIV</b> incarne la <b>monarchie absolue</b> : il gouverne seul, « de <b>droit divin</b> ». <b>Versailles</b> symbolise et renforce sa puissance.</p>',
+    retenir:'Monarchie absolue = <b>tous les pouvoirs</b> concentrés dans les mains du roi.'
+  }
+},
+{
+  id:'hist-lumieres', matiereKey:'histoire', matiere:'Histoire', niveau:'4e',
+  titre:'L’Europe des Lumières (XVIIIᵉ)',
+  motsCles:['lumières','philosophe','voltaire','rousseau','encyclopédie','raison','liberté','tolérance'],
+  contenu:{
+    objectifs:['Définir le mouvement des Lumières.','Comprendre ses idées nouvelles.'],
+    notions:[
+      {terme:'Lumières', def:'mouvement d’idées du XVIIIᵉ s. fondé sur la raison et l’esprit critique.'},
+      {terme:'Philosophes', def:'Voltaire, Rousseau, Montesquieu, Diderot…'},
+      {terme:'Idées', def:'liberté, égalité, tolérance, critique de l’absolutisme.'}
+    ],
+    essentiel:'<p>Au <b>XVIIIᵉ siècle</b>, les <b>philosophes des Lumières</b> défendent la <b>raison</b>, la <b>liberté</b> et la <b>tolérance</b>. Ils critiquent la monarchie absolue et préparent la Révolution.</p>',
+    retenir:'Les Lumières diffusent leurs idées par l’<b>Encyclopédie</b> et les salons.'
+  }
+},
+{
+  id:'hist-traite-esclavage', matiereKey:'histoire', matiere:'Histoire', niveau:'4e',
+  titre:'La traite négrière et l’esclavage',
+  motsCles:['traite négrière','esclavage','commerce triangulaire','abolition','colonies','plantations','atlantique'],
+  contenu:{
+    objectifs:['Comprendre le commerce triangulaire.','Connaître l’esclavage colonial et son abolition.'],
+    notions:[
+      {terme:'Traite', def:'commerce d’êtres humains déportés d’Afrique vers les colonies d’Amérique.'},
+      {terme:'Commerce triangulaire', def:'Europe → Afrique (produits) → Amérique (esclaves) → Europe (sucre, coton).'},
+      {terme:'Abolition', def:'en France, esclavage définitivement aboli en 1848.'}
+    ],
+    essentiel:'<p>Au <b>XVIIIᵉ siècle</b>, le <b>commerce triangulaire</b> déporte des millions d’Africains réduits en <b>esclavage</b> dans les plantations. L’esclavage est <b>aboli</b> en France en <b>1848</b>.</p>',
+    retenir:'Commerce triangulaire entre <b>Europe, Afrique et Amérique</b> ; abolition en <b>1848</b>.'
+  }
 }
 ]);
