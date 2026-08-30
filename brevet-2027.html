@@ -3691,15 +3691,84 @@ window.PARCOURS = [
 }
 ];
 
-/* ---- Construction automatique des examens : 2 questions de chaque leçon du bloc ---- */
+/* ============================================================
+   Construction du chemin complet :
+   1) découpe les leçons manuelles en mini-leçons de 3 questions ;
+   2) génère un nœud « Révision » par fiche (questions terme ↔ définition
+      créées à partir des notions de la fiche) ;
+   3) entrelace le tout et construit l'examen de bloc (échantillonné).
+   ============================================================ */
 (function(){
+  var F = window.FICHES || [];
+
+  /* 2) leçons auto générées depuis les fiches : 2 questions par notion
+        (définition → terme ET terme → définition), toutes les notions. */
+  function tronc(s){ s=(s||'').replace(/<[^>]+>/g,''); return s.length>110 ? s.slice(0,107)+'…' : s; }
+  function fichesLecons(matieres, niveaux){
+    var pool = F.filter(function(f){ return matieres.indexOf(f.matiereKey)>=0 && niveaux.indexOf(f.niveau)>=0; });
+    return pool.map(function(f, fi){
+      var notions = (f.contenu && f.contenu.notions) || [];
+      var autres = F.filter(function(g){ return g.matiereKey===f.matiereKey && g!==f && g.contenu && g.contenu.notions && g.contenu.notions.length; });
+      var qs = [];
+      function fabrique(n, i, sens){   // sens 0 : terme→définition ; sens 1 : définition→terme
+        var bonne = sens ? n.terme : tronc(n.def);
+        var dist = [];
+        notions.forEach(function(m){
+          if(m!==n){ var v = sens ? m.terme : tronc(m.def); if(v!==bonne && dist.indexOf(v)<0) dist.push(v); }
+        });
+        var k=1;
+        while(dist.length<3 && autres.length && k<=12){
+          var g = autres[(fi+k)%autres.length]; k++;
+          var gn = g.contenu.notions[(fi+i)%g.contenu.notions.length];
+          var v2 = sens ? gn.terme : tronc(gn.def);
+          if(v2!==bonne && dist.indexOf(v2)<0) dist.push(v2);
+        }
+        dist = dist.slice(0,3);
+        if(dist.length<2) return;                       // pas assez de distracteurs → on saute
+        var pos = (fi+i+sens) % (dist.length+1);
+        var choix = dist.slice(); choix.splice(pos,0,bonne);
+        qs.push(sens
+          ? { q:'Quel terme correspond à : « '+tronc(n.def)+' » ?', choix:choix, sol:pos, expl:'Fiche « '+f.titre+' » : '+n.terme+' — '+tronc(n.def) }
+          : { q:'Que signifie « '+n.terme+' » ? ('+f.titre+')', choix:choix, sol:pos, expl:'Fiche « '+f.titre+' » : '+n.terme+' — '+tronc(n.def) });
+      }
+      notions.forEach(function(n,i){ fabrique(n,i,0); });          // toutes : terme → définition
+      notions.forEach(function(n,i){ fabrique(n,i+notions.length,1); }); // puis : définition → terme
+      return qs.length>=4 ? { id:'f-'+f.id, titre:'Révision : '+f.titre, matiereKey:f.matiereKey, questions:qs, fiche:f.id } : null;
+    }).filter(Boolean);
+  }
+
+  /* 3) entrelacement : 2 mini-leçons, puis 1 révision de fiche, etc. */
+  function meler(minis, fiches){
+    var out=[], i=0, j=0;
+    while(i<minis.length || j<fiches.length){
+      if(i<minis.length) out.push(minis[i++]);
+      if(j<fiches.length) out.push(fiches[j++]);
+      if(j<fiches.length) out.push(fiches[j++]);
+    }
+    return out;
+  }
+
+  var PLAN = {
+    bloc1:{ mat:['maths','francais','svt'],                                niv:['6e','5e'] },
+    bloc2:{ mat:['physique','histoire','geographie','emc','techno'],       niv:['6e','5e'] },
+    bloc3:{ mat:['maths','francais','svt'],                                niv:['4e'] },
+    bloc4:{ mat:['physique','histoire','geographie','emc','techno'],       niv:['4e'] },
+    bloc5:{ mat:['maths','francais'],                                      niv:['3e'] },
+    bloc6:{ mat:['svt','physique','histoire','geographie','emc','techno'], niv:['3e'] }
+  };
+
   window.PARCOURS.forEach(function(b){
+    var plan = PLAN[b.id] || { mat:[], niv:[] };
+    b.lecons = meler(b.lecons, fichesLecons(plan.mat, plan.niv));
+
+    /* examen : questions échantillonnées régulièrement sur tout le bloc */
+    var cap = b.id==='bloc6' ? 20 : 14;
     var qs = [];
-    b.lecons.forEach(function(l){
-      var picks = [1, l.questions.length - 1];       // 2ᵉ et dernière question de chaque leçon
-      if(picks[0] === picks[1]) picks = [0];
-      picks.forEach(function(i){ qs.push(Object.assign({}, l.questions[i])); });
-    });
+    var pas = Math.max(1, Math.floor(b.lecons.length / cap));
+    for(var li=0; li<b.lecons.length && qs.length<cap; li+=pas){
+      var l = b.lecons[li];
+      qs.push(Object.assign({}, l.questions[qs.length % l.questions.length]));
+    }
     b.examen = { titre: b.examenTitre || ('Examen — ' + b.titre.replace(/ —.*$/,'').trim()), questions: qs };
   });
 })();
