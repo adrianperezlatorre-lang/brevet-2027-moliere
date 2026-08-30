@@ -294,10 +294,193 @@ function renderRecherche(q){
 function renderNav(active){
   $('#subjectnav').innerHTML =
     `<a href="#accueil" class="${active==='accueil'?'active':''}">🏠 Accueil</a>` +
+    `<a href="#parcours" class="${active==='parcours'?'active':''}">🦉 Parcours</a>` +
     `<a href="#pratique" class="navpratique ${active==='pratique'?'active':''}">📝 Pratique</a>` +
     MATIERES.map(m =>
       `<a href="#matiere/${m.key}" class="${active===m.key?'active':''}">${m.emoji} ${m.nom}</a>`
     ).join('');
+}
+
+/* ============================================================
+   PARCOURS (façon Duolingo) : chemin de leçons + examens de bloc
+   ============================================================ */
+const PARCOURS = window.PARCOURS || [];
+const PSTORE = 'brevet_moliere_parcours';   // { "bloc1/l1": 85, "bloc1/examen": 90, ... } meilleur score %
+function getParcoursScores(){ try{ return JSON.parse(localStorage.getItem(PSTORE)||'{}'); }catch{ return {}; } }
+function setParcoursScore(key, pct){
+  const s = getParcoursScores();
+  if(!(key in s) || pct > s[key]) s[key] = pct;
+  localStorage.setItem(PSTORE, JSON.stringify(s));
+}
+const PASS = 60; // % minimum pour valider une étape
+
+/* une étape est débloquée si toutes les étapes précédentes sont validées */
+function parcoursSteps(){
+  const steps = [];
+  PARCOURS.forEach(b => {
+    b.lecons.forEach(l => steps.push({ bloc:b, lecon:l, key:`${b.id}/${l.id}`, type:'lecon' }));
+    steps.push({ bloc:b, lecon:null, key:`${b.id}/examen`, type:'examen' });
+  });
+  return steps;
+}
+function stepUnlocked(key){
+  const scores = getParcoursScores();
+  const steps = parcoursSteps();
+  for(const st of steps){
+    if(st.key === key) return true;                 // toutes les précédentes étaient validées
+    if((scores[st.key]||0) < PASS) return false;    // une étape précédente non validée
+  }
+  return false;
+}
+
+function renderParcours(){
+  const scores = getParcoursScores();
+  let unlockedReached = false;
+  const blocsHtml = PARCOURS.map(b => {
+    const nodes = [];
+    b.lecons.forEach(l => {
+      const key = `${b.id}/${l.id}`;
+      const score = scores[key];
+      const done = (score||0) >= PASS;
+      const unlocked = stepUnlocked(key);
+      const m = M_BY_KEY[l.matiereKey];
+      let cls = done ? 'done' : (unlocked ? 'open' : 'locked');
+      if(unlocked && !done && !unlockedReached){ cls += ' current'; unlockedReached = true; }
+      nodes.push(`<div class="pnode ${cls}" ${unlocked?`data-goto="parcours/${b.id}/${l.id}"`:''} style="--c:${m.color}">
+        <div class="pnode-circle">${done?'✓':(unlocked?m.emoji:'🔒')}</div>
+        <div class="pnode-label"><b>${l.titre}</b><small>${m.nom}${score!=null?` · ${score}%`:''}</small></div>
+      </div>`);
+    });
+    const ekey = `${b.id}/examen`;
+    const escore = scores[ekey];
+    const edone = (escore||0) >= PASS;
+    const eunlocked = stepUnlocked(ekey);
+    let ecls = edone ? 'done' : (eunlocked ? 'open' : 'locked');
+    if(eunlocked && !edone && !unlockedReached){ ecls += ' current'; unlockedReached = true; }
+    nodes.push(`<div class="pnode examen ${ecls}" ${eunlocked?`data-goto="parcours/${b.id}/examen"`:''}>
+      <div class="pnode-circle">${edone?'🏆':(eunlocked?'⭐':'🔒')}</div>
+      <div class="pnode-label"><b>${b.examen.titre}</b><small>${b.examen.questions.length} questions${escore!=null?` · ${escore}%`:''}</small></div>
+    </div>`);
+    return `<section class="pbloc">
+      <header class="pbloc-head"><h2>${b.titre}</h2><span>${b.sousTitre}</span></header>
+      <div class="pchemin">${nodes.join('<div class="plink"></div>')}</div>
+    </section>`;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="section-title"><h1>🦉 Parcours</h1>
+      <span class="count">Avance leçon par leçon · ${PASS}% pour valider</span></div>
+    <p class="lead">Comme sur Duolingo : suis le chemin dans l’ordre, du plus facile au plus difficile.
+      Chaque leçon = des questions flash. À la fin d’un bloc : un <b>examen</b> qui mélange tout.
+      Il faut <b>${PASS}%</b> pour débloquer l’étape suivante.</p>
+    ${blocsHtml}`;
+}
+
+/* ---- Moteur de leçon / examen ---- */
+let quizState = null; // { questions, idx, bonnes, key, titre, retourHash }
+
+function startQuiz(bloc, leconId){
+  const isExam = leconId === 'examen';
+  const source = isExam ? bloc.examen : bloc.lecons.find(l=>l.id===leconId);
+  if(!source) { renderParcours(); return; }
+  quizState = {
+    questions: source.questions,
+    idx: 0, bonnes: 0,
+    key: `${bloc.id}/${leconId}`,
+    titre: isExam ? bloc.examen.titre : source.titre,
+    isExam
+  };
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  const s = quizState;
+  const q = s.questions[s.idx];
+  const pct = Math.round(s.idx / s.questions.length * 100);
+  let corps;
+  if(q.choix){
+    corps = `<div class="quiz-choix">${q.choix.map((c,i)=>
+      `<button class="quiz-opt" data-quiz-opt="${i}">${c}</button>`).join('')}</div>`;
+  } else {
+    corps = `<div class="quiz-saisie">
+      <input id="quizInput" type="text" autocomplete="off" placeholder="Ta réponse…" />
+      <button class="btn btn-check" data-quiz-valider>Valider</button></div>`;
+  }
+  app.innerHTML = `
+    <div class="quiz">
+      <div class="quiz-top">
+        <span class="backlink" data-goto="parcours">✕ Quitter</span>
+        <div class="quiz-bar"><span style="width:${pct}%"></span></div>
+        <span class="quiz-count">${s.idx+1}/${s.questions.length}</span>
+      </div>
+      <h1 class="quiz-titre">${s.isExam?'⭐ ':''}${s.titre}</h1>
+      <div class="quiz-q">${q.q}</div>
+      ${corps}
+      <div id="quizFeedback"></div>
+    </div>`;
+  const inp = document.getElementById('quizInput');
+  if(inp){ inp.focus(); inp.addEventListener('keydown', e => { if(e.key==='Enter') validerSaisie(); }); }
+}
+
+function normaliserRep(str){
+  return (str||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/\s+/g,' ').replace(',', '.').trim();
+}
+
+function afficherFeedback(ok, expl, solTexte){
+  const s = quizState;
+  if(ok) s.bonnes++;
+  const fb = document.getElementById('quizFeedback');
+  fb.innerHTML = `<div class="quiz-fb ${ok?'ok':'ko'}">
+    <b>${ok?'✅ Correct !':'❌ Raté…'}</b>
+    ${!ok && solTexte ? `<div>La bonne réponse était : <b>${solTexte}</b></div>` : ''}
+    ${expl ? `<div class="quiz-expl">${expl}</div>` : ''}
+    <button class="btn ${ok?'btn-check':'btn-random'}" data-quiz-suivant>${s.idx+1 < s.questions.length ? 'Continuer →' : 'Voir le résultat 🏁'}</button>
+  </div>`;
+  // désactiver les options
+  document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+  fb.querySelector('[data-quiz-suivant]').focus();
+}
+
+function validerChoix(i){
+  const q = quizState.questions[quizState.idx];
+  const ok = i === q.sol;
+  document.querySelectorAll('.quiz-opt').forEach((b,bi)=>{
+    if(bi===q.sol) b.classList.add('good');
+    else if(bi===i && !ok) b.classList.add('bad');
+  });
+  afficherFeedback(ok, q.expl, q.choix[q.sol]);
+}
+function validerSaisie(){
+  const q = quizState.questions[quizState.idx];
+  const val = normaliserRep(document.getElementById('quizInput')?.value);
+  if(!val) return;
+  const ok = (q.saisie||[]).some(r => normaliserRep(r) === val);
+  afficherFeedback(ok, q.expl, (q.saisie||[])[0]);
+}
+
+function quizSuivant(){
+  const s = quizState;
+  s.idx++;
+  if(s.idx < s.questions.length){ renderQuizQuestion(); return; }
+  // fin : score
+  const pct = Math.round(s.bonnes / s.questions.length * 100);
+  setParcoursScore(s.key, pct);
+  const reussi = pct >= PASS;
+  app.innerHTML = `
+    <div class="quiz quiz-fin">
+      <div class="quiz-resultat ${reussi?'win':'lose'}">
+        <div class="quiz-emoji">${reussi ? (s.isExam?'🏆':'🎉') : '😅'}</div>
+        <h1>${reussi ? (s.isExam?'Examen réussi !':'Leçon validée !') : 'Presque…'}</h1>
+        <p class="quiz-score">${s.bonnes}/${s.questions.length} bonnes réponses · <b>${pct}%</b></p>
+        <p>${reussi ? 'L’étape suivante est débloquée. Continue sur ta lancée !'
+                    : `Il faut ${PASS}% pour valider. Revois la notion puis réessaie !`}</p>
+        <div class="quiz-fin-btns">
+          ${!reussi ? `<button class="btn btn-random" data-quiz-retry>🔁 Réessayer</button>` : ''}
+          <button class="btn ${reussi?'btn-check':'btn-ghost'}" data-goto="parcours">← Retour au parcours</button>
+        </div>
+      </div>
+    </div>`;
 }
 
 /* ---- Pratique : annales « centre étranger – groupe 1 » 2026 ---- */
@@ -362,6 +545,14 @@ function route(){
   else if(hash.startsWith('fiche/')){ renderNav(''); renderFiche(hash.split('/')[1]); }
   else if(hash.startsWith('pratique/')){ renderNav('pratique'); renderPratiqueExam(hash.split('/')[1]); }
   else if(hash==='pratique'){ renderNav('pratique'); renderPratiqueList(); }
+  else if(hash.startsWith('parcours/')){
+    const [,blocId,leconId] = hash.split('/');
+    const bloc = PARCOURS.find(b=>b.id===blocId);
+    renderNav('parcours');
+    if(bloc && stepUnlocked(`${blocId}/${leconId}`)) startQuiz(bloc, leconId);
+    else renderParcours();
+  }
+  else if(hash==='parcours'){ renderNav('parcours'); renderParcours(); }
   else if(hash.startsWith('q/')){ renderNav(''); renderRecherche(hash.slice(2)); }
   else { renderNav('accueil'); renderAccueil(); }
 }
@@ -397,6 +588,14 @@ document.addEventListener('click', e => {
     tsol.textContent = hidden ? '👁 Afficher les corrections' : '🙈 Masquer les corrections';
     return;
   }
+
+  /* --- Parcours / quiz --- */
+  const opt = e.target.closest('[data-quiz-opt]');
+  if(opt && !opt.disabled){ validerChoix(parseInt(opt.dataset.quizOpt,10)); return; }
+  if(e.target.closest('[data-quiz-valider]')){ validerSaisie(); return; }
+  if(e.target.closest('[data-quiz-suivant]')){ quizSuivant(); return; }
+  const retry = e.target.closest('[data-quiz-retry]');
+  if(retry && quizState){ quizState.idx=0; quizState.bonnes=0; renderQuizQuestion(); return; }
 
   const check = e.target.closest('[data-check]');
   if(check){

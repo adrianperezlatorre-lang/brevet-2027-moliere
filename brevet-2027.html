@@ -293,6 +293,67 @@ kbd{background:#eef1f9;border-radius:6px;padding:1px 7px;font-family:inherit;fon
   letter-spacing:.04em;margin-bottom:6px}
 .prat-exos.hide-sol .prat-sol{display:none}
 
+/* ---------- Parcours (façon Duolingo) ---------- */
+.pbloc{margin:26px 0 34px}
+.pbloc-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;
+  background:linear-gradient(135deg,#4338ca,#7c3aed);color:#fff;border-radius:16px;padding:14px 20px;box-shadow:var(--shadow)}
+.pbloc-head h2{margin:0;font-size:19px;font-weight:800}
+.pbloc-head span{opacity:.85;font-size:13px;font-weight:600}
+.pchemin{display:flex;flex-direction:column;align-items:center;gap:0;padding:8px 0}
+.plink{width:6px;height:26px;background:#d9dfef;border-radius:99px}
+.pnode{display:flex;align-items:center;gap:14px;width:min(430px,92%);padding:10px 14px;border-radius:16px;transition:.18s}
+.pnode:nth-child(4n+1){transform:translateX(-26px)}
+.pnode:nth-child(4n+3){transform:translateX(26px)}
+.pnode .pnode-circle{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font-size:26px;flex-shrink:0;
+  background:#e6e9f4;border-bottom:6px solid #c6ccdf;color:#9aa3b8;transition:.18s}
+.pnode-label{line-height:1.25}
+.pnode-label b{font-size:15px}
+.pnode-label small{display:block;color:var(--muted);font-weight:600}
+.pnode.locked{opacity:.55}
+.pnode.open{cursor:pointer}
+.pnode.open .pnode-circle{background:color-mix(in srgb,var(--c,#4f46e5) 18%,#fff);
+  border-bottom-color:color-mix(in srgb,var(--c,#4f46e5) 45%,#fff);color:var(--ink)}
+.pnode.open:hover{transform:translateY(-3px) scale(1.02)}
+.pnode.done .pnode-circle{background:linear-gradient(135deg,#16a34a,#22c55e);border-bottom-color:#15803d;color:#fff}
+.pnode.current .pnode-circle{animation:pulse 1.6s infinite;box-shadow:0 0 0 6px color-mix(in srgb,var(--c,#4f46e5) 22%,transparent)}
+.pnode.examen.open .pnode-circle{background:linear-gradient(135deg,#f59e0b,#fbbf24);border-bottom-color:#b45309;color:#fff}
+.pnode.examen.done .pnode-circle{background:linear-gradient(135deg,#f59e0b,#fbbf24);border-bottom-color:#b45309}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+
+/* ---------- Quiz ---------- */
+.quiz{max-width:640px;margin:0 auto;animation:pop .3s both}
+.quiz-top{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.quiz-top .backlink{margin:0}
+.quiz-bar{flex:1;height:14px;background:#e3e8f5;border-radius:999px;overflow:hidden}
+.quiz-bar span{display:block;height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:999px;transition:width .4s}
+.quiz-count{color:var(--muted);font-weight:700;font-size:14px}
+.quiz-titre{font-size:16px;color:var(--muted);font-weight:700;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em}
+.quiz-q{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow-sm);
+  padding:24px;font-size:20px;font-weight:700;margin-bottom:18px}
+.quiz-choix{display:grid;gap:10px}
+.quiz-opt{background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;
+  padding:14px 18px;font-size:16px;font-weight:600;font-family:inherit;cursor:pointer;text-align:left;transition:.15s}
+.quiz-opt:hover:not(:disabled){border-color:#93c5fd;transform:translateY(-2px)}
+.quiz-opt.good{background:#e8f8ee;border-color:#22c55e;color:#15803d}
+.quiz-opt.bad{background:#fdecec;border-color:#ef4444;color:#b91c1c}
+.quiz-opt:disabled{cursor:default}
+.quiz-saisie{display:flex;gap:10px}
+.quiz-saisie input{flex:1;border:2px solid var(--line);border-radius:14px;padding:13px 16px;font-size:17px;font-family:inherit;outline:none}
+.quiz-saisie input:focus{border-color:#93c5fd}
+.quiz-fb{margin-top:18px;border-radius:16px;padding:16px 18px;animation:fadeUp .25s both}
+.quiz-fb.ok{background:#e8f8ee;border:1px solid #a7e0ba;color:#15803d}
+.quiz-fb.ko{background:#fdecec;border:1px solid #fca5a5;color:#b91c1c}
+.quiz-fb b{font-size:17px}
+.quiz-expl{margin-top:6px;color:var(--ink);opacity:.85;font-size:14.5px}
+.quiz-fb .btn{margin-top:12px}
+.quiz-resultat{text-align:center;background:#fff;border:1px solid var(--line);border-radius:24px;
+  box-shadow:var(--shadow-lg);padding:40px 28px}
+.quiz-emoji{font-size:64px;margin-bottom:8px}
+.quiz-resultat h1{margin:0 0 6px;font-size:26px}
+.quiz-score{font-size:18px;color:var(--muted)}
+.quiz-resultat.win h1{color:#15803d}
+.quiz-fin-btns{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+
 .footer{max-width:1120px;margin:0 auto;padding:10px 22px 40px;color:var(--muted);font-size:13px;text-align:center}
 
 @media(max-width:640px){
@@ -342,25 +403,22 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'Le théorème de Pythagore',
   motsCles:['triangle rectangle','hypoténuse','longueur','distance','racine carrée','réciproque','contraposée','angle droit'],
   contenu:{
-    objectifs:[
-      'Calculer la longueur d’un côté dans un triangle rectangle.',
-      'Démontrer qu’un triangle est rectangle (réciproque) ou non (contraposée).'
-    ],
+    objectifs:['Calculer la longueur d’un côté dans un triangle rectangle.','Démontrer qu’un triangle est rectangle (réciproque) ou non (contraposée).'],
     notions:[
       {terme:'Hypoténuse', def:'le côté le plus long, toujours opposé à l’angle droit.'},
-      {terme:'Théorème (sens direct)', def:'si le triangle ABC est rectangle en A, alors BC² = AB² + AC² (hypoténuse² = somme des carrés des deux autres côtés).'},
-      {terme:'Réciproque', def:'si BC² = AB² + AC² (BC étant le plus grand côté), alors ABC est rectangle en A.'},
-      {terme:'Contraposée', def:'si BC² ≠ AB² + AC², alors ABC n’est pas rectangle.'}
+      {terme:'Théorème (sens direct)', def:'si ABC est rectangle en A, alors BC² = AB² + AC² (hypoténuse² = somme des carrés des deux autres côtés).'},
+      {terme:'Réciproque', def:'si BC² = AB² + AC² (BC étant le plus grand côté), alors le triangle est rectangle en A.'},
+      {terme:'Contraposée', def:'si BC² ≠ AB² + AC², alors le triangle n’est pas rectangle.'}
     ],
-    essentiel:'<p>Le théorème de Pythagore relie les trois côtés d’un <b>triangle rectangle</b>. Sens <b>direct</b> : pour <b>calculer une longueur</b> quand on connaît les deux autres côtés. <b>Réciproque</b> : pour <b>prouver un angle droit</b>. <b>Contraposée</b> : pour prouver qu’un triangle <b>n’est pas</b> rectangle, en comparant le carré du plus grand côté avec la somme des carrés des deux autres.</p>',
+    essentiel:'<p>Le théorème de Pythagore relie les trois côtés d’un <b>triangle rectangle</b>. On l’utilise dans trois situations. Le <b>sens direct</b> sert à <b>calculer une longueur</b> quand on connaît les deux autres côtés. La <b>réciproque</b> sert à <b>démontrer qu’un triangle est rectangle</b>. La <b>contraposée</b> sert à prouver qu’un triangle <b>n’est pas</b> rectangle.</p><p>Attention à ce qu’on cherche : pour calculer l’<b>hypoténuse</b>, on <b>additionne</b> ; pour calculer un côté de l’angle droit, on <b>soustrait</b>. L’hypoténuse est toujours le plus grand côté et se trouve en face de l’angle droit.</p>',
     methode:[
-      'Identifie l’angle droit et nomme l’hypoténuse (côté opposé).',
+      'Repère l’angle droit et nomme l’hypoténuse (côté opposé, le plus grand).',
       'Écris l’égalité : hypoténuse² = côté² + côté².',
-      'Pour un côté de l’angle droit, isole-le : côté² = hypoténuse² − autre côté².',
-      'Prends la racine carrée et conclus avec l’unité.'
+      'Remplace les valeurs connues ; pour un côté de l’angle droit, isole-le (soustraction).',
+      'Prends la racine carrée et conclus avec l’unité (valeur arrondie si besoin).'
     ],
-    exemple:'<p><b>Calcul de l’hypoténuse</b> — ABC rectangle en A, AB = 3 cm, AC = 4 cm :<br>BC² = AB² + AC² = 3² + 4² = 9 + 16 = 25, donc BC = √25 = <b>5 cm</b>.</p><p><b>Calcul d’un côté</b> — rectangle en A, BC = 13, AB = 5 :<br>AC² = BC² − AB² = 169 − 25 = 144, donc AC = √144 = <b>12</b>.</p>',
-    retenir:'L’hypoténuse est le <b>plus grand côté</b>, opposé à l’angle droit. Réciproque → prouver un angle droit ; contraposée → prouver l’absence d’angle droit. On <b>soustrait</b> quand on cherche un côté de l’angle droit.'
+    exemple:'<p><b>Calcul de l’hypoténuse</b> — ABC rectangle en A, AB = 3 cm, AC = 4 cm :<br>BC² = AB² + AC² = 3² + 4² = 9 + 16 = 25 → BC = √25 = <b>5 cm</b>.</p><p><b>Calcul d’un côté</b> — rectangle en A, BC = 13, AB = 5 :<br>AC² = BC² − AB² = 169 − 25 = 144 → AC = √144 = <b>12</b>.</p><p><b>Réciproque</b> — côtés 6, 8, 10 : 10² = 100 et 6² + 8² = 36 + 64 = 100. Comme c’est égal, le triangle <b>est rectangle</b>.</p>',
+    retenir:'Hypoténuse² = somme des carrés. Chercher l’hypoténuse → <b>on additionne</b> ; chercher un côté de l’angle droit → <b>on soustrait</b>. Réciproque = prouver un angle droit.'
   }
 },
 {
@@ -368,26 +426,22 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'Le théorème de Thalès',
   motsCles:['droites parallèles','triangle','papillon','proportionnalité','rapport','réciproque','contraposée','longueurs'],
   contenu:{
-    objectifs:[
-      'Calculer une longueur manquante dans une configuration de Thalès.',
-      'Démontrer que deux droites sont parallèles à l’aide de la réciproque.',
-      'Prouver que deux droites ne sont pas parallèles (contraposée).'
-    ],
+    objectifs:['Calculer une longueur manquante dans une configuration de Thalès.','Démontrer que deux droites sont parallèles (réciproque) ou non (contraposée).'],
     notions:[
-      {terme:'Conditions d’application', def:'deux droites sécantes en un point A, coupées par deux autres droites parallèles ; les points doivent être alignés — configuration « triangle » (D∈[AB], E∈[AC]) ou « papillon » (D et E de part et d’autre de A).'},
-      {terme:'Théorème (sens direct)', def:'si (DE) // (BC), alors AD/AB = AE/AC = DE/BC. Les trois rapports sont égaux.'},
-      {terme:'Réciproque', def:'si AD/AB = AE/AC ET si les points A, D, B et A, E, C sont alignés dans le même ordre, alors (DE) // (BC).'},
+      {terme:'Conditions d’application', def:'deux droites sécantes en A, coupées par deux parallèles ; points alignés — configuration « triangle » (D∈[AB], E∈[AC]) ou « papillon » (D et E de part et d’autre de A).'},
+      {terme:'Théorème (sens direct)', def:'si (DE) // (BC), alors AD/AB = AE/AC = DE/BC (les trois rapports sont égaux).'},
+      {terme:'Réciproque', def:'si AD/AB = AE/AC ET si A, D, B et A, E, C sont alignés dans le même ordre, alors (DE) // (BC).'},
       {terme:'Contraposée', def:'si AD/AB ≠ AE/AC (points alignés), alors (DE) et (BC) ne sont pas parallèles.'}
     ],
-    essentiel:'<p>Le théorème de Thalès traduit la <b>proportionnalité</b> des longueurs entre deux triangles emboîtés (ou opposés par le sommet A : configuration « <b>papillon</b> ») formés par deux <b>parallèles</b>. On écrit les rapports <b>dans le même ordre</b> : à chaque fois « <b>segment du petit triangle / segment du grand triangle</b> », le sommet commun A cité en premier.</p><p>⚠️ Le rapport <b>DE/BC</b> ne sert qu’à calculer <b>DE</b> ou <b>BC</b> (les segments portés par les parallèles), jamais une longueur située sur les droites sécantes.</p>',
+    essentiel:'<p>Le théorème de Thalès traduit la <b>proportionnalité</b> des longueurs entre deux triangles emboîtés (ou opposés par le sommet A : configuration « <b>papillon</b> ») formés par deux <b>parallèles</b>. On écrit les rapports <b>dans le même ordre</b> : « segment du petit triangle / segment du grand triangle », le sommet commun A cité en premier.</p><p>⚠️ Le rapport <b>DE/BC</b> ne sert qu’à calculer <b>DE</b> ou <b>BC</b> (les segments portés par les parallèles), jamais une longueur située sur les droites sécantes. La <b>réciproque</b> sert à prouver le parallélisme ; la <b>contraposée</b> à prouver le non-parallélisme.</p>',
     methode:[
-      'Vérifie les conditions : sommet commun A, points alignés, et (DE) // (BC).',
+      'Vérifie les conditions : sommet commun A, points alignés, (DE) // (BC).',
       'Écris la triple égalité en respectant l’ordre : AD/AB = AE/AC = DE/BC.',
       'Ne garde que les deux rapports contenant la longueur cherchée.',
-      'Résous par produit en croix, puis conclus par une phrase avec l’unité.'
+      'Résous par produit en croix, puis conclus avec l’unité.'
     ],
-    exemple:'<p>Triangle ABC, D∈[AB] et E∈[AC] avec (DE)//(BC). On donne AD = 2 cm, AB = 6 cm, AE = 3 cm ; on cherche AC.<br>D’après le théorème de Thalès : AD/AB = AE/AC, soit 2/6 = 3/AC.<br>Par produit en croix : AC = (3 × 6) ÷ 2 = 18 ÷ 2 = <b>9 cm</b>.<br>Conclusion : la longueur AC mesure 9 cm.</p>',
-    retenir:'Vérifie <b>toujours</b> les deux conditions (parallèles + points alignés). Erreur classique : inverser l’ordre des rapports. <b>Réciproque</b> → prouver que c’est parallèle ; <b>contraposée</b> → prouver que ce ne l’est pas.'
+    exemple:'<p>Triangle ABC, D∈[AB] et E∈[AC] avec (DE)//(BC). AD = 2 cm, AB = 6 cm, AE = 3 cm ; on cherche AC.<br>D’après Thalès : AD/AB = AE/AC, soit 2/6 = 3/AC.<br>Produit en croix : AC = (3 × 6) ÷ 2 = 18 ÷ 2 = <b>9 cm</b>.</p>',
+    retenir:'Vérifie <b>toujours</b> les conditions (parallèles + points alignés). Rapports <b>dans le même ordre</b>. Réciproque → prouver le parallélisme ; contraposée → le non-parallélisme.'
   }
 },
 {
@@ -395,24 +449,21 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'La trigonométrie (cosinus, sinus, tangente)',
   motsCles:['cosinus','sinus','tangente','triangle rectangle','angle','soh cah toa','adjacent','opposé','hypoténuse'],
   contenu:{
-    objectifs:[
-      'Calculer une longueur dans un triangle rectangle à partir d’un angle.',
-      'Calculer la mesure d’un angle à partir de deux longueurs.'
-    ],
+    objectifs:['Calculer une longueur à partir d’un angle.','Calculer un angle à partir de deux longueurs.'],
     notions:[
       {terme:'Cosinus', def:'cos(angle) = côté adjacent ÷ hypoténuse.'},
       {terme:'Sinus', def:'sin(angle) = côté opposé ÷ hypoténuse.'},
       {terme:'Tangente', def:'tan(angle) = côté opposé ÷ côté adjacent.'},
-      {terme:'Adjacent / opposé', def:'l’adjacent touche l’angle ; l’opposé est en face de l’angle. L’hypoténuse est toujours face à l’angle droit.'}
+      {terme:'Repérer les côtés', def:'l’adjacent touche l’angle, l’opposé est en face de l’angle, l’hypoténuse est face à l’angle droit.'}
     ],
-    essentiel:'<p>Dans un <b>triangle rectangle</b>, un <b>angle aigu</b> et deux côtés sont reliés par le cosinus, le sinus ou la tangente. Moyen mnémotechnique : <b>SOH-CAH-TOA</b> (Sin=Opp/Hyp, Cos=Adj/Hyp, Tan=Opp/Adj). Pour trouver un <b>angle</b>, on utilise les touches inverses <kbd>cos⁻¹</kbd>, <kbd>sin⁻¹</kbd>, <kbd>tan⁻¹</kbd>.</p>',
+    essentiel:'<p>Dans un <b>triangle rectangle</b>, un <b>angle aigu</b> et deux côtés sont reliés par le cosinus, le sinus ou la tangente. Moyen mnémotechnique : <b>SOH-CAH-TOA</b> (Sin = Opp/Hyp, Cos = Adj/Hyp, Tan = Opp/Adj).</p><p>Pour calculer une <b>longueur</b>, on choisit la formule qui relie le côté connu et le côté cherché, puis on isole l’inconnue. Pour calculer un <b>angle</b>, on utilise les touches inverses <kbd>cos⁻¹</kbd>, <kbd>sin⁻¹</kbd>, <kbd>tan⁻¹</kbd>. La calculatrice doit être en mode <b>degré (DEG)</b>.</p>',
     methode:[
       'Place-toi sur l’angle utilisé et nomme les côtés (adjacent, opposé, hypoténuse).',
-      'Choisis la formule qui relie les deux côtés connus/cherchés.',
-      'Pour une longueur : produit en croix ; pour un angle : touche inverse.'
+      'Choisis la formule reliant les deux côtés connus/cherchés (SOH-CAH-TOA).',
+      'Longueur : produit en croix. Angle : touche inverse (cos⁻¹…).'
     ],
-    exemple:'<p><b>Longueur</b> — angle B = 30°, hypoténuse BC = 10, on cherche le côté opposé AC :<br>sin(30°) = AC ÷ BC → AC = sin(30°) × 10 = 0,5 × 10 = <b>5</b>.</p><p><b>Angle</b> — adjacent = 4, hypoténuse = 8 :<br>cos(x) = 4/8 = 0,5 → x = cos⁻¹(0,5) = <b>60°</b>.</p>',
-    retenir:'Calculatrice en mode <b>degré (DEG)</b>. Valeurs utiles : cos(60°)=0,5 ; sin(30°)=0,5. Choisis la formule selon les côtés en jeu (adjacent, opposé, hypoténuse).'
+    exemple:'<p><b>Longueur</b> — angle B = 30°, hypoténuse BC = 10, côté opposé AC cherché :<br>sin(30°) = AC ÷ BC → AC = sin(30°) × 10 = 0,5 × 10 = <b>5</b>.</p><p><b>Angle</b> — adjacent = 4, hypoténuse = 8 :<br>cos(x) = 4 ÷ 8 = 0,5 → x = cos⁻¹(0,5) = <b>60°</b>.</p>',
+    retenir:'<b>SOH-CAH-TOA</b>. Calculatrice en mode <b>degré (DEG)</b>. À connaître : cos(60°) = 0,5 ; sin(30°) = 0,5.'
   }
 },
 {
@@ -422,14 +473,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Additionner, soustraire, multiplier et diviser des fractions.','Simplifier une fraction.'],
     notions:[
-      {terme:'Addition / soustraction', def:'même dénominateur → on additionne (ou soustrait) les numérateurs, on garde le dénominateur. Sinon, on réduit d’abord au même dénominateur.'},
+      {terme:'Addition / soustraction', def:'même dénominateur → on additionne (ou soustrait) les numérateurs et on garde le dénominateur. Sinon, on réduit d’abord au même dénominateur.'},
       {terme:'Multiplication', def:'numérateurs entre eux, dénominateurs entre eux : a/b × c/d = (a×c)/(b×d).'},
       {terme:'Division', def:'multiplier par l’inverse : a/b ÷ c/d = a/b × d/c.'},
       {terme:'Simplifier', def:'diviser numérateur et dénominateur par un même nombre (leur PGCD).'}
     ],
-    essentiel:'<p>Pour <b>+ et −</b>, il faut un <b>dénominateur commun</b> (souvent un multiple commun). Pour <b>×</b>, on multiplie « en ligne ». Pour <b>÷</b>, on multiplie par l’<b>inverse</b> de la deuxième fraction. On <b>simplifie</b> toujours le résultat final.</p>',
-    exemple:'<p><b>Addition</b> : 2/3 + 1/4 = 8/12 + 3/12 = <b>11/12</b>.<br><b>Multiplication</b> : 3/5 × 10/9 = 30/45 = <b>2/3</b> (après simplification).<br><b>Division</b> : 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = <b>5/6</b>.</p>',
-    retenir:'On n’additionne <b>jamais</b> les dénominateurs. Diviser = multiplier par l’<b>inverse</b>. Pense à <b>simplifier</b> à la fin.'
+    essentiel:'<p>Pour <b>additionner ou soustraire</b>, il faut un <b>dénominateur commun</b> (souvent un multiple commun des dénominateurs). Pour <b>multiplier</b>, on multiplie « en ligne » ; on peut simplifier avant de calculer. Pour <b>diviser</b>, on multiplie par l’<b>inverse</b> de la deuxième fraction. On <b>simplifie</b> toujours le résultat final.</p><p>Erreur fréquente : ne jamais additionner les dénominateurs. Pour 2/3 + 1/4, on ne fait pas 3/7 !</p>',
+    exemple:'<p><b>Addition</b> : 2/3 + 1/4 = 8/12 + 3/12 = <b>11/12</b>.<br><b>Multiplication</b> : 3/5 × 10/9 = 30/45 = <b>2/3</b> (simplifié).<br><b>Division</b> : 2/3 ÷ 4/5 = 2/3 × 5/4 = 10/12 = <b>5/6</b>.</p>',
+    retenir:'Pour + et − : <b>dénominateur commun</b> (jamais additionner les dénominateurs). Diviser = multiplier par l’<b>inverse</b>. Toujours <b>simplifier</b>.'
   }
 },
 {
@@ -441,12 +492,12 @@ window.FICHES = (window.FICHES || []).concat([
     notions:[
       {terme:'Définition', def:'aⁿ = a×a×…×a (n facteurs). a¹ = a ; a⁰ = 1 ; a⁻ⁿ = 1/aⁿ.'},
       {terme:'Règles', def:'aⁿ × aᵐ = aⁿ⁺ᵐ ; aⁿ ÷ aᵐ = aⁿ⁻ᵐ ; (aⁿ)ᵐ = aⁿˣᵐ.'},
-      {terme:'Puissances de 10', def:'10ⁿ = 1 suivi de n zéros ; 10⁻ⁿ = 0,0…01.'},
-      {terme:'Notation scientifique', def:'a × 10ⁿ avec 1 ≤ a < 10 (un seul chiffre non nul avant la virgule).'}
+      {terme:'Puissances de 10', def:'10ⁿ = 1 suivi de n zéros ; 10⁻ⁿ = 0,0…01 (n chiffres après la virgule).'},
+      {terme:'Notation scientifique', def:'écriture a × 10ⁿ avec 1 ≤ a < 10 (un seul chiffre non nul avant la virgule).'}
     ],
-    essentiel:'<p>Une puissance est une multiplication répétée. Les <b>puissances de 10</b> servent à écrire les très grands ou très petits nombres en <b>notation scientifique</b>. Attention : (−2)² = 4 mais −2² = −4 (la puissance s’applique avant le signe).</p>',
+    essentiel:'<p>Une puissance est une multiplication répétée. Les <b>puissances de 10</b> servent à écrire simplement les très grands et très petits nombres, sous forme de <b>notation scientifique</b> a × 10ⁿ.</p><p>Attention aux signes : (−2)² = 4 (le carré d’un négatif est positif), mais −2² = −4 (ici la puissance s’applique avant le signe). Un exposant <b>négatif</b> ne donne pas un nombre négatif, mais un nombre entre 0 et 1.</p>',
     exemple:'<p>10³ = 1000 ; 10⁻² = 0,01.<br>52 000 = <b>5,2 × 10⁴</b> ; 0,00047 = <b>4,7 × 10⁻⁴</b>.<br>10⁵ × 10³ = 10⁸ ; (10²)³ = 10⁶.</p>',
-    retenir:'Exposant <b>positif</b> → grand nombre ; exposant <b>négatif</b> → nombre entre 0 et 1. En notation scientifique, <b>1 ≤ a < 10</b>.'
+    retenir:'Exposant <b>positif</b> → grand nombre ; exposant <b>négatif</b> → nombre entre 0 et 1. Notation scientifique : <b>1 ≤ a < 10</b>.'
   }
 },
 {
@@ -456,14 +507,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Développer un produit.','Factoriser une expression.','Utiliser les identités remarquables.'],
     notions:[
-      {terme:'Développer', def:'transformer un produit en somme : k(a+b) = ka + kb (simple distributivité).'},
+      {terme:'Développer', def:'transformer un produit en somme : k(a+b) = ka + kb (distributivité).'},
       {terme:'Double distributivité', def:'(a+b)(c+d) = ac + ad + bc + bd.'},
       {terme:'Identités remarquables', def:'(a+b)² = a²+2ab+b² ; (a−b)² = a²−2ab+b² ; (a+b)(a−b) = a²−b².'},
-      {terme:'Factoriser', def:'transformer une somme en produit, en cherchant un facteur commun ou une identité remarquable.'}
+      {terme:'Factoriser', def:'transformer une somme en produit, avec un facteur commun ou une identité remarquable.'}
     ],
-    essentiel:'<p><b>Développer</b> = enlever les parenthèses (produit → somme), puis <b>réduire</b> les termes semblables. <b>Factoriser</b> = faire apparaître un produit (somme → produit). Utile pour résoudre des équations (via l’équation-produit).</p>',
+    essentiel:'<p><b>Développer</b>, c’est enlever les parenthèses (passer d’un produit à une somme), puis <b>réduire</b> les termes semblables. <b>Factoriser</b>, c’est l’opération inverse : faire apparaître un produit (passer d’une somme à un produit).</p><p>Pour factoriser, deux méthodes : chercher un <b>facteur commun</b> à tous les termes, ou reconnaître une <b>identité remarquable</b> (surtout a²−b² = (a−b)(a+b)). La factorisation est utile pour résoudre des équations avec l’équation-produit.</p>',
     exemple:'<p><b>Développer</b> : (x+3)(x−2) = x²−2x+3x−6 = <b>x²+x−6</b>.<br>(2x+5)² = (2x)²+2×2x×5+5² = <b>4x²+20x+25</b>.<br><b>Factoriser</b> (facteur commun) : 5x + 35 = <b>5(x+7)</b>.<br><b>Factoriser</b> (identité) : x²−9 = x²−3² = <b>(x−3)(x+3)</b>.</p>',
-    retenir:'Pour factoriser, cherche un <b>facteur commun</b> ou reconnais une <b>identité remarquable</b> (surtout a²−b²).'
+    retenir:'Développer = produit → somme ; factoriser = somme → produit. Pour factoriser : <b>facteur commun</b> ou <b>identité remarquable</b> (surtout a²−b²).'
   }
 },
 {
@@ -477,7 +528,7 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Règles', def:'on peut ajouter/soustraire un même nombre aux deux membres, ou multiplier/diviser par un même nombre non nul.'},
       {terme:'Équation-produit', def:'A × B = 0 équivaut à A = 0 OU B = 0.'}
     ],
-    essentiel:'<p>Résoudre, c’est <b>isoler x</b> : on regroupe les termes en x d’un côté, les nombres de l’autre. Une <b>équation-produit</b> se résout en annulant chaque facteur séparément.</p>',
+    essentiel:'<p>Résoudre une équation, c’est <b>isoler x</b> : on regroupe les termes en x d’un côté et les nombres de l’autre, puis on divise par le coefficient de x. Astuce : un terme qui « change de côté » <b>change d’opération</b>.</p><p>Une <b>équation-produit</b> (de la forme A × B = 0) se résout en annulant chaque facteur séparément : elle a en général <b>deux</b> solutions. On peut toujours <b>vérifier</b> en remplaçant x par la solution trouvée.</p>',
     methode:[
       'Développe et réduis chaque membre si besoin.',
       'Regroupe les x d’un côté, les nombres de l’autre.',
@@ -485,7 +536,7 @@ window.FICHES = (window.FICHES || []).concat([
       'Vérifie en remplaçant x par la solution.'
     ],
     exemple:'<p>3x + 5 = 20 → 3x = 15 → x = <b>5</b>.<br>5x − 3 = 2x + 9 → 3x = 12 → x = <b>4</b>.<br>(x−2)(x+7) = 0 → x = 2 <b>ou</b> x = <b>−7</b>.</p>',
-    retenir:'Un terme qui « change de côté » <b>change d’opération</b>. Une équation-produit a en général <b>deux</b> solutions. Pense à <b>vérifier</b>.'
+    retenir:'Isoler x : ce qui change de côté <b>change d’opération</b>. Équation-produit A×B=0 → A=0 ou B=0 (deux solutions). Penser à <b>vérifier</b>.'
   }
 },
 {
@@ -496,12 +547,12 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Résoudre un système de 2 équations à 2 inconnues.','Modéliser un problème par un système.'],
     notions:[
       {terme:'Substitution', def:'on exprime une inconnue en fonction de l’autre, puis on la remplace dans la seconde équation.'},
-      {terme:'Combinaison', def:'on additionne ou soustrait les équations (après multiplication) pour éliminer une inconnue.'},
+      {terme:'Combinaison', def:'on additionne ou soustrait les équations (après multiplication éventuelle) pour éliminer une inconnue.'},
       {terme:'Solution', def:'un couple (x ; y) qui vérifie les DEUX équations en même temps.'}
     ],
-    essentiel:'<p>Un <b>système</b> cherche deux nombres vérifiant <b>deux conditions</b> simultanément. On l’utilise pour des problèmes à deux inconnues (prix, quantités…). Deux méthodes : <b>substitution</b> ou <b>combinaison linéaire</b>.</p>',
+    essentiel:'<p>Un <b>système</b> cherche deux nombres (x et y) qui vérifient <b>deux conditions simultanément</b>. On l’utilise beaucoup pour les problèmes à deux inconnues (prix de deux articles, quantités…). Bien <b>définir les inconnues</b> au départ est essentiel.</p><p>Deux méthodes : la <b>substitution</b> (pratique quand une inconnue est déjà isolée) et la <b>combinaison linéaire</b> (on additionne ou soustrait les lignes pour faire disparaître une inconnue). La solution est un <b>couple (x ; y)</b> que l’on peut vérifier dans les deux équations.</p>',
     exemple:'<p>Système { x + y = 10 ; x − y = 4 }.<br><b>Combinaison</b> : on additionne les deux lignes → 2x = 14 → x = 7. Puis 7 + y = 10 → y = 3.<br>Solution : le couple <b>(7 ; 3)</b>.</p>',
-    retenir:'La solution est un <b>couple (x ; y)</b>. Vérifie-le dans les <b>deux</b> équations. Bien définir les inconnues au départ d’un problème.'
+    retenir:'La solution est un <b>couple (x ; y)</b> valable dans les <b>deux</b> équations. Méthodes : <b>substitution</b> ou <b>combinaison</b>.'
   }
 },
 {
@@ -512,13 +563,13 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Comprendre image et antécédent.','Lire une fonction sur un graphique ou un tableau.'],
     notions:[
       {terme:'Fonction', def:'procédé qui associe à un nombre x un unique nombre noté f(x).'},
-      {terme:'Image', def:'f(x) est l’image de x. Un nombre x a UNE seule image.'},
+      {terme:'Image', def:'f(x) est l’image de x. Un nombre x a une seule image.'},
       {terme:'Antécédent', def:'x est un antécédent de f(x). Un nombre peut avoir plusieurs antécédents (ou aucun).'},
-      {terme:'Lecture graphique', def:'image → on part de l’axe horizontal (x) ; antécédent → on part de l’axe vertical (y).'}
+      {terme:'Lecture graphique', def:'pour une image, on part de l’axe horizontal (x) ; pour un antécédent, on part de l’axe vertical (y).'}
     ],
-    essentiel:'<p>Une fonction est une <b>machine</b> : on entre x, elle renvoie f(x). On la décrit par une <b>formule</b>, un <b>tableau de valeurs</b> ou une <b>courbe</b>. Sur la courbe, l’image se lit verticalement, l’antécédent horizontalement.</p>',
-    exemple:'<p>f(x) = 2x + 1.<br>Image de 3 : f(3) = 2×3+1 = <b>7</b>.<br>Antécédent de 5 : on résout 2x+1 = 5 → x = <b>2</b>.</p>',
-    retenir:'<b>Image</b> = je pars de x (horizontal). <b>Antécédent</b> = je pars de y (vertical). Un x a une seule image ; un y peut avoir plusieurs antécédents.'
+    essentiel:'<p>Une fonction est comme une <b>machine</b> : on entre un nombre x, elle renvoie f(x). On peut la décrire par une <b>formule</b>, un <b>tableau de valeurs</b> ou une <b>courbe</b>.</p><p>Il faut bien distinguer <b>image</b> et <b>antécédent</b>. Calculer l’<b>image</b> de x, c’est remplacer x dans la formule. Trouver un <b>antécédent</b> d’un nombre, c’est résoudre une équation (f(x) = ce nombre). Graphiquement, l’image se lit verticalement, l’antécédent horizontalement.</p>',
+    exemple:'<p>f(x) = 2x + 1.<br>Image de 3 : f(3) = 2×3+1 = <b>7</b>.<br>Antécédent de 5 : on résout 2x+1 = 5 → 2x = 4 → x = <b>2</b>.</p>',
+    retenir:'<b>Image</b> = je pars de x (on calcule f(x)). <b>Antécédent</b> = je pars de y (on résout une équation). Un x a UNE image ; un y peut avoir plusieurs antécédents.'
   }
 },
 {
@@ -526,33 +577,33 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'Fonctions linéaires et affines',
   motsCles:['fonction linéaire','fonction affine','coefficient directeur','ordonnée à l’origine','droite','proportionnalité','pente'],
   contenu:{
-    objectifs:['Distinguer fonction linéaire et affine.','Tracer et exploiter leur représentation.','Déterminer a et b.'],
+    objectifs:['Distinguer fonction linéaire et affine.','Tracer, lire et déterminer a et b.'],
     notions:[
-      {terme:'Fonction affine', def:'f(x) = ax + b. Sa représentation est une droite.'},
+      {terme:'Fonction affine', def:'f(x) = ax + b ; sa représentation graphique est une droite.'},
       {terme:'Fonction linéaire', def:'cas où b = 0 : f(x) = ax. Droite passant par l’origine, liée à la proportionnalité.'},
-      {terme:'Coefficient directeur a', def:'la pente ; a = variation de y ÷ variation de x = Δy/Δx.'},
-      {terme:'Ordonnée à l’origine b', def:'valeur de f(0) ; point où la droite coupe l’axe des ordonnées.'}
+      {terme:'Coefficient directeur a', def:'la pente ; a = (variation de y) ÷ (variation de x) = Δy/Δx.'},
+      {terme:'Ordonnée à l’origine b', def:'valeur de f(0) ; c’est là où la droite coupe l’axe des ordonnées.'}
     ],
-    essentiel:'<p>Ces fonctions sont représentées par des <b>droites</b>. <b>a</b> indique l’inclinaison (montée quand x augmente de 1), <b>b</b> le point de départ (x=0). Une fonction <b>linéaire</b> traduit une <b>proportionnalité</b>. Pour tracer : il suffit de <b>2 points</b>.</p>',
-    exemple:'<p>f(x) = 3x + 2 : pente 3, coupe l’axe vertical en 2. f(0)=2, f(1)=5.<br>Trouver a entre A(1;5) et B(3;11) : a = (11−5)/(3−1) = 6/2 = <b>3</b>.</p>',
-    retenir:'a = <b>combien on monte</b> quand x augmente de 1 ; b = <b>valeur en x=0</b>. Linéaire ⟺ b=0 ⟺ proportionnalité (droite par l’origine).'
+    essentiel:'<p>Les fonctions affines et linéaires sont représentées par des <b>droites</b>. Le coefficient <b>a</b> donne l’inclinaison (de combien y monte quand x augmente de 1) ; <b>b</b> est la valeur de départ, en x = 0. La fonction <b>linéaire</b> (b = 0) traduit une situation de <b>proportionnalité</b> : sa droite passe par l’origine.</p><p>Pour tracer une droite, il suffit de <b>2 points</b>. Pour trouver <b>a</b> à partir de deux points A et B, on calcule Δy/Δx ; pour trouver <b>b</b>, on utilise f(0) ou un point connu.</p>',
+    exemple:'<p>f(x) = 3x + 2 : pente 3, coupe l’axe vertical en 2. f(0)=2, f(1)=5.<br>Coefficient directeur entre A(1;5) et B(3;11) : a = (11−5)/(3−1) = 6/2 = <b>3</b>.</p>',
+    retenir:'a = <b>ce que monte y</b> quand x augmente de 1 (pente) ; b = <b>f(0)</b>. Linéaire ⟺ b = 0 ⟺ proportionnalité (droite par l’origine).'
   }
 },
 {
   id:'maths-proportionnalite', matiereKey:'maths', matiere:'Mathématiques', niveau:'4e',
   titre:'Proportionnalité et pourcentages',
-  motsCles:['proportionnalité','pourcentage','coefficient','produit en croix','vitesse','échelle','coefficient multiplicateur'],
+  motsCles:['proportionnalité','pourcentage','coefficient','produit en croix','coefficient multiplicateur','échelle','vitesse'],
   contenu:{
     objectifs:['Reconnaître une situation de proportionnalité.','Appliquer et calculer des pourcentages.','Utiliser le produit en croix.'],
     notions:[
       {terme:'Coefficient de proportionnalité', def:'nombre par lequel on multiplie pour passer d’une grandeur à l’autre.'},
-      {terme:'Produit en croix', def:'pour une 4ᵉ valeur : si a/b = c/d, alors a×d = b×c.'},
-      {terme:'Pourcentage', def:'t % d’une valeur = valeur × t/100.'},
+      {terme:'Produit en croix', def:'pour trouver une 4ᵉ valeur : si a/b = c/d, alors a×d = b×c.'},
+      {terme:'Pourcentage', def:'prendre t % d’une valeur = valeur × t/100.'},
       {terme:'Coefficient multiplicateur', def:'augmenter de t % : ×(1 + t/100) ; diminuer de t % : ×(1 − t/100).'}
     ],
-    essentiel:'<p>Il y a proportionnalité quand on passe d’une ligne à l’autre en <b>multipliant par le même nombre</b>. Les <b>pourcentages</b>, <b>échelles</b> et <b>vitesses</b> en sont des applications. Les hausses/baisses se calculent avec un <b>coefficient multiplicateur</b>.</p>',
-    exemple:'<p>Réduction de 20 % sur 50 € : 50 × (1 − 0,20) = 50 × 0,80 = <b>40 €</b>.<br>Hausse de 15 % sur 200 € : 200 × 1,15 = <b>230 €</b>.<br>Produit en croix : si 3 kg coûtent 12 €, alors 5 kg coûtent (12×5)/3 = <b>20 €</b>.</p>',
-    retenir:'Augmentation/diminution → <b>coefficient multiplicateur</b> (×1,2 pour +20 %). Deux hausses successives se <b>multiplient</b>, elles ne s’additionnent pas.'
+    essentiel:'<p>Il y a proportionnalité quand on passe d’une grandeur à l’autre en <b>multipliant par un même nombre</b> (le coefficient). Les <b>pourcentages</b>, <b>échelles</b> et <b>vitesses</b> en sont des applications, ainsi que le <b>produit en croix</b> (règle de trois).</p><p>Les hausses et baisses se calculent avec un <b>coefficient multiplicateur</b> : +20 % revient à ×1,20, −20 % à ×0,80. Attention : deux hausses successives se <b>multiplient</b>, elles ne s’additionnent pas (deux hausses de 10 % ne font pas +20 %).</p>',
+    exemple:'<p>Réduction de 20 % sur 50 € : 50 × 0,80 = <b>40 €</b>.<br>Hausse de 15 % sur 200 € : 200 × 1,15 = <b>230 €</b>.<br>Produit en croix : si 3 kg coûtent 12 €, alors 5 kg coûtent (12×5)/3 = <b>20 €</b>.</p>',
+    retenir:'Hausse/baisse → <b>coefficient multiplicateur</b> (×1,2 pour +20 %). Deux hausses se <b>multiplient</b>. Produit en croix pour une 4ᵉ valeur.'
   }
 },
 {
@@ -562,14 +613,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Calculer moyenne, médiane et étendue.','Interpréter une série de données.'],
     notions:[
-      {terme:'Moyenne', def:'somme des valeurs ÷ nombre de valeurs. Pondérée : Σ(valeur×effectif) ÷ effectif total.'},
+      {terme:'Moyenne', def:'somme des valeurs ÷ nombre de valeurs. Pondérée : Σ(valeur × effectif) ÷ effectif total.'},
       {terme:'Médiane', def:'valeur qui partage la série ORDONNÉE en deux moitiés (autant de valeurs avant qu’après).'},
       {terme:'Étendue', def:'plus grande valeur − plus petite valeur (mesure la dispersion).'},
-      {terme:'Fréquence', def:'effectif d’une valeur ÷ effectif total (souvent en %).'}
+      {terme:'Fréquence', def:'effectif d’une valeur ÷ effectif total (souvent exprimée en %).'}
     ],
-    essentiel:'<p>La <b>moyenne</b> tient compte de toutes les valeurs ; la <b>médiane</b> du « milieu » (moins sensible aux valeurs extrêmes) ; l’<b>étendue</b> de la dispersion. Pour la médiane, il faut d’abord <b>ranger</b> les valeurs.</p>',
-    exemple:'<p>Série 4 ; 6 ; 8 ; 10 ; 12 (déjà rangée, 5 valeurs).<br>Moyenne = 40/5 = <b>8</b> ; médiane = valeur du milieu = <b>8</b> ; étendue = 12 − 4 = <b>8</b>.</p>',
-    retenir:'Toujours <b>ranger</b> la série avant la médiane. Avec un nombre <b>pair</b> de valeurs, la médiane est la moyenne des deux valeurs centrales.'
+    essentiel:'<p>Ces indicateurs résument une série de données. La <b>moyenne</b> tient compte de toutes les valeurs ; la <b>médiane</b> représente la valeur « du milieu » et est moins sensible aux valeurs extrêmes ; l’<b>étendue</b> mesure la dispersion.</p><p>Attention : pour la médiane, il faut d’abord <b>ranger</b> les valeurs dans l’ordre croissant. Avec un nombre <b>impair</b> de valeurs, la médiane est la valeur centrale ; avec un nombre <b>pair</b>, c’est la moyenne des deux valeurs centrales.</p>',
+    exemple:'<p>Série 4 ; 6 ; 8 ; 10 ; 12 (5 valeurs, déjà rangée).<br>Moyenne = 40 ÷ 5 = <b>8</b> ; médiane = valeur du milieu = <b>8</b> ; étendue = 12 − 4 = <b>8</b>.</p>',
+    retenir:'Toujours <b>ranger</b> la série avant la médiane. Nombre pair de valeurs → médiane = moyenne des deux valeurs centrales.'
   }
 },
 {
@@ -579,31 +630,31 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Calculer la probabilité d’un événement.','Utiliser l’événement contraire et un arbre.'],
     notions:[
-      {terme:'Probabilité', def:'nombre entre 0 (impossible) et 1 (certain) mesurant la chance qu’un événement se produise.'},
+      {terme:'Probabilité', def:'nombre entre 0 (impossible) et 1 (certain) qui mesure la chance qu’un événement se produise.'},
       {terme:'Équiprobabilité', def:'P(événement) = nombre de cas favorables ÷ nombre de cas possibles.'},
       {terme:'Événement contraire', def:'P(contraire) = 1 − P(événement).'},
       {terme:'Deux épreuves (arbre)', def:'on multiplie les probabilités le long d’un chemin.'}
     ],
-    essentiel:'<p>Une probabilité mesure le <b>hasard</b>. En situation <b>équiprobable</b>, on compte les cas favorables sur les cas possibles. L’<b>événement contraire</b> simplifie souvent (« au moins un… » = 1 − « aucun »).</p>',
-    exemple:'<p>Un dé équilibré : P(obtenir 6) = <b>1/6</b> ; P(nombre pair) = 3/6 = <b>1/2</b> ; P(ne pas faire 6) = 1 − 1/6 = <b>5/6</b>.</p>',
-    retenir:'La somme des probabilités de <b>toutes</b> les issues vaut <b>1</b>. Sur un arbre, on <b>multiplie</b> le long d’un chemin.'
+    essentiel:'<p>Une probabilité mesure le <b>hasard</b> sur une échelle de 0 à 1. En situation <b>équiprobable</b> (dé équilibré, pièce non truquée), on compte les cas favorables sur le nombre de cas possibles. La somme des probabilités de toutes les issues vaut toujours <b>1</b>.</p><p>L’<b>événement contraire</b> simplifie souvent les calculs (« au moins un… » = 1 − « aucun »). Pour deux épreuves successives, on utilise un <b>arbre</b> : on multiplie les probabilités le long d’un chemin.</p>',
+    exemple:'<p>Un dé équilibré : P(6) = <b>1/6</b> ; P(nombre pair) = 3/6 = <b>1/2</b> ; P(ne pas faire 6) = 1 − 1/6 = <b>5/6</b>.</p>',
+    retenir:'0 ≤ P ≤ 1 ; somme des probabilités = <b>1</b>. Contraire : 1 − P. Sur un arbre, on <b>multiplie</b> le long d’un chemin.'
   }
 },
 {
   id:'maths-volumes', matiereKey:'maths', matiere:'Mathématiques', niveau:'3e',
   titre:'Volumes et agrandissement-réduction',
-  motsCles:['volume','cylindre','pyramide','cône','sphère','boule','coefficient','k²','k³','solide'],
+  motsCles:['volume','cylindre','pyramide','cône','sphère','boule','coefficient','k²','k³','unités'],
   contenu:{
-    objectifs:['Calculer le volume des solides usuels.','Gérer les effets d’un agrandissement/réduction.'],
+    objectifs:['Calculer le volume des solides usuels.','Gérer les effets d’un agrandissement ou d’une réduction.'],
     notions:[
       {terme:'Prisme / cylindre', def:'V = aire de base × hauteur.'},
       {terme:'Pyramide / cône', def:'V = (aire de base × hauteur) ÷ 3.'},
       {terme:'Boule', def:'V = 4/3 × π × R³ (aire de la sphère = 4πR²).'},
-      {terme:'Agrandissement de rapport k', def:'les longueurs ×k, les aires ×k², les volumes ×k³.'}
+      {terme:'Agrandissement de rapport k', def:'les longueurs sont ×k, les aires ×k², les volumes ×k³.'}
     ],
-    essentiel:'<p>Chaque solide a sa <b>formule de volume</b>. Lors d’un <b>agrandissement/réduction</b> de rapport k, les <b>aires</b> sont multipliées par <b>k²</b> et les <b>volumes</b> par <b>k³</b> — attention à cette erreur fréquente.</p>',
-    exemple:'<p>Cylindre R = 3 cm, h = 10 cm : V = π×3²×10 = 90π ≈ <b>283 cm³</b>.<br>Si on double les dimensions (k=2), le volume est ×2³ = <b>×8</b>.</p>',
-    retenir:'Vérifie les <b>unités</b> : 1 L = 1 dm³ = 1000 cm³. Agrandissement k : longueurs ×k, aires ×<b>k²</b>, volumes ×<b>k³</b>.'
+    essentiel:'<p>Chaque solide a sa <b>formule de volume</b> : penser à diviser par 3 pour les pyramides et cônes. Il faut faire attention aux <b>unités</b> : 1 L = 1 dm³ = 1000 cm³.</p><p>Lors d’un <b>agrandissement ou d’une réduction</b> de rapport k, l’erreur classique est de tout multiplier par k. En réalité, seules les <b>longueurs</b> sont ×k ; les <b>aires</b> sont ×<b>k²</b> et les <b>volumes</b> ×<b>k³</b>.</p>',
+    exemple:'<p>Cylindre R = 3 cm, h = 10 cm : V = π × 3² × 10 = 90π ≈ <b>283 cm³</b>.<br>Si on double toutes les dimensions (k = 2), le volume est ×2³ = <b>×8</b>.</p>',
+    retenir:'Pyramide/cône : ÷3. Unités : 1 L = 1000 cm³. Agrandissement k → longueurs ×k, aires ×<b>k²</b>, volumes ×<b>k³</b>.'
   }
 },
 {
@@ -613,13 +664,13 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Utiliser des grandeurs composées (vitesse, débit…).','Convertir des unités.'],
     notions:[
-      {terme:'Grandeur quotient', def:'obtenue en divisant deux grandeurs : vitesse = distance ÷ temps.'},
+      {terme:'Grandeur quotient', def:'obtenue en divisant deux grandeurs : vitesse = distance ÷ temps ; masse volumique = masse ÷ volume.'},
       {terme:'Grandeur produit', def:'obtenue en multipliant : énergie (kWh) = puissance × durée.'},
       {terme:'Conversion m/s ↔ km/h', def:'de m/s vers km/h : ×3,6 ; de km/h vers m/s : ÷3,6.'}
     ],
-    essentiel:'<p>Beaucoup de grandeurs du quotidien sont <b>composées</b> : vitesse (km/h), débit (L/min), masse volumique (g/cm³). On les manipule comme des <b>proportionnalités</b>, en soignant les <b>unités</b>.</p>',
-    exemple:'<p>150 km parcourus en 2 h → v = 150 ÷ 2 = <b>75 km/h</b>.<br>Convertir en m/s : 75 ÷ 3,6 ≈ <b>20,8 m/s</b>.</p>',
-    retenir:'Le mot « <b>par</b> » signifie une <b>division</b>. Vérifie la cohérence des <b>unités</b> avant de calculer.'
+    essentiel:'<p>De nombreuses grandeurs du quotidien sont <b>composées</b> : la vitesse (km/h), le débit (L/min), la masse volumique (g/cm³). Le mot « <b>par</b> » indique une <b>division</b>. On les manipule comme des <b>proportionnalités</b>, en veillant à la cohérence des <b>unités</b>.</p>',
+    exemple:'<p>150 km parcourus en 2 h → v = 150 ÷ 2 = <b>75 km/h</b>.<br>Conversion en m/s : 75 ÷ 3,6 ≈ <b>20,8 m/s</b>.</p>',
+    retenir:'« par » = division. Vérifie les <b>unités</b>. m/s → km/h : <b>×3,6</b> ; km/h → m/s : <b>÷3,6</b>.'
   }
 },
 {
@@ -629,14 +680,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Reconnaître un nombre premier et décomposer un entier.','Calculer un PGCD et rendre une fraction irréductible.'],
     notions:[
-      {terme:'Nombre premier', def:'entier ayant exactement deux diviseurs : 1 et lui-même (2, 3, 5, 7, 11, 13…). 1 n’est pas premier.'},
-      {terme:'Décomposition', def:'écrire un entier comme produit de facteurs premiers (ex. 24 = 2³×3).'},
+      {terme:'Nombre premier', def:'entier ayant exactement deux diviseurs : 1 et lui-même (2, 3, 5, 7, 11, 13…). 1 n’est pas premier ; 2 est le seul pair.'},
+      {terme:'Décomposition', def:'écrire un entier comme produit de facteurs premiers (ex. 24 = 2³ × 3).'},
       {terme:'PGCD', def:'plus grand diviseur commun à deux nombres (algorithme d’Euclide ou des soustractions).'},
       {terme:'Fraction irréductible', def:'obtenue en divisant numérateur et dénominateur par leur PGCD.'}
     ],
-    essentiel:'<p>Tout entier se <b>décompose</b> en produit de facteurs premiers. Le <b>PGCD</b> sert à <b>simplifier</b> une fraction jusqu’à la rendre irréductible.</p>',
+    essentiel:'<p>Tout entier se <b>décompose</b> de façon unique en produit de facteurs premiers. Le <b>PGCD</b> de deux nombres est leur plus grand diviseur commun ; on peut le trouver par la décomposition ou par l’algorithme d’Euclide (divisions successives).</p><p>Le PGCD sert à <b>simplifier</b> une fraction jusqu’à la rendre <b>irréductible</b> : une fraction est irréductible lorsque le PGCD du numérateur et du dénominateur vaut 1.</p>',
     exemple:'<p>PGCD(24 ; 36) : 24 = 2³×3 et 36 = 2²×3² → PGCD = 2²×3 = <b>12</b>.<br>Donc 24/36 = (24÷12)/(36÷12) = <b>2/3</b> (irréductible).</p>',
-    retenir:'Une fraction est <b>irréductible</b> quand le PGCD du numérateur et du dénominateur vaut <b>1</b>.'
+    retenir:'Nombre premier = 2 diviseurs (1 et lui-même). Une fraction est <b>irréductible</b> quand PGCD(numérateur ; dénominateur) = 1.'
   }
 },
 {
@@ -647,13 +698,13 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Lire et compléter un programme.','Comprendre boucles, variables et conditions.'],
     notions:[
       {terme:'Algorithme', def:'suite d’instructions précises et ordonnées pour obtenir un résultat.'},
-      {terme:'Boucle', def:'« répéter … fois » exécute plusieurs fois un bloc.'},
-      {terme:'Condition', def:'« si … alors … sinon » exécute selon un test (vrai/faux).'},
-      {terme:'Variable', def:'case mémoire qui stocke une valeur (score, position…).'}
+      {terme:'Boucle', def:'« répéter … fois » exécute plusieurs fois un bloc d’instructions.'},
+      {terme:'Condition', def:'« si … alors … sinon » : le programme choisit selon un test (vrai/faux).'},
+      {terme:'Variable', def:'case mémoire qui stocke une valeur (score, position, compteur…).'}
     ],
-    essentiel:'<p>Un programme exécute les instructions <b>dans l’ordre</b>. Les <b>boucles</b> évitent les répétitions, les <b>conditions</b> permettent des choix, les <b>variables</b> gardent des valeurs. Sur Scratch, repère le <b>repère (x ; y)</b> et le sens des <b>angles</b>.</p>',
+    essentiel:'<p>Un programme exécute les instructions <b>dans l’ordre</b>. Les <b>boucles</b> évitent de répéter le même bloc, les <b>conditions</b> permettent des choix selon un test, et les <b>variables</b> gardent des valeurs en mémoire.</p><p>Sur Scratch, pour prédire ce que fait un lutin, il faut suivre pas à pas ses <b>coordonnées (x ; y)</b> et le sens des <b>angles</b> (« s’orienter à 90° », « tourner de 90° »). On lit le script instruction par instruction.</p>',
     exemple:'<p>« Aller à x:0 y:0 ; répéter 4 fois [avancer de 100 ; tourner de 90°] » trace un <b>carré</b> de côté 100.</p>',
-    retenir:'Compte bien le nombre de <b>répétitions</b> et suis les <b>coordonnées</b> pas à pas pour prédire ce que fait un script.'
+    retenir:'Suivre les instructions <b>dans l’ordre</b>. Compter les <b>répétitions</b> et suivre les <b>coordonnées/angles</b> pour prédire le tracé.'
   }
 },
 {
@@ -661,14 +712,14 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'Angles inscrits et angles au centre',
   motsCles:['angle inscrit','angle au centre','cercle','arc','polygone régulier','géométrie'],
   contenu:{
-    objectifs:['Relier angle inscrit et angle au centre.','Calculer des angles dans un cercle.'],
+    objectifs:['Relier angle inscrit et angle au centre.','Calculer des angles dans un cercle et un polygone régulier.'],
     notions:[
       {terme:'Angle au centre', def:'angle dont le sommet est le centre du cercle.'},
       {terme:'Angle inscrit', def:'angle dont le sommet est sur le cercle et qui intercepte un arc.'},
-      {terme:'Propriété', def:'l’angle au centre vaut le double de l’angle inscrit qui intercepte le même arc.'},
+      {terme:'Propriété principale', def:'l’angle au centre vaut le double de l’angle inscrit qui intercepte le même arc.'},
       {terme:'Angles inscrits', def:'deux angles inscrits interceptant le même arc sont égaux.'}
     ],
-    essentiel:'<p>Dans un cercle, un <b>angle au centre</b> vaut <b>2 fois</b> l’angle inscrit qui « voit » le même arc. Cela permet de calculer des angles et d’étudier les <b>polygones réguliers</b> (angle au centre = 360°/n).</p>',
+    essentiel:'<p>Dans un cercle, un <b>angle au centre</b> vaut <b>2 fois</b> l’angle inscrit qui « voit » le même arc. Réciproquement, l’angle inscrit vaut la moitié de l’angle au centre correspondant. De plus, deux angles inscrits interceptant le même arc sont <b>égaux</b>.</p><p>Ces propriétés s’appliquent aussi aux <b>polygones réguliers</b> inscrits dans un cercle : l’angle au centre entre deux sommets consécutifs vaut 360° ÷ n (n = nombre de côtés).</p>',
     exemple:'<p>Angle au centre de 80° → angle inscrit correspondant = 80 ÷ 2 = <b>40°</b>.<br>Hexagone régulier : angle au centre = 360 ÷ 6 = <b>60°</b>.</p>',
     retenir:'Même arc → angle au centre = <b>2 ×</b> angle inscrit. Polygone régulier à n côtés : angle au centre = <b>360°/n</b>.'
   }
@@ -680,14 +731,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Additionner et soustraire des relatifs.','Multiplier et diviser avec la règle des signes.'],
     notions:[
-      {terme:'Nombre relatif', def:'nombre positif ou négatif (ex. −5 ; +3). Son opposé change son signe.'},
-      {terme:'Somme', def:'mêmes signes → on additionne les distances et on garde le signe ; signes différents → on soustrait et on prend le signe du plus « grand ».'},
+      {terme:'Nombre relatif', def:'nombre positif ou négatif (ex. −5 ; +3). L’opposé d’un nombre a le signe contraire.'},
+      {terme:'Somme', def:'mêmes signes → on additionne les distances et on garde le signe ; signes différents → on soustrait et on prend le signe du plus grand.'},
       {terme:'Soustraction', def:'soustraire = ajouter l’opposé : a − (−b) = a + b.'},
-      {terme:'Règle des signes (× et ÷)', def:'(+)(+)=+ ; (−)(−)=+ ; (+)(−)=− ; (−)(+)=−.'}
+      {terme:'Règle des signes (× et ÷)', def:'(+)(+) = + ; (−)(−) = + ; (+)(−) = − ; (−)(+) = −.'}
     ],
-    essentiel:'<p>Les <b>relatifs</b> ont un <b>signe</b>. Pour × et ÷ : <b>deux mêmes signes → positif</b>, <b>deux signes différents → négatif</b>. Soustraire, c’est <b>ajouter l’opposé</b>.</p>',
+    essentiel:'<p>Les <b>relatifs</b> possèdent un <b>signe</b>. Pour la <b>multiplication</b> et la <b>division</b>, on applique la règle des signes : <b>deux mêmes signes → positif</b>, <b>deux signes différents → négatif</b> (« moins par moins = plus »).</p><p>Pour l’<b>addition</b> et la <b>soustraction</b>, attention aux signes devant les parenthèses : soustraire un nombre revient à <b>ajouter son opposé</b>.</p>',
     exemple:'<p>−3 + 8 = +5 ; −3 − 8 = −11 ; 5 − (−3) = 5 + 3 = <b>8</b>.<br>(−4) × (−2) = <b>+8</b> ; (−12) ÷ 3 = <b>−4</b>.</p>',
-    retenir:'« Moins par moins = plus ». Soustraire un nombre = <b>ajouter son opposé</b>. Attention aux signes devant les parenthèses.'
+    retenir:'« Moins par moins = plus ». Soustraire = <b>ajouter l’opposé</b>. Bien gérer les signes devant les parenthèses.'
   }
 },
 {
@@ -697,12 +748,12 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Respecter les priorités de calcul.','Mener un calcul par étapes.'],
     notions:[
-      {terme:'Règle des priorités', def:'1) parenthèses (et fractions/racines) ; 2) puissances ; 3) × et ÷ ; 4) + et −.'},
+      {terme:'Règle des priorités', def:'1) les parenthèses ; 2) les puissances ; 3) les × et ÷ ; 4) les + et −.'},
       {terme:'À priorité égale', def:'on calcule de gauche à droite.'}
     ],
-    essentiel:'<p>Dans un calcul, on effectue en priorité les <b>parenthèses</b>, puis les <b>puissances</b>, puis les <b>× et ÷</b>, enfin les <b>+ et −</b>. À priorité égale, on va de <b>gauche à droite</b>.</p>',
+    essentiel:'<p>Dans un calcul, on effectue en priorité les <b>parenthèses</b>, puis les <b>puissances</b>, puis les <b>× et ÷</b>, et enfin les <b>+ et −</b>. À priorité égale (par exemple plusieurs × et ÷), on calcule de <b>gauche à droite</b>.</p><p>Erreur classique : 3 + 4 × 2 n’est pas 14 mais 11, car la multiplication passe avant l’addition.</p>',
     exemple:'<p>3 + 4 × 2 = 3 + 8 = <b>11</b> (et non 14).<br>(3 + 4) × 2 = 7 × 2 = <b>14</b>.<br>20 − 2 × 3² = 20 − 2 × 9 = 20 − 18 = <b>2</b>.</p>',
-    retenir:'× et ÷ passent <b>avant</b> + et − ; les <b>parenthèses</b> d’abord, les <b>puissances</b> avant les multiplications.'
+    retenir:'Ordre : <b>parenthèses → puissances → × et ÷ → + et −</b>. À priorité égale, de gauche à droite.'
   }
 },
 {
@@ -716,9 +767,9 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Propriétés', def:'(√a)² = a ; √a × √a = a ; √(a×b) = √a × √b.'},
       {terme:'Carrés parfaits', def:'√1=1, √4=2, √9=3, √16=4, √25=5, √36=6, √49=7, √64=8, √81=9, √100=10.'}
     ],
-    essentiel:'<p>La <b>racine carrée</b> est l’opération inverse du <b>carré</b>. Elle apparaît souvent avec le théorème de <b>Pythagore</b>. On peut la <b>simplifier</b> en repérant un carré parfait dans le nombre sous la racine.</p>',
+    essentiel:'<p>La <b>racine carrée</b> est l’opération inverse du <b>carré</b>. Elle apparaît souvent avec le théorème de <b>Pythagore</b>. Certaines racines « tombent juste » (carrés parfaits), d’autres non (nombres irrationnels comme √2).</p><p>Pour <b>simplifier</b> une racine, on cherche le plus grand <b>carré parfait</b> qui divise le nombre sous la racine, puis on utilise √(a×b) = √a × √b.</p>',
     exemple:'<p>√49 = 7 (car 7² = 49).<br>√50 = √(25 × 2) = √25 × √2 = <b>5√2</b>.<br>(√7)² = <b>7</b>.</p>',
-    retenir:'√a existe seulement si <b>a ≥ 0</b>. Pour simplifier, cherche le plus grand <b>carré parfait</b> facteur du nombre.'
+    retenir:'√a existe seulement si <b>a ≥ 0</b> et donne un résultat positif. Pour simplifier : sortir le plus grand <b>carré parfait</b>.'
   }
 },
 {
@@ -729,13 +780,13 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Utiliser la somme des angles d’un triangle.','Reconnaître les angles formés par des parallèles.'],
     notions:[
       {terme:'Somme des angles', def:'dans tout triangle, la somme des trois angles vaut 180°.'},
-      {terme:'Triangles particuliers', def:'équilatéral → 3 angles de 60° ; isocèle → 2 angles égaux (à la base).'},
+      {terme:'Triangles particuliers', def:'équilatéral → 3 angles de 60° ; isocèle → les deux angles à la base sont égaux.'},
       {terme:'Angles alternes-internes', def:'égaux lorsque les deux droites coupées sont parallèles.'},
       {terme:'Angles correspondants', def:'égaux lorsque les deux droites sont parallèles.'}
     ],
-    essentiel:'<p>La <b>somme des angles</b> d’un triangle vaut toujours <b>180°</b>. Deux droites <b>parallèles</b> coupées par une sécante forment des angles <b>alternes-internes</b> et <b>correspondants</b> égaux (utile pour justifier des égalités d’angles).</p>',
-    exemple:'<p>Triangle avec deux angles de 60° et 70° : le troisième = 180 − 60 − 70 = <b>50°</b>.<br>Triangle isocèle avec un angle au sommet de 40° : les deux angles à la base valent (180−40)/2 = <b>70°</b> chacun.</p>',
-    retenir:'Triangle → <b>180°</b>. Équilatéral → <b>60°</b> partout. Parallèles → angles alternes-internes et correspondants <b>égaux</b>.'
+    essentiel:'<p>La <b>somme des angles</b> d’un triangle vaut toujours <b>180°</b> : cela permet de calculer un angle manquant. Les triangles particuliers ont des propriétés utiles : l’<b>équilatéral</b> a trois angles de 60°, l’<b>isocèle</b> a deux angles égaux à la base.</p><p>Deux droites <b>parallèles</b> coupées par une sécante forment des angles <b>alternes-internes</b> et <b>correspondants</b> égaux : c’est très utile pour justifier une égalité d’angles dans une démonstration.</p>',
+    exemple:'<p>Triangle avec deux angles de 60° et 70° : le troisième = 180 − 60 − 70 = <b>50°</b>.<br>Triangle isocèle avec un angle au sommet de 40° : chaque angle à la base = (180 − 40) ÷ 2 = <b>70°</b>.</p>',
+    retenir:'Triangle → <b>180°</b> ; équilatéral → <b>60°</b> partout. Parallèles → angles alternes-internes et correspondants <b>égaux</b>.'
   }
 },
 {
@@ -748,12 +799,12 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Symétrie axiale', def:'« pliage » par rapport à un axe (effet miroir).'},
       {terme:'Symétrie centrale', def:'demi-tour autour d’un point (rotation de 180°).'},
       {terme:'Translation', def:'glissement défini par une direction, un sens et une longueur.'},
-      {terme:'Rotation', def:'tourner autour d’un point (centre) d’un certain angle et sens.'},
-      {terme:'Homothétie', def:'agrandissement/réduction de rapport k depuis un centre ; les longueurs sont multipliées par |k|.'}
+      {terme:'Rotation', def:'rotation autour d’un point (le centre), d’un certain angle et dans un sens donné.'},
+      {terme:'Homothétie', def:'agrandissement ou réduction de rapport k depuis un centre ; les longueurs sont multipliées par |k|.'}
     ],
-    essentiel:'<p>Une <b>transformation</b> déplace ou modifie une figure. Symétries, translation et rotation <b>conservent les longueurs</b> (ce sont des <b>isométries</b>) ; seule l’<b>homothétie</b> change la taille. Toutes conservent la forme et les angles.</p>',
-    exemple:'<p>Homothétie de rapport k = 2 : une figure devient 2 fois plus grande (aires ×4, volumes ×8).<br>Symétrie centrale de centre O : chaque point A a une image A’ telle que O est le milieu de [AA’].</p>',
-    retenir:'Isométries (symétries, translation, rotation) → <b>mêmes longueurs</b>. Homothétie de rapport k → longueurs <b>×|k|</b>, aires ×k².'
+    essentiel:'<p>Une <b>transformation</b> déplace ou modifie une figure. Les symétries (axiale et centrale), la translation et la rotation <b>conservent les longueurs</b> : ce sont des <b>isométries</b> (la figure garde la même taille et la même forme).</p><p>Seule l’<b>homothétie</b> change la <b>taille</b> : elle agrandit (|k| > 1) ou réduit (|k| < 1). Comme pour l’agrandissement-réduction, les longueurs sont ×|k|, les aires ×k².</p>',
+    exemple:'<p>Symétrie centrale de centre O : chaque point A a une image A’ telle que O est le milieu de [AA’].<br>Homothétie de rapport k = 2 : la figure devient 2 fois plus grande (aires ×4, volumes ×8).</p>',
+    retenir:'Isométries (symétries, translation, rotation) → <b>mêmes longueurs</b>. Homothétie de rapport k → longueurs ×|k|, aires ×k².'
   }
 },
 {
@@ -763,28 +814,28 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Calculer périmètres et aires des figures usuelles.','Ne pas confondre longueur et surface.'],
     notions:[
-      {terme:'Rectangle', def:'périmètre = 2×(L+l) ; aire = L×l.'},
+      {terme:'Rectangle', def:'périmètre = 2 × (L + l) ; aire = L × l.'},
       {terme:'Triangle', def:'aire = (base × hauteur) ÷ 2.'},
       {terme:'Parallélogramme', def:'aire = base × hauteur.'},
-      {terme:'Disque', def:'circonférence = 2×π×R ; aire = π×R² (R = rayon).'}
+      {terme:'Disque', def:'circonférence = 2 × π × R ; aire = π × R² (R = rayon).'}
     ],
-    essentiel:'<p>Le <b>périmètre</b> est une <b>longueur</b> (le tour, en cm) ; l’<b>aire</b> est une <b>surface</b> (en cm²). Ne pas confondre <b>rayon</b> et <b>diamètre</b> (D = 2R) dans les formules du disque.</p>',
-    exemple:'<p>Disque de rayon 5 cm : circonférence = 2π×5 ≈ 31,4 cm ; aire = π×5² = 25π ≈ <b>78,5 cm²</b>.<br>Triangle base 6, hauteur 4 : aire = (6×4)/2 = <b>12</b>.</p>',
+    essentiel:'<p>Le <b>périmètre</b> est une <b>longueur</b> (le contour, en cm), tandis que l’<b>aire</b> est une <b>surface</b> (en cm²) : il ne faut pas les confondre, ni mélanger leurs unités.</p><p>Pour le disque, l’erreur fréquente est de confondre <b>rayon</b> et <b>diamètre</b> : dans les formules, on utilise toujours le <b>rayon</b> (D = 2R). On garde π ou on utilise une valeur approchée (3,14) selon la consigne.</p>',
+    exemple:'<p>Disque de rayon 5 cm : circonférence = 2π × 5 ≈ 31,4 cm ; aire = π × 5² = 25π ≈ <b>78,5 cm²</b>.<br>Triangle base 6, hauteur 4 : aire = (6 × 4) ÷ 2 = <b>12</b>.</p>',
     retenir:'Périmètre en <b>cm</b>, aire en <b>cm²</b>. Formules du disque avec le <b>rayon</b> (pas le diamètre).'
   }
 },
 {
   id:'maths-reperage', matiereKey:'maths', matiere:'Mathématiques', niveau:'5e',
   titre:'Repérage et coordonnées',
-  motsCles:['repère','coordonnées','abscisse','ordonnée','point','axe','plan','milieu'],
+  motsCles:['repère','coordonnées','abscisse','ordonnée','point','axe','plan','origine'],
   contenu:{
     objectifs:['Lire et placer un point dans un repère.','Comprendre abscisse et ordonnée.'],
     notions:[
-      {terme:'Repère', def:'deux axes gradués perpendiculaires : horizontal (abscisses) et vertical (ordonnées), qui se croisent à l’origine O(0 ; 0).'},
+      {terme:'Repère', def:'deux axes gradués perpendiculaires (horizontal = abscisses, vertical = ordonnées) qui se croisent à l’origine O(0 ; 0).'},
       {terme:'Abscisse', def:'la première coordonnée (position horizontale, axe des x).'},
       {terme:'Ordonnée', def:'la seconde coordonnée (position verticale, axe des y).'}
     ],
-    essentiel:'<p>Un point est repéré par un couple <b>(x ; y)</b> : d’abord l’<b>abscisse</b> (horizontale), puis l’<b>ordonnée</b> (verticale). C’est la base pour tracer des <b>fonctions</b> et lire des graphiques.</p>',
+    essentiel:'<p>Un point est repéré par un couple <b>(x ; y)</b> : d’abord l’<b>abscisse</b> (déplacement horizontal), puis l’<b>ordonnée</b> (déplacement vertical), à partir de l’origine O. C’est la base pour tracer et lire des <b>fonctions</b> et des graphiques.</p><p>Attention à l’ordre : toujours l’abscisse en premier. Un nombre négatif signifie qu’on va à gauche (abscisse) ou vers le bas (ordonnée).</p>',
     exemple:'<p>Placer A(3 ; 2) : depuis O, on avance de 3 vers la droite, puis de 2 vers le haut.<br>Point B(−1 ; 4) : 1 vers la gauche, 4 vers le haut.</p>',
     retenir:'Toujours l’ordre <b>(abscisse ; ordonnée)</b> = (x ; y). L’origine est le point O(0 ; 0).'
   }
@@ -799,7 +850,7 @@ window.FICHES = (window.FICHES || []).concat([
   titre:'La phrase complexe et la subordination',
   motsCles:['proposition','subordonnée','juxtaposition','coordination','conjonction','relative','conjonctive','complexe'],
   contenu:{
-    objectifs:['Distinguer phrase simple et phrase complexe.','Reconnaître juxtaposition, coordination et subordination.','Identifier le type de subordonnée.'],
+    objectifs:['Distinguer phrase simple et complexe.','Reconnaître juxtaposition, coordination et subordination.','Identifier le type de subordonnée.'],
     notions:[
       {terme:'Phrase simple', def:'une seule proposition, donc un seul verbe conjugué.'},
       {terme:'Phrase complexe', def:'plusieurs propositions, donc plusieurs verbes conjugués.'},
@@ -807,9 +858,9 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Coordination', def:'propositions reliées par une conjonction de coordination : mais, ou, et, donc, or, ni, car.'},
       {terme:'Subordination', def:'une proposition (subordonnée) dépend d’une autre (principale), introduite par un mot subordonnant (que, qui, quand, parce que, si…).'}
     ],
-    essentiel:'<p>On compte les <b>verbes conjugués</b> : autant de propositions. Elles sont <b>juxtaposées</b>, <b>coordonnées</b> (même niveau) ou <b>subordonnées</b> (dépendance). Types de subordonnées : <b>relative</b> (introduite par qui, que, dont, où), <b>conjonctive</b> (par « que » après un verbe, ou par une conjonction : parce que, quand, si…).</p>',
-    exemple:'<p>« Je révise <b>parce que</b> le brevet approche. » → subordonnée conjonctive circonstancielle de cause.<br>« Le livre <b>que</b> je lis est passionnant. » → subordonnée relative (complète le nom « livre »).</p>',
-    retenir:'Une subordonnée ne peut <b>pas exister seule</b> : elle complète la principale. Repère le <b>mot subordonnant</b> pour identifier son type.'
+    essentiel:'<p>Pour analyser une phrase, on compte les <b>verbes conjugués</b> : il y a autant de propositions que de verbes conjugués. On identifie ensuite comment elles sont reliées : <b>juxtaposées</b> (par une ponctuation), <b>coordonnées</b> (par mais, ou, et, donc, or, ni, car) — dans ces deux cas les propositions sont au même niveau — ou <b>subordonnées</b> (l’une dépend de l’autre).</p><p>Les principales subordonnées sont : la <b>relative</b> (introduite par qui, que, dont, où ; elle complète un nom) et la <b>conjonctive</b> (introduite par « que » après un verbe, ou par une conjonction : parce que, quand, si… ; elle complète le verbe). Repérer le <b>mot subordonnant</b> permet d’identifier son type.</p>',
+    exemple:'<p>« Je révise <b>parce que</b> le brevet approche. » → subordonnée conjonctive de cause.<br>« Le livre <b>que</b> je lis est passionnant. » → subordonnée relative (complète « livre »).</p>',
+    retenir:'Autant de <b>verbes conjugués</b> = autant de propositions. Une subordonnée ne peut pas exister seule. Repère le <b>mot subordonnant</b> pour son type.'
   }
 },
 {
@@ -820,12 +871,12 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Identifier la nature (classe) de chaque mot.','Ne pas confondre nature et fonction.'],
     notions:[
       {terme:'Classes variables', def:'nom, déterminant, adjectif, pronom, verbe : ils changent de forme (genre, nombre, personne, temps).'},
-      {terme:'Classes invariables', def:'adverbe, préposition, conjonction, interjection : ils ne changent jamais.'},
-      {terme:'Nature vs fonction', def:'la nature est fixe (donnée par le dictionnaire) ; la fonction dépend du rôle dans la phrase.'}
+      {terme:'Classes invariables', def:'adverbe, préposition, conjonction, interjection : ils ne changent jamais de forme.'},
+      {terme:'Nature vs fonction', def:'la nature est fixe (donnée par le dictionnaire) ; la fonction dépend du rôle du mot dans la phrase.'}
     ],
-    essentiel:'<p>Chaque mot appartient à une <b>classe grammaticale</b> (sa nature). C’est la base de toute analyse : on ne confond pas la <b>nature</b> (« qu’est-ce que c’est ? ») avec la <b>fonction</b> (« à quoi ça sert dans la phrase ? »).</p>',
+    essentiel:'<p>Chaque mot appartient à une <b>classe grammaticale</b> (sa nature), qui est la base de toute analyse. On distingue les classes <b>variables</b> (qui changent de forme) des classes <b>invariables</b>. Un même mot garde toujours la même nature, quelle que soit la phrase.</p><p>Il ne faut pas confondre la <b>nature</b> (« qu’est-ce que ce mot ? » — un nom, un verbe…) avec la <b>fonction</b> (« à quoi sert-il dans la phrase ? » — sujet, COD…). Un même mot peut avoir des fonctions différentes selon la phrase, mais sa nature reste la même.</p>',
     exemple:'<p>« Le petit chat dort tranquillement » : <b>Le</b> (déterminant), <b>petit</b> (adjectif), <b>chat</b> (nom), <b>dort</b> (verbe), <b>tranquillement</b> (adverbe).</p>',
-    retenir:'Nature = <b>toujours la même</b> (dictionnaire) ; fonction = <b>dépend de la phrase</b>. Un même mot peut avoir des fonctions différentes.'
+    retenir:'Nature = <b>toujours la même</b> (dictionnaire) ; fonction = <b>dépend de la phrase</b>. Ne pas confondre les deux.'
   }
 },
 {
@@ -835,15 +886,15 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Identifier les fonctions liées au verbe.','Distinguer COD, COI et compléments circonstanciels.'],
     notions:[
-      {terme:'Sujet', def:'fait ou subit l’action (« qui est-ce qui… ? »). Il commande l’accord du verbe.'},
+      {terme:'Sujet', def:'fait ou subit l’action (« qui est-ce qui… ? ») ; il commande l’accord du verbe.'},
       {terme:'COD', def:'complète le verbe sans préposition (« qui ? quoi ? » après le verbe).'},
       {terme:'COI', def:'complète le verbe avec une préposition (« à qui ? de quoi ? »).'},
-      {terme:'Attribut du sujet', def:'donne une qualité au sujet, après un verbe d’état (être, sembler, paraître…).'},
-      {terme:'Complément circonstanciel', def:'temps, lieu, manière, cause… : déplaçable et souvent supprimable.'}
+      {terme:'Attribut du sujet', def:'donne une qualité au sujet, après un verbe d’état (être, sembler, paraître, devenir…).'},
+      {terme:'Complément circonstanciel', def:'précise les circonstances (temps, lieu, manière, cause…) ; il est déplaçable et souvent supprimable.'}
     ],
-    essentiel:'<p>La <b>fonction</b> décrit le <b>rôle</b> d’un mot. Les compléments <b>essentiels</b> (COD, COI) ne se déplacent pas et ne se suppriment pas ; les <b>circonstanciels</b> sont mobiles et supprimables.</p>',
-    exemple:'<p>« Hier, Léa offre un livre à son frère. » → <b>Hier</b> (CC temps), <b>Léa</b> (sujet), <b>un livre</b> (COD), <b>à son frère</b> (COI).<br>« Ce chien semble <b>fatigué</b> » → attribut du sujet.</p>',
-    retenir:'COD/COI = <b>on ne peut pas les enlever</b> ni les déplacer ; CC = <b>déplaçable et supprimable</b>. Attribut = après un verbe d’état.'
+    essentiel:'<p>La <b>fonction</b> décrit le <b>rôle</b> d’un mot dans la phrase. Autour du verbe, on distingue les compléments <b>essentiels</b> (COD, COI), qu’on ne peut ni déplacer ni supprimer, des compléments <b>circonstanciels</b>, qui sont mobiles et souvent supprimables.</p><p>Le <b>COD</b> répond à « qui ? quoi ? » sans préposition ; le <b>COI</b> répond à « à qui ? de quoi ? » avec une préposition. L’<b>attribut du sujet</b> apparaît après un verbe d’état et donne une qualité au sujet.</p>',
+    exemple:'<p>« Hier, Léa offre un livre à son frère. » → <b>Hier</b> (CC de temps), <b>Léa</b> (sujet), <b>un livre</b> (COD), <b>à son frère</b> (COI).<br>« Ce chien semble <b>fatigué</b> » → attribut du sujet.</p>',
+    retenir:'COD/COI = essentiels (ni déplaçables ni supprimables) ; CC = <b>déplaçable et supprimable</b>. Attribut = après un verbe d’état.'
   }
 },
 {
@@ -856,12 +907,12 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Présent', def:'action actuelle, vérité générale, ou présent de narration.'},
       {terme:'Imparfait', def:'arrière-plan du récit : description, habitude, action qui dure.'},
       {terme:'Passé simple', def:'premier plan du récit : actions brèves, soudaines, successives.'},
-      {terme:'Passé composé', def:'action passée achevée, en lien avec le présent (récits à l’oral, lettres).'},
+      {terme:'Passé composé', def:'action passée achevée, souvent en lien avec le présent (récit oral, lettre).'},
       {terme:'Plus-que-parfait', def:'action antérieure à une autre action passée.'}
     ],
-    essentiel:'<p>Dans un <b>récit au passé</b>, l’<b>imparfait</b> plante le décor (« il faisait nuit ») et le <b>passé simple</b> raconte les actions (« soudain, un cri retentit »). Le <b>plus-que-parfait</b> exprime ce qui s’est passé <b>avant</b>.</p>',
+    essentiel:'<p>Dans un <b>récit au passé</b>, deux temps se combinent : l’<b>imparfait</b> plante le décor et exprime ce qui dure ou se répète (« il faisait nuit »), tandis que le <b>passé simple</b> raconte les actions de premier plan, brèves et successives (« soudain, un cri retentit »). Le <b>plus-que-parfait</b> exprime une action qui s’est passée <b>encore avant</b>.</p><p>Pour distinguer imparfait et passé simple, on se demande si l’action <b>dure/se répète</b> (imparfait) ou si elle est <b>ponctuelle et fait avancer l’histoire</b> (passé simple).</p>',
     exemple:'<p>« Il <b>faisait</b> nuit (imparfait) quand un cri <b>retentit</b> (passé simple). Il <b>avait fermé</b> (plus-que-parfait) la porte une heure plus tôt. »</p>',
-    retenir:'Imparfait = <b>décor / durée / habitude</b> ; passé simple = <b>action soudaine et brève</b> ; plus-que-parfait = <b>action encore avant</b>.'
+    retenir:'Imparfait = <b>décor / durée / habitude</b> ; passé simple = <b>action soudaine et brève</b> ; plus-que-parfait = action <b>encore avant</b>.'
   }
 },
 {
@@ -872,12 +923,12 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Accorder le participe passé.','Ne plus confondre les homophones courants.'],
     notions:[
       {terme:'Participe passé avec être', def:'il s’accorde avec le sujet (« elles sont parties »).'},
-      {terme:'Participe passé avec avoir', def:'il s’accorde avec le COD seulement s’il est placé AVANT le verbe (« les fleurs que j’ai cueillies »).'},
+      {terme:'Participe passé avec avoir', def:'il s’accorde avec le COD seulement si le COD est placé AVANT le verbe (« les fleurs que j’ai cueillies »).'},
       {terme:'Homophones à tester', def:'a/à (→ avait) ; et/est (→ était) ; son/sont (→ étaient) ; on/ont (→ avaient) ; ces/ses ; ou/où ; ce/se.'}
     ],
-    essentiel:'<p>La plupart des fautes de <b>dictée</b> viennent des <b>accords</b> et des <b>homophones</b>. Astuce : on <b>remplace par l’imparfait</b> pour trancher (a→avait, est→était, ont→avaient).</p>',
+    essentiel:'<p>La plupart des fautes de <b>dictée</b> viennent des <b>accords</b> et des <b>homophones</b>. C’est justement là que le nouveau barème du brevet retire (ou accorde) des points, donc il faut être vigilant.</p><p>Pour les <b>participes passés</b> : avec <b>être</b>, on accorde avec le sujet ; avec <b>avoir</b>, on accorde seulement si le COD est <b>placé avant</b> le verbe. Pour les <b>homophones</b>, une astuce simple : on remplace par l’imparfait (« a » → « avait », « est » → « était », « ont » → « avaient »).</p>',
     exemple:'<p>« Il <b>a</b> (avait) mangé » ≠ « Il va <b>à</b> l’école ».<br>« Elles <b>sont</b> (étaient) prêtes » ≠ « <b>son</b> sac ».<br>« Les lettres qu’il a <b>écrites</b> » (COD « qu’ » placé avant → accord).</p>',
-    retenir:'Avec <b>avoir</b> : accord seulement si le COD est <b>avant</b>. Pour les homophones : <b>remplace par l’imparfait</b> pour vérifier.'
+    retenir:'Avec <b>avoir</b> : accord seulement si le COD est <b>avant</b>. Homophones : <b>remplace par l’imparfait</b> pour trancher.'
   }
 },
 {
@@ -888,15 +939,15 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Identifier les principales figures de style.','Analyser leur effet dans un texte.'],
     notions:[
       {terme:'Comparaison', def:'rapproche deux éléments avec un outil de comparaison (comme, tel, pareil à, ressembler à).'},
-      {terme:'Métaphore', def:'comparaison SANS outil de comparaison.'},
+      {terme:'Métaphore', def:'rapproche deux éléments SANS outil de comparaison.'},
       {terme:'Personnification', def:'attribue des traits humains à une chose, un animal ou une idée.'},
       {terme:'Hyperbole', def:'exagération pour frapper l’esprit.'},
       {terme:'Antithèse', def:'oppose deux mots ou deux idées.'},
-      {terme:'Gradation', def:'énumération en intensité croissante (ou décroissante).'}
+      {terme:'Gradation', def:'énumération d’intensité croissante (ou décroissante).'}
     ],
-    essentiel:'<p>Les figures de style créent des <b>images</b> et des <b>effets</b>. Au brevet, il faut savoir les <b>nommer</b> ET expliquer l’<b>effet produit</b> sur le lecteur (insister, embellir, opposer, exagérer…).</p>',
-    exemple:'<p>« Cet homme est un lion » → <b>métaphore</b> (courage, force).<br>« Fort comme un lion » → <b>comparaison</b> (outil : comme).<br>« Le vent hurlait » → <b>personnification</b>.</p>',
-    retenir:'Toujours associer la figure à son <b>effet</b>. Différence clé : <b>comparaison</b> a un outil (comme…), la <b>métaphore</b> non.'
+    essentiel:'<p>Les figures de style créent des <b>images</b> et produisent des <b>effets</b> sur le lecteur (frapper, embellir, opposer, exagérer). Au brevet, il ne suffit pas de les <b>nommer</b> : il faut aussi expliquer l’<b>effet produit</b> et, si possible, <b>citer le texte</b>.</p><p>La distinction la plus demandée est celle entre <b>comparaison</b> (il y a un outil : comme, tel…) et <b>métaphore</b> (il n’y en a pas). La <b>personnification</b> et l’<b>hyperbole</b> sont aussi très fréquentes.</p>',
+    exemple:'<p>« Cet homme est un lion » → <b>métaphore</b> (force, courage).<br>« Fort comme un lion » → <b>comparaison</b> (outil : comme).<br>« Le vent hurlait » → <b>personnification</b>.</p>',
+    retenir:'Toujours associer la figure à son <b>effet</b> (+ citer le texte). Comparaison = avec un outil (comme…) ; métaphore = sans outil.'
   }
 },
 {
@@ -912,25 +963,25 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Dénouement', def:'l’événement qui résout le problème.'},
       {terme:'Situation finale', def:'le nouvel équilibre, la fin de l’histoire.'}
     ],
-    essentiel:'<p>La plupart des récits suivent ces <b>5 étapes</b>. Elles aident à <b>comprendre</b> un texte et à <b>rédiger</b> une histoire cohérente. À ne pas confondre avec le <b>schéma actanciel</b> (les rôles : héros, adjuvants, opposants).</p>',
-    exemple:'<p>Conte : un roi vit heureux (initiale) → un dragon attaque (perturbateur) → combats et épreuves (péripéties) → le héros tue le dragon (dénouement) → le royaume retrouve la paix (finale).</p>',
-    retenir:'L’élément perturbateur <b>déclenche</b> l’action ; il est souvent marqué par « <b>soudain</b> », « <b>un jour</b> ».'
+    essentiel:'<p>La plupart des récits suivent ces <b>cinq étapes</b>. Elles aident à la fois à <b>comprendre</b> un texte et à <b>rédiger</b> une histoire cohérente. La situation initiale, souvent à l’<b>imparfait</b>, installe le calme ; l’<b>élément perturbateur</b> le rompt et lance l’intrigue.</p><p>Il ne faut pas confondre le schéma <b>narratif</b> (les étapes de l’histoire) avec le schéma <b>actanciel</b> (les rôles : le héros, ce qu’il cherche, ses adjuvants et ses opposants).</p>',
+    exemple:'<p>Conte : un roi vit heureux (initiale) → un dragon attaque (perturbateur) → épreuves et combats (péripéties) → le héros tue le dragon (dénouement) → le royaume retrouve la paix (finale).</p>',
+    retenir:'Cinq étapes ; l’élément perturbateur <b>déclenche</b> l’action (souvent « soudain », « un jour »). Ne pas confondre schéma narratif et actanciel.'
   }
 },
 {
   id:'fr-discours-rapporte', matiereKey:'francais', matiere:'Français', niveau:'3e',
   titre:'Les paroles rapportées (discours direct/indirect)',
-  motsCles:['discours direct','discours indirect','discours indirect libre','ponctuation du dialogue','verbe de parole'],
+  motsCles:['discours direct','discours indirect','ponctuation du dialogue','verbe de parole','transposition'],
   contenu:{
     objectifs:['Distinguer discours direct et indirect.','Transposer de l’un à l’autre.'],
     notions:[
-      {terme:'Discours direct', def:'les paroles telles quelles, avec guillemets/tirets, verbe de parole et ponctuation expressive.'},
+      {terme:'Discours direct', def:'les paroles rapportées telles quelles, avec guillemets/tirets, verbe de parole et ponctuation expressive.'},
       {terme:'Discours indirect', def:'les paroles intégrées au récit dans une subordonnée (« il dit que… »).'},
-      {terme:'Transposition', def:'on modifie les pronoms (je→il), les temps (présent→imparfait) et les marqueurs de temps (demain→le lendemain).'}
+      {terme:'Transposition', def:'en passant au discours indirect, on change les pronoms (je→il), les temps (présent→imparfait) et les indicateurs de temps (demain→le lendemain).'}
     ],
-    essentiel:'<p>Le <b>discours direct</b> rend le dialogue vivant ; le <b>discours indirect</b> l’intègre au récit. Passer de l’un à l’autre exige de changer <b>pronoms</b>, <b>temps</b> et parfois la <b>ponctuation</b>.</p>',
+    essentiel:'<p>Le <b>discours direct</b> rapporte les paroles telles qu’elles sont prononcées : il rend le dialogue vivant et se reconnaît à sa <b>ponctuation</b> (guillemets, tirets) et à ses verbes de parole. Le <b>discours indirect</b>, lui, intègre les paroles dans le récit à l’aide d’une <b>subordonnée</b> introduite par « que ».</p><p>Passer de l’un à l’autre demande de la rigueur : il faut modifier les <b>pronoms</b>, les <b>temps</b> et les <b>marqueurs de temps</b>, et supprimer la ponctuation du dialogue.</p>',
     exemple:'<p>Direct : Il dit : « <b>Je</b> pars <b>demain</b>. »<br>Indirect : Il dit qu’<b>il</b> partait <b>le lendemain</b>.</p>',
-    retenir:'Discours direct = <b>ponctuation forte</b> (guillemets, tirets) ; indirect = <b>subordonnée</b> introduite par « que » + changement des pronoms/temps.'
+    retenir:'Direct = <b>ponctuation forte</b> (guillemets/tirets) ; indirect = <b>subordonnée « que »</b> + changement des pronoms, temps et marqueurs de temps.'
   }
 },
 {
@@ -941,13 +992,13 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Compter les syllabes d’un vers.','Reconnaître les types de strophes et de rimes.'],
     notions:[
       {terme:'Vers et mètres', def:'8 syllabes = octosyllabe ; 10 = décasyllabe ; 12 = alexandrin.'},
-      {terme:'Le « e » muet', def:'ne se compte pas en fin de vers ; se compte s’il est entre deux consonnes prononcées.'},
+      {terme:'Le « e » muet', def:'ne se compte pas en fin de vers ni devant une voyelle ; se compte entre deux consonnes prononcées.'},
       {terme:'Rimes', def:'plates/suivies (AABB), croisées (ABAB), embrassées (ABBA).'},
-      {terme:'Strophes', def:'tercet = 3 vers, quatrain = 4 vers. Un sonnet = 2 quatrains + 2 tercets.'}
+      {terme:'Strophes', def:'tercet = 3 vers, quatrain = 4 vers. Un sonnet = 2 quatrains + 2 tercets (14 vers).'}
     ],
-    essentiel:'<p>La poésie joue sur les <b>sons</b> et le <b>rythme</b>. On compte les <b>syllabes</b> (attention au « e » muet), on identifie les <b>rimes</b> et leur disposition, et on analyse les <b>images</b> (comparaisons, métaphores).</p>',
-    exemple:'<p>« Demain, dès l’aube… » : compter les syllabes De-main-dès-l’au-be → le « e » de « aube » ne compte pas en fin de groupe.</p>',
-    retenir:'Le « e » en fin de vers <b>ne compte pas</b>. Un <b>sonnet</b> = 14 vers (2 quatrains + 2 tercets), souvent en alexandrins.'
+    essentiel:'<p>La poésie joue sur les <b>sons</b> et le <b>rythme</b>. Pour analyser un poème, on compte les <b>syllabes</b> de chaque vers (en tenant compte du « e » muet), on identifie le type de <b>strophe</b> et la disposition des <b>rimes</b>, et on étudie les <b>images</b> (comparaisons, métaphores).</p><p>La règle du « e » muet est délicate : en fin de vers ou devant une voyelle, il ne se compte pas ; entre deux consonnes prononcées, il compte. Cela change le décompte des syllabes.</p>',
+    exemple:'<p>« Demain, dès l’aube… » : De-main-dès-l’au-be → le « e » de « aube » en fin de groupe ne se compte pas.</p>',
+    retenir:'Le « e » en fin de vers <b>ne compte pas</b>. Sonnet = <b>14 vers</b> (2 quatrains + 2 tercets), souvent en alexandrins.'
   }
 },
 {
@@ -957,15 +1008,15 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Connaître le vocabulaire du théâtre.','Distinguer comédie et tragédie.'],
     notions:[
-      {terme:'Didascalie', def:'indication scénique (décor, gestes, ton) donnée par l’auteur, hors dialogue.'},
+      {terme:'Didascalie', def:'indication scénique (décor, gestes, ton) donnée par l’auteur, en dehors du dialogue.'},
       {terme:'Réplique / tirade', def:'ce que dit un personnage ; une longue réplique s’appelle une tirade.'},
       {terme:'Monologue', def:'un personnage seul se parle à lui-même (ou au public).'},
       {terme:'Double énonciation', def:'les paroles s’adressent à la fois à un personnage ET au spectateur.'},
       {terme:'Aparté', def:'parole que seul le spectateur est censé entendre.'}
     ],
-    essentiel:'<p>Un texte de théâtre est fait pour être <b>joué</b> ; il se découpe en <b>actes</b> et <b>scènes</b>. Les <b>didascalies</b> guident la mise en scène. La <b>comédie</b> fait rire et corrige les mœurs ; la <b>tragédie</b> montre un destin funeste.</p>',
-    exemple:'<p>Molière écrit des <b>comédies</b> qui critiquent les défauts humains (l’hypocrisie dans <i>Tartuffe</i>, l’avarice dans <i>L’Avare</i>).</p>',
-    retenir:'Comédie = rire + critique des mœurs ; tragédie = fatalité et mort. Repère les <b>didascalies</b> (souvent en italique).'
+    essentiel:'<p>Un texte de théâtre est fait pour être <b>joué</b>. Il se découpe en <b>actes</b> puis en <b>scènes</b>, et les <b>didascalies</b> (souvent en italique) guident la mise en scène. Une particularité du théâtre est la <b>double énonciation</b> : un personnage parle à un autre, mais aussi, en réalité, au spectateur.</p><p>On distingue deux grands genres : la <b>comédie</b>, qui fait rire et corrige les mœurs (Molière critique l’hypocrisie, l’avarice…), et la <b>tragédie</b>, qui met en scène un destin funeste et provoque de fortes émotions.</p>',
+    exemple:'<p>Molière écrit des <b>comédies</b> qui dénoncent les défauts humains : l’hypocrisie dans <i>Tartuffe</i>, l’avarice dans <i>L’Avare</i>.</p>',
+    retenir:'Comédie = rire + critique des mœurs ; tragédie = destin funeste. Les <b>didascalies</b> guident le jeu ; <b>double énonciation</b> = au personnage ET au public.'
   }
 },
 {
@@ -975,15 +1026,15 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Construire un raisonnement argumenté.','Utiliser des connecteurs logiques.'],
     notions:[
-      {terme:'Thèse', def:'l’opinion défendue.'},
+      {terme:'Thèse', def:'l’opinion que l’on défend.'},
       {terme:'Argument', def:'une idée qui soutient la thèse.'},
       {terme:'Exemple', def:'un cas concret qui illustre l’argument.'},
       {terme:'Connecteurs logiques', def:'d’abord, ensuite, de plus, en effet, cependant, donc, par conséquent.'},
       {terme:'Convaincre / persuader', def:'convaincre = par la raison et les arguments ; persuader = par les émotions.'}
     ],
-    essentiel:'<p>Argumenter, c’est <b>défendre une thèse</b> avec des <b>arguments</b> illustrés d’<b>exemples</b>, organisés par des <b>connecteurs logiques</b>. On peut aussi <b>réfuter</b> la thèse adverse.</p>',
-    exemple:'<p>Thèse : lire est utile. Argument : cela enrichit le vocabulaire. Exemple : on mémorise l’orthographe des mots rencontrés souvent. Connecteur : « <b>en effet</b> ».</p>',
-    retenir:'Un bon paragraphe = <b>1 argument + 1 exemple</b>, introduit par un connecteur logique.'
+    essentiel:'<p>Argumenter, c’est <b>défendre une thèse</b> à l’aide d’<b>arguments</b>, chacun illustré par un <b>exemple</b>, le tout organisé par des <b>connecteurs logiques</b>. On peut aussi <b>réfuter</b> la thèse adverse pour renforcer la sienne.</p><p>On distingue deux façons d’agir sur le lecteur : le <b>convaincre</b> par la raison (arguments, logique) ou le <b>persuader</b> par les émotions (registres, images fortes). Un bon paragraphe argumentatif enchaîne un argument, un exemple, et se relie au suivant par un connecteur.</p>',
+    exemple:'<p>Thèse : lire est utile. Argument : cela enrichit le vocabulaire. Exemple : on mémorise l’orthographe des mots vus souvent. Connecteur : « <b>en effet</b> ».</p>',
+    retenir:'Un paragraphe = <b>1 argument + 1 exemple</b>, introduit par un connecteur. Convaincre (raison) ≠ persuader (émotions).'
   }
 },
 {
@@ -997,14 +1048,14 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Sujet de réflexion', def:'donner un avis argumenté sur une question (thèse, arguments, exemples).'},
       {terme:'Plan', def:'introduction, développement en paragraphes, conclusion.'}
     ],
-    essentiel:'<p>À l’écrit, tu choisis entre <b>imagination</b> et <b>réflexion</b>. Dans les deux cas : <b>brouillon</b>, <b>plan</b>, paragraphes organisés, et surtout une <b>relecture</b> orthographe/ponctuation — car avec le nouveau barème, la <b>qualité de la langue</b> compte beaucoup.</p>',
+    essentiel:'<p>À l’écrit du brevet, tu choisis entre un sujet d’<b>imagination</b> et un sujet de <b>réflexion</b>. Dans les deux cas, la méthode est la même : analyser le sujet, faire un <b>brouillon</b> et un <b>plan</b>, puis rédiger en paragraphes reliés par des connecteurs.</p><p>Avec le <b>nouveau barème</b>, la <b>qualité de la langue</b> (orthographe, syntaxe, ponctuation) compte beaucoup : il faut donc garder du temps pour la <b>relecture</b>. C’est elle qui fait souvent la différence entre une note correcte et une bonne note.</p>',
     methode:[
-      'Analyse le sujet : consignes, temps demandé, longueur.',
+      'Analyse le sujet : consignes, temps demandé, longueur attendue.',
       'Fais un brouillon d’idées, puis un plan.',
       'Rédige en soignant connecteurs et paragraphes.',
       'Relis : accords, participes passés, ponctuation, répétitions.'
     ],
-    retenir:'Garde <b>10 minutes</b> pour la <b>relecture</b> : c’est ce qui rapporte le plus de points au nouveau barème.'
+    retenir:'Garde <b>10 minutes</b> pour la <b>relecture</b> : avec le nouveau barème, la qualité de la langue rapporte beaucoup de points.'
   }
 },
 {
@@ -1014,13 +1065,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Connaître les caractéristiques du réalisme.','Analyser une description réaliste.'],
     notions:[
-      {terme:'Réalisme', def:'mouvement du XIXᵉ siècle qui peint la société telle qu’elle est, sans l’idéaliser.'},
-      {terme:'Auteurs', def:'Balzac, Flaubert, Maupassant ; Zola pour le naturalisme (une version « scientifique » du réalisme).'},
+      {terme:'Réalisme', def:'mouvement littéraire du XIXᵉ siècle qui cherche à peindre la société telle qu’elle est, sans l’idéaliser.'},
+      {terme:'Naturalisme', def:'prolongement du réalisme (Zola) qui étudie l’influence du milieu social et de l’hérédité, comme une « science ».'},
+      {terme:'Auteurs', def:'Balzac, Flaubert, Maupassant (réalisme) ; Zola (naturalisme).'},
       {terme:'Procédés', def:'descriptions précises, détails concrets, milieux sociaux variés, vocabulaire du quotidien.'}
     ],
-    essentiel:'<p>Le <b>réalisme</b> cherche à représenter fidèlement la vie quotidienne et la <b>société</b> (travail, argent, classes sociales). Les <b>descriptions</b> et <b>portraits</b> sont détaillés : les objets et les lieux traduisent le milieu social des personnages.</p>',
-    exemple:'<p>Dans <i>La Peau de chagrin</i> (Balzac), la description des lieux et des objets révèle la condition sociale des personnages.</p>',
-    retenir:'Réalisme = <b>miroir de la société</b>. Observe les <b>détails concrets</b> d’une description et explique ce qu’ils révèlent.'
+    essentiel:'<p>Le <b>réalisme</b> cherche à représenter fidèlement la vie quotidienne et la <b>société</b> du XIXᵉ siècle (travail, argent, classes sociales), sans l’embellir. Les auteurs multiplient les <b>descriptions</b> détaillées et les <b>portraits</b> précis.</p><p>Dans un texte réaliste, les <b>objets</b>, les <b>lieux</b> et l’<b>apparence</b> des personnages ne sont pas là par hasard : ils <b>révèlent</b> le milieu social et la personnalité. Lorsqu’on analyse une description, on explique donc ce que ces détails concrets nous apprennent.</p>',
+    exemple:'<p>Dans <i>La Peau de chagrin</i> (Balzac), la description minutieuse des lieux et des objets révèle la condition sociale des personnages.</p>',
+    retenir:'Réalisme = <b>miroir de la société</b> (XIXᵉ s.). Les <b>détails concrets</b> d’une description ont un sens : ils révèlent le milieu social.'
   }
 },
 {
@@ -1030,12 +1082,12 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Distinguer les modes et leurs valeurs.','Employer le bon mode selon le sens.'],
     notions:[
-      {terme:'Indicatif', def:'mode du réel, des faits certains.'},
+      {terme:'Indicatif', def:'mode du réel, des faits présentés comme certains.'},
       {terme:'Conditionnel', def:'mode de l’hypothèse, de l’imaginaire, du souhait ou de la politesse (« je voudrais »).'},
-      {terme:'Subjonctif', def:'mode du souhait, de l’ordre, du doute ; souvent après « que » (« il faut que tu viennes »).'},
+      {terme:'Subjonctif', def:'mode du souhait, de la volonté, du doute ; il apparaît souvent après « que » (« il faut que tu viennes »).'},
       {terme:'Impératif', def:'mode de l’ordre et du conseil, sans sujet exprimé (« viens ! »).'}
     ],
-    essentiel:'<p>Le <b>mode</b> traduit la façon de présenter l’action : <b>réelle</b> (indicatif), <b>envisagée</b> (conditionnel, subjonctif) ou <b>commandée</b> (impératif). Le conditionnel présent se forme sur le futur + terminaisons de l’imparfait.</p>',
+    essentiel:'<p>Le <b>mode</b> traduit la manière dont on présente l’action : comme <b>réelle</b> (indicatif), comme <b>envisagée</b> (conditionnel, subjonctif) ou comme <b>commandée</b> (impératif). Reconnaître le mode aide à comprendre l’intention de l’auteur.</p><p>Deux repères utiles : le <b>conditionnel</b> exprime souvent une hypothèse (« si… je ferais ») ou la politesse ; le <b>subjonctif</b> apparaît souvent après « que » quand on exprime une volonté, un souhait ou un doute. Le conditionnel présent se forme sur le futur avec les terminaisons de l’imparfait.</p>',
     exemple:'<p>« Si j’avais le temps, je <b>lirais</b> » → conditionnel (hypothèse).<br>« Je veux que tu <b>sois</b> à l’heure » → subjonctif (volonté).<br>« <b>Écoute</b>-moi ! » → impératif (ordre).</p>',
     retenir:'Conditionnel = <b>hypothèse / politesse</b> ; subjonctif = souvent après « <b>que</b> » (volonté, doute) ; impératif = <b>ordre sans sujet</b>.'
   }
@@ -1051,9 +1103,9 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Voix passive', def:'le sujet subit l’action (« la souris est mangée par le chat »).'},
       {terme:'Complément d’agent', def:'celui qui fait réellement l’action, introduit par « par » (parfois « de »).'}
     ],
-    essentiel:'<p>À la <b>voix passive</b>, le COD de l’actif devient <b>sujet</b>, et le sujet de l’actif devient <b>complément d’agent</b> (introduit par « par »). Le verbe se conjugue avec l’auxiliaire <b>être</b>, au temps du verbe actif.</p>',
+    essentiel:'<p>À la <b>voix active</b>, le sujet <b>fait</b> l’action ; à la <b>voix passive</b>, le sujet <b>subit</b> l’action. La transformation suit une règle précise : le <b>COD</b> de la phrase active devient le <b>sujet</b> de la phrase passive, et le sujet actif devient le <b>complément d’agent</b> (introduit par « par »).</p><p>Le verbe passif se conjugue toujours avec l’auxiliaire <b>être</b>, au même temps que le verbe actif ; le participe passé s’accorde alors avec le sujet.</p>',
     exemple:'<p>Actif : « Le jury <b>récompense</b> l’élève. »<br>Passif : « L’élève <b>est récompensé</b> par le jury. »</p>',
-    retenir:'Passif = <b>être + participe passé</b> (+ « par » pour l’agent). Le participe passé s’accorde avec le sujet.'
+    retenir:'Passif = <b>être + participe passé</b> (+ « par » pour l’agent). Le COD actif devient sujet ; le participe passé s’accorde avec le sujet.'
   }
 },
 {
@@ -1064,11 +1116,11 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Reconnaître les types de phrases.','Maîtriser la forme négative.'],
     notions:[
       {terme:'Types de phrases', def:'déclarative (.), interrogative ( ?), exclamative ( !), injonctive (ordre/conseil).'},
-      {terme:'Formes', def:'affirmative ou négative. La négation encadre le verbe : ne… pas, ne… jamais, ne… plus, ne… rien.'}
+      {terme:'Formes', def:'affirmative ou négative. La négation encadre le verbe : ne… pas, ne… jamais, ne… plus, ne… rien, ne… personne.'}
     ],
-    essentiel:'<p>Chaque phrase a un <b>type</b> (selon son but) et une <b>forme</b> (affirmative ou négative). Une phrase peut cumuler : par exemple injonctive ET négative ET exclamative.</p>',
+    essentiel:'<p>Chaque phrase possède un <b>type</b> (selon son but : affirmer, interroger, s’exclamer, ordonner) et une <b>forme</b> (affirmative ou négative). Ces deux notions sont indépendantes : une phrase peut cumuler plusieurs caractéristiques (injonctive + négative + exclamative).</p><p>À l’écrit, la <b>négation</b> comporte deux mots (« ne… pas »), et l’oubli du « ne » est une faute fréquente. Bien ponctuer selon le type est aussi important (point d’interrogation pour une question, etc.).</p>',
     exemple:'<p>« Viens ici. » (injonctive) ; « Ne bouge pas ! » (injonctive, négative, exclamative) ; « Où vas-tu ? » (interrogative).</p>',
-    retenir:'À l’écrit, ne pas oublier le « <b>ne</b> » : la négation a <b>deux mots</b>. Ne pas confondre <b>type</b> (but) et <b>forme</b> (affirmatif/négatif).'
+    retenir:'Ne pas confondre <b>type</b> (but) et <b>forme</b> (affirmatif/négatif). À l’écrit, la négation a <b>deux mots</b> : ne pas oublier le « ne ».'
   }
 },
 {
@@ -1083,7 +1135,7 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Complément du nom', def:'introduit par une préposition (« un chat de gouttière »).'},
       {terme:'Proposition subordonnée relative', def:'introduite par qui, que, dont, où (« le chat qui dort »).'}
     ],
-    essentiel:'<p>Le <b>groupe nominal</b> s’organise autour d’un <b>nom noyau</b> qu’on enrichit par des <b>expansions</b> : adjectif <b>épithète</b>, <b>complément du nom</b> ou <b>proposition relative</b>. Elles précisent le sens du nom.</p>',
+    essentiel:'<p>Le <b>groupe nominal</b> s’organise autour d’un <b>nom noyau</b>. Autour de lui, on peut ajouter des <b>expansions</b> qui précisent son sens : l’adjectif <b>épithète</b> (directement lié au nom), le <b>complément du nom</b> (introduit par une préposition : de, à, en…) et la <b>proposition relative</b> (introduite par qui, que, dont, où).</p><p>Reconnaître ces expansions permet d’analyser une phrase, mais aussi d’<b>enrichir</b> ses propres textes en rédaction, pour éviter des phrases trop pauvres.</p>',
     exemple:'<p>« Un grand livre de contes qui fascine les enfants » : <b>grand</b> (épithète) + <b>de contes</b> (complément du nom) + <b>qui fascine les enfants</b> (relative).</p>',
     retenir:'Trois expansions du nom : <b>épithète</b>, <b>complément du nom</b>, <b>relative</b>. Toutes se rapportent au nom noyau.'
   }
@@ -1100,9 +1152,9 @@ window.FICHES = (window.FICHES || []).concat([
       {terme:'Formation des mots', def:'radical + préfixe (avant) + suffixe (après).'},
       {terme:'Synonyme / antonyme', def:'mot de sens proche / mot de sens contraire.'}
     ],
-    essentiel:'<p>Un mot peut avoir un <b>sens propre</b> ou <b>figuré</b>. Le <b>champ lexical</b> révèle le <b>thème</b> d’un texte (et son atmosphère). Les mots se forment par <b>préfixes</b> et <b>suffixes</b> ajoutés à un <b>radical</b>.</p>',
+    essentiel:'<p>Un mot peut être employé au <b>sens propre</b> (concret, premier) ou au <b>sens figuré</b> (imagé). Le <b>champ lexical</b> d’un texte (ensemble des mots liés à un même thème) permet d’en repérer le <b>thème</b> et l’<b>atmosphère</b> — un outil très utile pour la compréhension.</p><p>La <b>formation des mots</b> aide à comprendre leur sens : un mot est construit à partir d’un <b>radical</b>, auquel on ajoute un <b>préfixe</b> (devant) et/ou un <b>suffixe</b> (derrière). Repérer ces éléments permet de deviner le sens d’un mot inconnu.</p>',
     exemple:'<p>« Dévisser » = préfixe <b>dé-</b> + radical <b>viss-</b> + suffixe <b>-er</b>.<br>« Une mer de sable » = sens <b>figuré</b>. Champ lexical de la peur : « angoisse, trembler, cri, ombre ».</p>',
-    retenir:'Repérer un <b>champ lexical</b> aide à trouver le <b>thème</b> et le <b>ton</b>. Préfixe = avant, suffixe = après le radical.'
+    retenir:'Repérer un <b>champ lexical</b> révèle le <b>thème</b> et le <b>ton</b>. Un mot = <b>radical</b> + préfixe (avant) + suffixe (après).'
   }
 },
 {
@@ -1112,14 +1164,14 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Identifier le type de narrateur.','Reconnaître le point de vue (focalisation).'],
     notions:[
-      {terme:'Narrateur', def:'celui qui raconte ; il peut être un personnage (récit à la 1ʳᵉ personne) ou extérieur.'},
+      {terme:'Narrateur', def:'celui qui raconte ; il peut être un personnage (récit à la 1ʳᵉ personne) ou extérieur à l’histoire (3ᵉ personne).'},
       {terme:'Point de vue interne', def:'on voit à travers les yeux d’un personnage (ses pensées, ses sensations).'},
       {terme:'Point de vue externe', def:'on voit seulement de l’extérieur, comme une caméra, sans accès aux pensées.'},
-      {terme:'Point de vue omniscient', def:'le narrateur sait tout de tous les personnages (pensées, passé, futur).'}
+      {terme:'Point de vue omniscient', def:'le narrateur sait tout de tous les personnages (pensées, passé, avenir).'}
     ],
-    essentiel:'<p>Le <b>narrateur</b> choisit un <b>point de vue</b> (focalisation) qui oriente ce que le lecteur sait. Cela crée du <b>suspense</b>, de l’<b>identification</b> ou de la distance. On le repère grâce aux <b>verbes de perception et de pensée</b>.</p>',
+    essentiel:'<p>Il faut distinguer le <b>narrateur</b> (qui raconte) du <b>point de vue</b> (ce que l’on voit et sait). Le choix du point de vue oriente ce que le lecteur apprend, et crée des effets : du <b>suspense</b> (on ignore ce que sait un personnage), de l’<b>identification</b> (on partage ses émotions) ou de la <b>distance</b>.</p><p>On repère le point de vue grâce aux <b>verbes de perception et de pensée</b> : s’ils révèlent l’intérieur d’un personnage, le point de vue est <b>interne</b> ; si le narrateur sait tout de tous, il est <b>omniscient</b> ; s’il décrit seulement l’extérieur, il est <b>externe</b>.</p>',
     exemple:'<p>« Il ignorait ce qui l’attendait » → point de vue <b>interne</b>.<br>« Un homme entra ; personne ne savait qui il était » → point de vue <b>externe</b>.</p>',
-    retenir:'Omniscient = <b>sait tout</b> ; interne = <b>un seul regard</b> ; externe = <b>vue extérieure</b> sans les pensées.'
+    retenir:'Omniscient = <b>sait tout</b> ; interne = <b>un seul regard</b> (pensées d’un personnage) ; externe = <b>vue extérieure</b> sans les pensées.'
   }
 },
 {
@@ -1130,14 +1182,14 @@ window.FICHES = (window.FICHES || []).concat([
     objectifs:['Identifier le registre d’un texte.','Relier registre et émotion produite.'],
     notions:[
       {terme:'Comique', def:'fait rire (jeux de mots, situations, exagérations).'},
-      {terme:'Tragique', def:'fatalité, mort, destin inévitable.'},
+      {terme:'Tragique', def:'évoque la fatalité, la mort, un destin inévitable.'},
       {terme:'Pathétique', def:'suscite la pitié, l’émotion, la souffrance.'},
       {terme:'Épique', def:'exagère pour glorifier un héros ou un exploit.'},
       {terme:'Lyrique', def:'exprime des sentiments personnels (amour, tristesse, joie).'}
     ],
-    essentiel:'<p>Le <b>registre</b> (ou tonalité) est l’<b>émotion</b> que le texte cherche à provoquer. Un même thème peut être traité sur un ton comique, tragique, pathétique… On le repère au <b>vocabulaire</b> et aux <b>procédés</b> employés.</p>',
+    essentiel:'<p>Le <b>registre</b> (ou tonalité) est l’<b>émotion</b> que le texte cherche à provoquer chez le lecteur. Un même thème (par exemple la mort) peut être traité sur un ton comique, tragique ou pathétique selon l’effet recherché.</p><p>On identifie le registre grâce au <b>vocabulaire</b> et aux <b>procédés</b> employés : champ lexical de la souffrance pour le pathétique, exagérations et vocabulaire héroïque pour l’épique, expression du « je » et des sentiments pour le lyrique.</p>',
     exemple:'<p>Un combat raconté avec des exagérations et un héros surhumain → registre <b>épique</b>.<br>Un poème sur un chagrin d’amour → registre <b>lyrique</b>.</p>',
-    retenir:'Le registre = l’<b>effet émotionnel</b> recherché sur le lecteur (rire, pitié, peur, admiration…).'
+    retenir:'Le registre = l’<b>effet émotionnel</b> recherché (rire, pitié, peur, admiration…). On le repère au vocabulaire et aux procédés.'
   }
 },
 {
@@ -1147,13 +1199,13 @@ window.FICHES = (window.FICHES || []).concat([
   contenu:{
     objectifs:['Définir l’autobiographie.','Repérer ses marques d’écriture.'],
     notions:[
-      {terme:'Autobiographie', def:'récit de sa propre vie par l’auteur lui-même.'},
+      {terme:'Autobiographie', def:'récit de sa propre vie, écrit par l’auteur lui-même.'},
       {terme:'Pacte autobiographique', def:'l’auteur, le narrateur et le personnage principal sont une seule et même personne.'},
-      {terme:'Marques', def:'emploi du « je », temps du passé, souvenirs, émotions, regard rétrospectif.'}
+      {terme:'Marques d’écriture', def:'emploi du « je », temps du passé, souvenirs, émotions, regard rétrospectif sur soi.'}
     ],
-    essentiel:'<p>Dans une <b>autobiographie</b>, l’auteur raconte <b>sa propre vie</b> à la première personne. Le <b>pacte autobiographique</b> le distingue de la fiction : auteur = narrateur = personnage. À ne pas confondre avec la <b>biographie</b> (vie d’une autre personne).</p>',
+    essentiel:'<p>Dans une <b>autobiographie</b>, l’auteur raconte <b>sa propre vie</b> à la première personne. Ce qui la distingue de la fiction, c’est le <b>pacte autobiographique</b> : l’auteur, le narrateur et le personnage principal sont la <b>même personne</b>.</p><p>On la reconnaît à plusieurs marques : l’emploi du « <b>je</b> », les temps du <b>passé</b>, l’évocation de <b>souvenirs</b> et d’<b>émotions</b>, et un regard rétrospectif de l’adulte sur son passé. Il ne faut pas la confondre avec la <b>biographie</b> (récit de la vie d’une autre personne).</p>',
     exemple:'<p>« Je me souviens de la maison où je suis né… » : emploi du « je », souvenir d’enfance, temps du passé.</p>',
-    retenir:'Autobiographie : <b>auteur = narrateur = personnage</b>, récit à la <b>1ʳᵉ personne</b>, regard sur son propre passé.'
+    retenir:'Autobiographie : <b>auteur = narrateur = personnage</b>, récit à la <b>1ʳᵉ personne</b> de sa propre vie. À distinguer de la biographie.'
   }
 }
 ]);
@@ -3214,6 +3266,159 @@ window.PRATIQUE = [
 ];
 
 </script>
+  <script>
+/* Parcours façon Duolingo : blocs ordonnés du plus facile au plus difficile.
+   Chaque leçon = questions flash (QCM: choix+sol index ; ou saisie: réponses acceptées).
+   Fin de bloc = un examen plus gros qui mélange les matières du bloc. */
+window.PARCOURS = [
+
+/* ===================== BLOC 1 — Échauffement (facile) ===================== */
+{
+  id:'bloc1', titre:'Bloc 1 — Échauffement', sousTitre:'Les bases · 5ᵉ-4ᵉ',
+  lecons:[
+    { id:'l1', titre:'Calcul & fractions', matiereKey:'maths', questions:[
+      { q:'Combien font 2/3 + 1/3 ?', choix:['1','2/6','3/6','5/3'], sol:0, expl:'2/3 + 1/3 = 3/3 = 1.' },
+      { q:'7 × 8 = ?', saisie:['56'], expl:'7 × 8 = 56.' },
+      { q:'Simplifie la fraction 6/9.', choix:['2/3','3/6','1/2','6/9'], sol:0, expl:'On divise par 3 : 6/9 = 2/3.' },
+      { q:'Calcule : 3 + 4 × 2', choix:['14','11','10','24'], sol:1, expl:'× avant + : 3 + 8 = 11.' },
+      { q:'Quelle est la moitié de 50 ?', saisie:['25'], expl:'50 ÷ 2 = 25.' },
+      { q:'Calcule : −3 + 8', choix:['5','−5','11','−11'], sol:0, expl:'Signes différents : 8 − 3 = 5, signe du plus grand (+).' }
+    ]},
+    { id:'l2', titre:'La nature des mots', matiereKey:'francais', questions:[
+      { q:'Dans « le chat noir », quelle est la nature de « noir » ?', choix:['nom','adjectif','verbe','adverbe'], sol:1, expl:'« noir » qualifie le nom : c’est un adjectif.' },
+      { q:'« rapidement » est un…', choix:['adjectif','adverbe','nom','pronom'], sol:1, expl:'Les mots en -ment sont souvent des adverbes.' },
+      { q:'« le », « la », « un » sont des…', choix:['pronoms','déterminants','conjonctions','prépositions'], sol:1, expl:'Ils accompagnent le nom : ce sont des déterminants.' },
+      { q:'Quel est le verbe dans « Elle mange une pomme » ?', saisie:['mange'], expl:'Le verbe conjugué est « mange ».' },
+      { q:'« et », « mais », « ou » sont des conjonctions de…', choix:['subordination','coordination'], sol:1, expl:'Mais, ou, et, donc, or, ni, car = coordination.' }
+    ]},
+    { id:'l3', titre:'Le vivant', matiereKey:'svt', questions:[
+      { q:'Quelle est l’unité de base de tous les êtres vivants ?', choix:['l’atome','la cellule','la molécule','l’organe'], sol:1, expl:'Tous les êtres vivants sont faits de cellules.' },
+      { q:'Où se trouve l’information génétique dans la cellule ?', choix:['la membrane','le cytoplasme','le noyau','la paroi'], sol:2, expl:'Elle est dans le noyau, portée par les chromosomes.' },
+      { q:'Les plantes vertes fabriquent leur matière grâce à la…', choix:['respiration','photosynthèse','digestion','fermentation'], sol:1, expl:'La photosynthèse utilise lumière, eau et CO₂.' },
+      { q:'Combien de chromosomes possède l’espèce humaine ?', choix:['23','46','48','44'], sol:1, expl:'46 chromosomes, soit 23 paires.' },
+      { q:'Une chaîne alimentaire commence toujours par…', choix:['un animal','un végétal','un prédateur','un décomposeur'], sol:1, expl:'Les végétaux (producteurs) sont à la base.' }
+    ]}
+  ],
+  examen:{ titre:'Examen — Bloc 1', questions:[
+    { q:'2/3 + 1/3 = ?', choix:['1','2/6','5/3','3/6'], sol:0 },
+    { q:'Simplifie 6/9.', choix:['2/3','1/2','3/6','6/9'], sol:0 },
+    { q:'3 + 4 × 2 = ?', saisie:['11'] },
+    { q:'« rapidement » est un…', choix:['adverbe','adjectif','nom','verbe'], sol:0 },
+    { q:'« le », « un », « des » sont des…', choix:['déterminants','pronoms','adverbes','verbes'], sol:0 },
+    { q:'Unité de base du vivant ?', choix:['la cellule','l’atome','l’organe','la molécule'], sol:0 },
+    { q:'La photosynthèse est faite par…', choix:['les végétaux verts','les animaux','les champignons','les bactéries'], sol:0 },
+    { q:'−3 + 8 = ?', saisie:['5'] },
+    { q:'Combien de chromosomes chez l’humain ?', choix:['46','23','44','48'], sol:0 },
+    { q:'« et », « mais », « ou » = conjonctions de…', choix:['coordination','subordination'], sol:0 }
+  ]}
+},
+
+/* ===================== BLOC 2 — En route (moyen) ===================== */
+{
+  id:'bloc2', titre:'Bloc 2 — En route', sousTitre:'On monte · 4ᵉ-3ᵉ',
+  lecons:[
+    { id:'l1', titre:'Équations & calcul littéral', matiereKey:'maths', questions:[
+      { q:'Résous 3x + 5 = 20. x = ?', saisie:['5'], expl:'3x = 15 → x = 5.' },
+      { q:'Développe (x + 3)(x − 2).', choix:['x²+x−6','x²−x−6','x²+5x−6','x²−6'], sol:0, expl:'x²−2x+3x−6 = x²+x−6.' },
+      { q:'Factorise 5x + 35.', choix:['5(x+7)','5x+7','x(5+35)','5(x+35)'], sol:0, expl:'Facteur commun 5 : 5(x+7).' },
+      { q:'(a + b)² = ?', choix:['a²+b²','a²+2ab+b²','a²−2ab+b²','2a+2b'], sol:1, expl:'Identité remarquable : a²+2ab+b².' },
+      { q:'(x − 2)(x + 7) = 0. Une solution est…', choix:['2','−2','7','5'], sol:0, expl:'x−2=0 → x=2 (ou x=−7).' },
+      { q:'Calcule (−4) × (−2).', saisie:['8'], expl:'Moins par moins = plus : +8.' }
+    ]},
+    { id:'l2', titre:'Le XXᵉ siècle en dates', matiereKey:'histoire', questions:[
+      { q:'En quelle année se termine la Première Guerre mondiale ?', choix:['1914','1916','1918','1920'], sol:2, expl:'Armistice le 11 novembre 1918.' },
+      { q:'Qui dirige l’URSS totalitaire des années 1930 ?', choix:['Lénine','Staline','Trotski','Gorbatchev'], sol:1, expl:'Staline (parti unique, terreur, goulag).' },
+      { q:'La Seconde Guerre mondiale commence en…', choix:['1936','1939','1940','1945'], sol:1, expl:'1er septembre 1939 (invasion de la Pologne).' },
+      { q:'Le Débarquement de Normandie a lieu le…', choix:['6 juin 1944','8 mai 1945','11 nov. 1918','14 juillet 1789'], sol:0, expl:'6 juin 1944.' },
+      { q:'Le Mur de Berlin tombe en…', choix:['1961','1989','1991','1945'], sol:1, expl:'9 novembre 1989.' }
+    ]},
+    { id:'l3', titre:'Matière & énergie', matiereKey:'physique', questions:[
+      { q:'Quelle est la formule chimique de l’eau ?', choix:['CO₂','H₂O','O₂','H₂'], sol:1, expl:'H₂O : 2 hydrogènes + 1 oxygène.' },
+      { q:'Un atome qui perd un électron devient un ion…', choix:['négatif','positif','neutre','stable'], sol:1, expl:'Perdre des électrons (−) → charge positive.' },
+      { q:'Quelle est l’unité de l’énergie ?', choix:['le watt','le joule','le newton','le volt'], sol:1, expl:'Le joule (J). Le watt est la puissance.' },
+      { q:'Loi d’Ohm : U = ?', choix:['R + I','R × I','R − I','R ÷ I'], sol:1, expl:'U = R × I.' },
+      { q:'Le son se propage-t-il dans le vide ?', choix:['oui','non'], sol:1, expl:'Non : le son a besoin d’un milieu matériel.' },
+      { q:'Poids d’un objet de 2 kg (g = 10 N/kg) ?', choix:['2 N','10 N','20 N','200 N'], sol:2, expl:'P = m × g = 2 × 10 = 20 N.' }
+    ]},
+    { id:'l4', titre:'Conjugaison & accords', matiereKey:'francais', questions:[
+      { q:'« Elles sont ___ » (partir, passé composé)', choix:['parti','partie','parties','partis'], sol:2, expl:'Avec être : accord avec le sujet (elles → parties).' },
+      { q:'« Il ___ mangé » — quel homophone ?', choix:['a','à','as','ah'], sol:0, expl:'« a » (avait) → auxiliaire avoir.' },
+      { q:'Quel temps exprime une action soudaine dans un récit ?', choix:['imparfait','passé simple','présent','futur'], sol:1, expl:'Passé simple = actions brèves de premier plan.' },
+      { q:'« Je veux que tu ___ à l’heure »', choix:['es','sois','seras','étais'], sol:1, expl:'Après « que » (volonté) → subjonctif : sois.' },
+      { q:'Voix passive : « La souris ___ mangée par le chat »', choix:['a','est','avait','sera'], sol:1, expl:'Passif = être + participe passé : est mangée.' }
+    ]}
+  ],
+  examen:{ titre:'Examen — Bloc 2', questions:[
+    { q:'Résous 3x + 5 = 20. x = ?', saisie:['5'] },
+    { q:'Développe (x+3)(x−2).', choix:['x²+x−6','x²−x−6','x²−6','x²+6'], sol:0 },
+    { q:'Fin de la Première Guerre mondiale ?', choix:['1918','1914','1945','1939'], sol:0 },
+    { q:'Débarquement de Normandie ?', choix:['6 juin 1944','8 mai 1945','1918','1789'], sol:0 },
+    { q:'Formule de l’eau ?', choix:['H₂O','CO₂','O₂','H₂'], sol:0 },
+    { q:'Loi d’Ohm : U = ?', choix:['R × I','R + I','R − I','R ÷ I'], sol:0 },
+    { q:'Poids de 2 kg (g=10) ?', choix:['20 N','2 N','10 N','200 N'], sol:0 },
+    { q:'« Elles sont ___ » (partir) :', choix:['parties','parti','partis','partie'], sol:0 },
+    { q:'Action soudaine dans un récit → temps :', choix:['passé simple','imparfait','présent','futur'], sol:0 },
+    { q:'(−4) × (−2) = ?', saisie:['8'] },
+    { q:'Chute du Mur de Berlin ?', choix:['1989','1961','1991','1945'], sol:0 },
+    { q:'Un atome qui perd un électron devient un ion…', choix:['positif','négatif','neutre','stable'], sol:0 }
+  ]}
+},
+
+/* ===================== BLOC 3 — Niveau brevet (difficile) ===================== */
+{
+  id:'bloc3', titre:'Bloc 3 — Niveau brevet', sousTitre:'Le grand test · 3ᵉ',
+  lecons:[
+    { id:'l1', titre:'Géométrie (Pythagore, Thalès, trigo)', matiereKey:'maths', questions:[
+      { q:'Triangle rectangle en A, AB = 3, AC = 4. BC = ?', saisie:['5'], expl:'BC² = 3² + 4² = 25 → BC = 5.' },
+      { q:'Quel théorème prouve qu’un triangle est rectangle ?', choix:['Thalès','la réciproque de Pythagore','la trigonométrie','la somme des angles'], sol:1, expl:'On compare le plus grand côté² à la somme des deux autres².' },
+      { q:'cos(60°) = ?', choix:['0','0,5','1','60'], sol:1, expl:'Valeur à connaître : cos(60°) = 0,5.' },
+      { q:'La somme des angles d’un triangle vaut…', choix:['90°','180°','270°','360°'], sol:1, expl:'Toujours 180°.' },
+      { q:'Thalès s’utilise avec des droites…', choix:['perpendiculaires','parallèles','sécantes seulement','quelconques'], sol:1, expl:'Il faut deux droites parallèles + points alignés.' }
+    ]},
+    { id:'l2', titre:'Génétique & évolution', matiereKey:'svt', questions:[
+      { q:'Les versions différentes d’un même gène s’appellent des…', choix:['chromosomes','allèles','gamètes','cellules'], sol:1, expl:'Un gène existe en plusieurs allèles.' },
+      { q:'Le moteur de l’évolution décrit par Darwin est…', choix:['la mutation','la sélection naturelle','la respiration','la digestion'], sol:1, expl:'Les mieux adaptés survivent et se reproduisent plus.' },
+      { q:'Un gamète humain contient combien de chromosomes ?', choix:['23','46','48','22'], sol:0, expl:'23 (la moitié) ; la fécondation redonne 46.' },
+      { q:'Les vrais jumeaux ont un patrimoine génétique…', choix:['différent','identique','partiel','aléatoire'], sol:1, expl:'Ils viennent de la même cellule-œuf.' },
+      { q:'Preuve de l’évolution conservée dans les roches ?', choix:['l’ADN','le fossile','la cellule','le gène'], sol:1, expl:'Les fossiles témoignent des espèces passées.' }
+    ]},
+    { id:'l3', titre:'Histoire-Géo-EMC', matiereKey:'histoire', questions:[
+      { q:'La devise de la République française est…', choix:['Liberté, Égalité, Fraternité','Un pour tous','Paix et Travail','Dieu et mon droit'], sol:0, expl:'Liberté, Égalité, Fraternité.' },
+      { q:'La loi de séparation des Églises et de l’État date de…', choix:['1789','1848','1905','1958'], sol:2, expl:'Loi de laïcité de 1905.' },
+      { q:'L’IDH mesure…', choix:['la richesse seule','le développement humain','la population','la surface'], sol:1, expl:'Santé + éducation + niveau de vie.' },
+      { q:'Combien d’États compte l’Union européenne ?', choix:['12','15','27','50'], sol:2, expl:'27 États membres.' },
+      { q:'La Vᵉ République est fondée en…', choix:['1945','1958','1962','1968'], sol:1, expl:'1958, avec De Gaulle.' }
+    ]},
+    { id:'l4', titre:'Grammaire & analyse', matiereKey:'francais', questions:[
+      { q:'« parce que » introduit une subordonnée de…', choix:['temps','cause','lieu','condition'], sol:1, expl:'Parce que = cause.' },
+      { q:'Dans « le livre que je lis », « que je lis » est une proposition…', choix:['conjonctive','relative','indépendante','principale'], sol:1, expl:'Relative (introduite par « que »), complète « livre ».' },
+      { q:'« fort comme un lion » est une…', choix:['métaphore','comparaison','personnification','hyperbole'], sol:1, expl:'Il y a un outil (« comme ») → comparaison.' },
+      { q:'Le registre qui suscite la pitié est le…', choix:['comique','tragique','pathétique','épique'], sol:2, expl:'Pathétique = pitié, émotion, souffrance.' },
+      { q:'Dans une autobiographie, l’auteur = le narrateur = …', choix:['le lecteur','le personnage principal','un témoin','un héros de fiction'], sol:1, expl:'Pacte autobiographique : les trois sont la même personne.' }
+    ]}
+  ],
+  examen:{ titre:'Examen final — Bloc 3', questions:[
+    { q:'Triangle rectangle en A, AB=3, AC=4. BC = ?', saisie:['5'] },
+    { q:'cos(60°) = ?', choix:['0,5','0','1','60'], sol:0 },
+    { q:'Somme des angles d’un triangle ?', choix:['180°','90°','360°','270°'], sol:0 },
+    { q:'Thalès s’utilise avec des droites…', choix:['parallèles','perpendiculaires','sécantes','quelconques'], sol:0 },
+    { q:'Versions d’un même gène ?', choix:['allèles','chromosomes','gamètes','cellules'], sol:0 },
+    { q:'Moteur de l’évolution (Darwin) ?', choix:['la sélection naturelle','la digestion','la respiration','la photosynthèse'], sol:0 },
+    { q:'Devise de la République ?', choix:['Liberté, Égalité, Fraternité','Paix et Travail','Un pour tous','Dieu et mon droit'], sol:0 },
+    { q:'Loi de laïcité ?', choix:['1905','1789','1958','1848'], sol:0 },
+    { q:'Nombre d’États de l’UE ?', choix:['27','15','12','50'], sol:0 },
+    { q:'Fondation de la Vᵉ République ?', choix:['1958','1945','1962','1968'], sol:0 },
+    { q:'« parce que » introduit une cause. Vrai ?', choix:['Vrai','Faux'], sol:0 },
+    { q:'« fort comme un lion » est une…', choix:['comparaison','métaphore','hyperbole','personnification'], sol:0 },
+    { q:'Registre qui suscite la pitié ?', choix:['pathétique','comique','épique','lyrique'], sol:0 },
+    { q:'Un gamète humain a combien de chromosomes ?', choix:['23','46','48','22'], sol:0 },
+    { q:'Théorème pour prouver un angle droit ?', choix:['réciproque de Pythagore','Thalès','trigonométrie','somme des angles'], sol:0 }
+  ]}
+}
+
+];
+
+</script>
   <!-- Application -->
   <script>
 /* ============================================================
@@ -3512,10 +3717,193 @@ function renderRecherche(q){
 function renderNav(active){
   $('#subjectnav').innerHTML =
     `<a href="#accueil" class="${active==='accueil'?'active':''}">🏠 Accueil</a>` +
+    `<a href="#parcours" class="${active==='parcours'?'active':''}">🦉 Parcours</a>` +
     `<a href="#pratique" class="navpratique ${active==='pratique'?'active':''}">📝 Pratique</a>` +
     MATIERES.map(m =>
       `<a href="#matiere/${m.key}" class="${active===m.key?'active':''}">${m.emoji} ${m.nom}</a>`
     ).join('');
+}
+
+/* ============================================================
+   PARCOURS (façon Duolingo) : chemin de leçons + examens de bloc
+   ============================================================ */
+const PARCOURS = window.PARCOURS || [];
+const PSTORE = 'brevet_moliere_parcours';   // { "bloc1/l1": 85, "bloc1/examen": 90, ... } meilleur score %
+function getParcoursScores(){ try{ return JSON.parse(localStorage.getItem(PSTORE)||'{}'); }catch{ return {}; } }
+function setParcoursScore(key, pct){
+  const s = getParcoursScores();
+  if(!(key in s) || pct > s[key]) s[key] = pct;
+  localStorage.setItem(PSTORE, JSON.stringify(s));
+}
+const PASS = 60; // % minimum pour valider une étape
+
+/* une étape est débloquée si toutes les étapes précédentes sont validées */
+function parcoursSteps(){
+  const steps = [];
+  PARCOURS.forEach(b => {
+    b.lecons.forEach(l => steps.push({ bloc:b, lecon:l, key:`${b.id}/${l.id}`, type:'lecon' }));
+    steps.push({ bloc:b, lecon:null, key:`${b.id}/examen`, type:'examen' });
+  });
+  return steps;
+}
+function stepUnlocked(key){
+  const scores = getParcoursScores();
+  const steps = parcoursSteps();
+  for(const st of steps){
+    if(st.key === key) return true;                 // toutes les précédentes étaient validées
+    if((scores[st.key]||0) < PASS) return false;    // une étape précédente non validée
+  }
+  return false;
+}
+
+function renderParcours(){
+  const scores = getParcoursScores();
+  let unlockedReached = false;
+  const blocsHtml = PARCOURS.map(b => {
+    const nodes = [];
+    b.lecons.forEach(l => {
+      const key = `${b.id}/${l.id}`;
+      const score = scores[key];
+      const done = (score||0) >= PASS;
+      const unlocked = stepUnlocked(key);
+      const m = M_BY_KEY[l.matiereKey];
+      let cls = done ? 'done' : (unlocked ? 'open' : 'locked');
+      if(unlocked && !done && !unlockedReached){ cls += ' current'; unlockedReached = true; }
+      nodes.push(`<div class="pnode ${cls}" ${unlocked?`data-goto="parcours/${b.id}/${l.id}"`:''} style="--c:${m.color}">
+        <div class="pnode-circle">${done?'✓':(unlocked?m.emoji:'🔒')}</div>
+        <div class="pnode-label"><b>${l.titre}</b><small>${m.nom}${score!=null?` · ${score}%`:''}</small></div>
+      </div>`);
+    });
+    const ekey = `${b.id}/examen`;
+    const escore = scores[ekey];
+    const edone = (escore||0) >= PASS;
+    const eunlocked = stepUnlocked(ekey);
+    let ecls = edone ? 'done' : (eunlocked ? 'open' : 'locked');
+    if(eunlocked && !edone && !unlockedReached){ ecls += ' current'; unlockedReached = true; }
+    nodes.push(`<div class="pnode examen ${ecls}" ${eunlocked?`data-goto="parcours/${b.id}/examen"`:''}>
+      <div class="pnode-circle">${edone?'🏆':(eunlocked?'⭐':'🔒')}</div>
+      <div class="pnode-label"><b>${b.examen.titre}</b><small>${b.examen.questions.length} questions${escore!=null?` · ${escore}%`:''}</small></div>
+    </div>`);
+    return `<section class="pbloc">
+      <header class="pbloc-head"><h2>${b.titre}</h2><span>${b.sousTitre}</span></header>
+      <div class="pchemin">${nodes.join('<div class="plink"></div>')}</div>
+    </section>`;
+  }).join('');
+
+  app.innerHTML = `
+    <div class="section-title"><h1>🦉 Parcours</h1>
+      <span class="count">Avance leçon par leçon · ${PASS}% pour valider</span></div>
+    <p class="lead">Comme sur Duolingo : suis le chemin dans l’ordre, du plus facile au plus difficile.
+      Chaque leçon = des questions flash. À la fin d’un bloc : un <b>examen</b> qui mélange tout.
+      Il faut <b>${PASS}%</b> pour débloquer l’étape suivante.</p>
+    ${blocsHtml}`;
+}
+
+/* ---- Moteur de leçon / examen ---- */
+let quizState = null; // { questions, idx, bonnes, key, titre, retourHash }
+
+function startQuiz(bloc, leconId){
+  const isExam = leconId === 'examen';
+  const source = isExam ? bloc.examen : bloc.lecons.find(l=>l.id===leconId);
+  if(!source) { renderParcours(); return; }
+  quizState = {
+    questions: source.questions,
+    idx: 0, bonnes: 0,
+    key: `${bloc.id}/${leconId}`,
+    titre: isExam ? bloc.examen.titre : source.titre,
+    isExam
+  };
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  const s = quizState;
+  const q = s.questions[s.idx];
+  const pct = Math.round(s.idx / s.questions.length * 100);
+  let corps;
+  if(q.choix){
+    corps = `<div class="quiz-choix">${q.choix.map((c,i)=>
+      `<button class="quiz-opt" data-quiz-opt="${i}">${c}</button>`).join('')}</div>`;
+  } else {
+    corps = `<div class="quiz-saisie">
+      <input id="quizInput" type="text" autocomplete="off" placeholder="Ta réponse…" />
+      <button class="btn btn-check" data-quiz-valider>Valider</button></div>`;
+  }
+  app.innerHTML = `
+    <div class="quiz">
+      <div class="quiz-top">
+        <span class="backlink" data-goto="parcours">✕ Quitter</span>
+        <div class="quiz-bar"><span style="width:${pct}%"></span></div>
+        <span class="quiz-count">${s.idx+1}/${s.questions.length}</span>
+      </div>
+      <h1 class="quiz-titre">${s.isExam?'⭐ ':''}${s.titre}</h1>
+      <div class="quiz-q">${q.q}</div>
+      ${corps}
+      <div id="quizFeedback"></div>
+    </div>`;
+  const inp = document.getElementById('quizInput');
+  if(inp){ inp.focus(); inp.addEventListener('keydown', e => { if(e.key==='Enter') validerSaisie(); }); }
+}
+
+function normaliserRep(str){
+  return (str||'').toString().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/\s+/g,' ').replace(',', '.').trim();
+}
+
+function afficherFeedback(ok, expl, solTexte){
+  const s = quizState;
+  if(ok) s.bonnes++;
+  const fb = document.getElementById('quizFeedback');
+  fb.innerHTML = `<div class="quiz-fb ${ok?'ok':'ko'}">
+    <b>${ok?'✅ Correct !':'❌ Raté…'}</b>
+    ${!ok && solTexte ? `<div>La bonne réponse était : <b>${solTexte}</b></div>` : ''}
+    ${expl ? `<div class="quiz-expl">${expl}</div>` : ''}
+    <button class="btn ${ok?'btn-check':'btn-random'}" data-quiz-suivant>${s.idx+1 < s.questions.length ? 'Continuer →' : 'Voir le résultat 🏁'}</button>
+  </div>`;
+  // désactiver les options
+  document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+  fb.querySelector('[data-quiz-suivant]').focus();
+}
+
+function validerChoix(i){
+  const q = quizState.questions[quizState.idx];
+  const ok = i === q.sol;
+  document.querySelectorAll('.quiz-opt').forEach((b,bi)=>{
+    if(bi===q.sol) b.classList.add('good');
+    else if(bi===i && !ok) b.classList.add('bad');
+  });
+  afficherFeedback(ok, q.expl, q.choix[q.sol]);
+}
+function validerSaisie(){
+  const q = quizState.questions[quizState.idx];
+  const val = normaliserRep(document.getElementById('quizInput')?.value);
+  if(!val) return;
+  const ok = (q.saisie||[]).some(r => normaliserRep(r) === val);
+  afficherFeedback(ok, q.expl, (q.saisie||[])[0]);
+}
+
+function quizSuivant(){
+  const s = quizState;
+  s.idx++;
+  if(s.idx < s.questions.length){ renderQuizQuestion(); return; }
+  // fin : score
+  const pct = Math.round(s.bonnes / s.questions.length * 100);
+  setParcoursScore(s.key, pct);
+  const reussi = pct >= PASS;
+  app.innerHTML = `
+    <div class="quiz quiz-fin">
+      <div class="quiz-resultat ${reussi?'win':'lose'}">
+        <div class="quiz-emoji">${reussi ? (s.isExam?'🏆':'🎉') : '😅'}</div>
+        <h1>${reussi ? (s.isExam?'Examen réussi !':'Leçon validée !') : 'Presque…'}</h1>
+        <p class="quiz-score">${s.bonnes}/${s.questions.length} bonnes réponses · <b>${pct}%</b></p>
+        <p>${reussi ? 'L’étape suivante est débloquée. Continue sur ta lancée !'
+                    : `Il faut ${PASS}% pour valider. Revois la notion puis réessaie !`}</p>
+        <div class="quiz-fin-btns">
+          ${!reussi ? `<button class="btn btn-random" data-quiz-retry>🔁 Réessayer</button>` : ''}
+          <button class="btn ${reussi?'btn-check':'btn-ghost'}" data-goto="parcours">← Retour au parcours</button>
+        </div>
+      </div>
+    </div>`;
 }
 
 /* ---- Pratique : annales « centre étranger – groupe 1 » 2026 ---- */
@@ -3580,6 +3968,14 @@ function route(){
   else if(hash.startsWith('fiche/')){ renderNav(''); renderFiche(hash.split('/')[1]); }
   else if(hash.startsWith('pratique/')){ renderNav('pratique'); renderPratiqueExam(hash.split('/')[1]); }
   else if(hash==='pratique'){ renderNav('pratique'); renderPratiqueList(); }
+  else if(hash.startsWith('parcours/')){
+    const [,blocId,leconId] = hash.split('/');
+    const bloc = PARCOURS.find(b=>b.id===blocId);
+    renderNav('parcours');
+    if(bloc && stepUnlocked(`${blocId}/${leconId}`)) startQuiz(bloc, leconId);
+    else renderParcours();
+  }
+  else if(hash==='parcours'){ renderNav('parcours'); renderParcours(); }
   else if(hash.startsWith('q/')){ renderNav(''); renderRecherche(hash.slice(2)); }
   else { renderNav('accueil'); renderAccueil(); }
 }
@@ -3615,6 +4011,14 @@ document.addEventListener('click', e => {
     tsol.textContent = hidden ? '👁 Afficher les corrections' : '🙈 Masquer les corrections';
     return;
   }
+
+  /* --- Parcours / quiz --- */
+  const opt = e.target.closest('[data-quiz-opt]');
+  if(opt && !opt.disabled){ validerChoix(parseInt(opt.dataset.quizOpt,10)); return; }
+  if(e.target.closest('[data-quiz-valider]')){ validerSaisie(); return; }
+  if(e.target.closest('[data-quiz-suivant]')){ quizSuivant(); return; }
+  const retry = e.target.closest('[data-quiz-retry]');
+  if(retry && quizState){ quizState.idx=0; quizState.bonnes=0; renderQuizQuestion(); return; }
 
   const check = e.target.closest('[data-check]');
   if(check){
