@@ -62,7 +62,11 @@ a{color:inherit;text-decoration:none}
   color:#fff;font-weight:800;font-size:23px;
   display:grid;place-items:center;
   box-shadow:0 8px 20px rgba(79,70,229,.4);
+  position:relative;cursor:pointer;transition:.18s;
 }
+.brand-logo:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 12px 26px rgba(79,70,229,.5)}
+.brand-logo.logged::after{content:"";position:absolute;right:-3px;bottom:-3px;width:14px;height:14px;
+  border-radius:50%;background:#22c55e;border:2.5px solid #fff}
 .brand-text{display:flex;flex-direction:column;line-height:1.2}
 .brand-text strong{font-size:16px;letter-spacing:-.01em}
 .brand-text small{color:var(--muted);font-size:12px}

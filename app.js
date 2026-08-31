@@ -396,6 +396,12 @@ function renderRecherche(q){
    ============================================================ */
 function renderNav(active){
   const u = currentUser();
+  const logo = document.getElementById('brandLogo');
+  if(logo){
+    logo.textContent = u ? u[0].toUpperCase() : 'M';
+    logo.classList.toggle('logged', !!u);
+    logo.title = u ? ('Mon compte — ' + u) : 'Se connecter';
+  }
   $('#subjectnav').innerHTML =
     `<a href="#accueil" class="${active==='accueil'?'active':''}">🏠 Accueil</a>` +
     `<a href="#parcours" class="${active==='parcours'?'active':''}">🦉 Parcours</a>` +
