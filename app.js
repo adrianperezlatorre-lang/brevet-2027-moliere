@@ -548,12 +548,40 @@ function renderParcours(){
 /* ---- Moteur de leçon / examen ---- */
 let quizState = null; // { questions, idx, bonnes, key, titre, retourHash }
 
+/* ---- composition aléatoire : à chaque tentative, des questions différentes
+       sur le même thème (tirage dans le banc + options mélangées) ---- */
+function melangerTableau(a){
+  const t = a.slice();
+  for(let i=t.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [t[i],t[j]]=[t[j],t[i]]; }
+  return t;
+}
+function varianteQuestion(q){
+  if(!q.choix) return Object.assign({}, q);
+  const paires = q.choix.map((c,i)=>({ c, ok: i===q.sol }));
+  const mel = melangerTableau(paires);
+  return Object.assign({}, q, { choix: mel.map(p=>p.c), sol: mel.findIndex(p=>p.ok) });
+}
+function composerQuestions(src){
+  const banc = melangerTableau(src.pool || src.questions);
+  const cible = Math.min(src.tirage || src.questions.length, banc.length);
+  let choisies = banc.slice(0, cible);
+  // leçons manuelles : on remplace ~1/3 par des questions liées au même thème (fiches de la matière)
+  if(src.extra && src.extra.length){
+    const nExtra = Math.min(Math.max(1, Math.floor(cible/3)), src.extra.length);
+    choisies = melangerTableau(
+      choisies.slice(0, cible - nExtra).concat(melangerTableau(src.extra).slice(0, nExtra))
+    );
+  }
+  return choisies.map(varianteQuestion);
+}
+
 function startQuiz(bloc, leconId){
   const isExam = leconId === 'examen';
   const source = isExam ? bloc.examen : bloc.lecons.find(l=>l.id===leconId);
   if(!source) { renderParcours(); return; }
   quizState = {
-    questions: source.questions,
+    source,
+    questions: composerQuestions(source),
     idx: 0, bonnes: 0,
     key: `${bloc.id}/${leconId}`,
     titre: isExam ? bloc.examen.titre : source.titre,
@@ -776,7 +804,10 @@ document.addEventListener('click', e => {
   if(e.target.closest('[data-quiz-valider]')){ validerSaisie(); return; }
   if(e.target.closest('[data-quiz-suivant]')){ quizSuivant(); return; }
   const retry = e.target.closest('[data-quiz-retry]');
-  if(retry && quizState){ quizState.idx=0; quizState.bonnes=0; renderQuizQuestion(); return; }
+  if(retry && quizState){
+    quizState.questions = composerQuestions(quizState.source);   // nouvelles questions, même thème
+    quizState.idx=0; quizState.bonnes=0; renderQuizQuestion(); return;
+  }
 
   const check = e.target.closest('[data-check]');
   if(check){

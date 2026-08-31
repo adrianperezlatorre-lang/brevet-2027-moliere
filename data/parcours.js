@@ -464,7 +464,11 @@ window.PARCOURS = [
       }
       notions.forEach(function(n,i){ fabrique(n,i,0); });          // toutes : terme → définition
       notions.forEach(function(n,i){ fabrique(n,i+notions.length,1); }); // puis : définition → terme
-      return qs.length>=4 ? { id:'f-'+f.id, titre:'Révision : '+f.titre, matiereKey:f.matiereKey, questions:qs, fiche:f.id } : null;
+      if(qs.length < 4) return null;
+      var tirage = Math.min(6, qs.length);
+      // pool = banc complet ; à chaque tentative, l'appli tire `tirage` questions au hasard
+      return { id:'f-'+f.id, titre:'Révision : '+f.titre, matiereKey:f.matiereKey,
+               pool: qs, tirage: tirage, questions: qs.slice(0, tirage), fiche: f.id };
     }).filter(Boolean);
   }
 
@@ -490,16 +494,26 @@ window.PARCOURS = [
 
   window.PARCOURS.forEach(function(b){
     var plan = PLAN[b.id] || { mat:[], niv:[] };
-    b.lecons = meler(b.lecons, fichesLecons(plan.mat, plan.niv));
+    var fiches = fichesLecons(plan.mat, plan.niv);
+    var manuelles = b.lecons;
+    b.lecons = meler(manuelles, fiches);
 
-    /* examen : questions échantillonnées régulièrement sur tout le bloc */
+    /* leçons manuelles : questions « extra » du même thème (banc des fiches de la matière) —
+       à chaque tentative, ~1/3 du quiz est remplacé par des questions différentes */
+    manuelles.forEach(function(l){
+      var lie = fiches.filter(function(f){ return f.matiereKey === l.matiereKey; });
+      var ex = [];
+      lie.forEach(function(f){ ex = ex.concat(f.pool); });
+      if(ex.length) l.extra = ex;
+    });
+
+    /* examen : banc = toutes les questions du bloc ; tirage aléatoire à chaque tentative */
     var cap = b.id==='bloc6' ? 20 : 14;
-    var qs = [];
-    var pas = Math.max(1, Math.floor(b.lecons.length / cap));
-    for(var li=0; li<b.lecons.length && qs.length<cap; li+=pas){
-      var l = b.lecons[li];
-      qs.push(Object.assign({}, l.questions[qs.length % l.questions.length]));
-    }
-    b.examen = { titre: b.examenTitre || ('Examen — ' + b.titre.replace(/ —.*$/,'').trim()), questions: qs };
+    var banc = [];
+    b.lecons.forEach(function(l){ banc = banc.concat(l.pool || l.questions); });
+    b.examen = {
+      titre: b.examenTitre || ('Examen — ' + b.titre.replace(/ —.*$/,'').trim()),
+      pool: banc, tirage: cap, questions: banc.slice(0, cap)
+    };
   });
 })();

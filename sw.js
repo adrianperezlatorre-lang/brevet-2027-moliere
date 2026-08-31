@@ -3,7 +3,7 @@
    - navigations : réseau d'abord (pour recevoir les mises à jour), cache en secours (hors ligne) ;
    - autres fichiers du site : cache d'abord + mise à jour en arrière-plan (stale-while-revalidate).
    Les appels à Supabase (autre origine) ne sont jamais interceptés. */
-const CACHE = 'brevet-moliere-v1';
+const CACHE = 'brevet-moliere-v2';
 const CORE = [
   './', 'index.html', 'styles.css', 'app.js', 'manifest.json',
   'data/maths.js', 'data/francais.js', 'data/histoire.js', 'data/geographie.js',
