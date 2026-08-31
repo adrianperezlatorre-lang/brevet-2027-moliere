@@ -4,6 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Révisions Brevet 2027 · Lycée Français Molière de Saragosse</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#4f46e5" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Brevet 2027" />
   <style>
 :root{
   --bg:#eef1fa;
@@ -4598,5 +4605,11 @@ window.addEventListener('hashchange', route);
 route();
 
 </script>
+  <script>
+    // PWA : mise en cache hors ligne + installation sur l'écran d'accueil
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(function(){ /* file:// ou navigateur ancien : on ignore */ });
+    }
+  </script>
 </body>
 </html>
