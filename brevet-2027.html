@@ -3859,52 +3859,107 @@ function searchFiches(q){
 }
 
 /* ============================================================
-   COMPTES UTILISATEURS (locaux à cet appareil)
-   Plusieurs profils ; mot de passe haché (SHA-256 + sel) ;
-   chaque utilisateur a sa propre progression (fiches + parcours),
-   enregistrée automatiquement. Sans compte → mode « invité ».
+   COMPTES UTILISATEURS (cloud Supabase + cache local)
+   Comptes pseudo + mot de passe (haché en bcrypt côté serveur),
+   progression synchronisée automatiquement entre appareils.
+   Sans compte → mode « invité » (local uniquement).
    ============================================================ */
-const USTORE = 'bm_users';
-const SSTORE = 'bm_session';
-function getUsers(){ try{ return JSON.parse(localStorage.getItem(USTORE)||'{}'); }catch{ return {}; } }
-function saveUsers(u){ localStorage.setItem(USTORE, JSON.stringify(u)); }
+const BM_SYNC = {
+  url: 'https://dygwcehqjzbduphiiybf.supabase.co',
+  key: 'sb_publishable_Z8UAoZ94YvS-vLcsu7rfUA_GVYgV81r'   // clé publique (côté client par conception)
+};
+const SSTORE = 'bm_session';   // pseudo connecté
+const TSTORE = 'bm_token';     // jeton de session cloud
+const KSTORE = 'bm_known';     // pseudos déjà connectés sur cet appareil (pour les puces de la page compte)
+const DSTORE = 'bm_dirty';     // progression locale pas encore poussée au cloud
+
 function currentUser(){ return localStorage.getItem(SSTORE) || null; }
-async function hashPass(pass, salt){
-  const data = new TextEncoder().encode(salt + '§' + pass);
-  if(window.crypto && crypto.subtle){
-    const buf = await crypto.subtle.digest('SHA-256', data);
-    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+function knownUsers(){ try{ return JSON.parse(localStorage.getItem(KSTORE)||'[]'); }catch{ return []; } }
+function rememberUser(p){ const k = knownUsers(); if(!k.includes(p)){ k.push(p); localStorage.setItem(KSTORE, JSON.stringify(k)); } }
+
+const BM_ERREURS = {
+  PSEUDO_PRIS:'Ce pseudo est déjà pris.',
+  PSEUDO_INVALIDE:'Pseudo : 2 à 20 caractères (lettres, chiffres, . - _).',
+  MDP_INVALIDE:'Mot de passe : 4 caractères minimum.',
+  IDENTIFIANTS_INCORRECTS:'Pseudo ou mot de passe incorrect.',
+  SESSION_INVALIDE:'Session expirée : reconnecte-toi.'
+};
+async function bmRpc(fn, args){
+  let res;
+  try{
+    res = await fetch(BM_SYNC.url + '/rest/v1/rpc/' + fn, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'apikey':BM_SYNC.key, 'Authorization':'Bearer '+BM_SYNC.key },
+      body: JSON.stringify(args)
+    });
+  }catch{ throw 'Pas de connexion internet — réessaie.'; }
+  const data = await res.json().catch(()=>({}));
+  if(!res.ok){
+    const code = Object.keys(BM_ERREURS).find(c => (data.message||'').includes(c));
+    throw code ? BM_ERREURS[code] : 'Erreur serveur — réessaie dans un instant.';
   }
-  let h = 0; for(const c of (salt+pass)) h = (h*31 + c.charCodeAt(0)) >>> 0; // repli
-  return 'x' + h.toString(16);
+  return data;
 }
+
 async function registerUser(name, pass){
-  name = name.trim();
-  if(!/^[\wÀ-ÿ.-]{2,20}$/.test(name)) throw 'Pseudo : 2 à 20 caractères (lettres, chiffres, . ou -).';
-  if(pass.length < 4) throw 'Mot de passe : 4 caractères minimum.';
-  const users = getUsers();
-  if(users[name]) throw 'Ce pseudo existe déjà sur cet appareil.';
-  const salt = Math.random().toString(36).slice(2,10);
-  users[name] = { salt, hash: await hashPass(pass, salt) };
-  const premier = Object.keys(users).length === 1;
-  saveUsers(users);
-  // 1er compte créé sur l'appareil → il récupère la progression « invité » existante
+  const r = await bmRpc('bm_inscrire', { p_pseudo:(name||'').trim(), p_mdp:pass||'' });
+  const premier = knownUsers().length === 0;
+  localStorage.setItem(SSTORE, r.pseudo);
+  localStorage.setItem(TSTORE, r.token);
+  rememberUser(r.pseudo);
+  // 1er compte sur cet appareil → il adopte la progression « invité » existante, puis on la pousse au cloud
   if(premier){
     const vues = localStorage.getItem(STORE), sc = localStorage.getItem(PSTORE);
-    if(vues) localStorage.setItem(STORE+'::'+name, vues);
-    if(sc) localStorage.setItem(PSTORE+'::'+name, sc);
+    if(vues) localStorage.setItem(STORE+'::'+r.pseudo, vues);
+    if(sc) localStorage.setItem(PSTORE+'::'+r.pseudo, sc);
+    if(vues || sc) planifierSync();
   }
-  localStorage.setItem(SSTORE, name);
 }
 async function loginUser(name, pass){
-  const u = getUsers()[name];
-  if(!u) throw 'Utilisateur inconnu sur cet appareil.';
-  if(await hashPass(pass, u.salt) !== u.hash) throw 'Mot de passe incorrect.';
-  localStorage.setItem(SSTORE, name);
+  const r = await bmRpc('bm_connecter', { p_pseudo:(name||'').trim(), p_mdp:pass||'' });
+  localStorage.setItem(SSTORE, r.pseudo);
+  localStorage.setItem(TSTORE, r.token);
+  rememberUser(r.pseudo);
+  // la progression cloud remplace le cache local de ce pseudo
+  localStorage.setItem(STORE+'::'+r.pseudo, JSON.stringify(r.vues||[]));
+  localStorage.setItem(PSTORE+'::'+r.pseudo, JSON.stringify(r.parcours||{}));
+  localStorage.removeItem(DSTORE);
 }
-function logoutUser(){ localStorage.removeItem(SSTORE); }
+function logoutUser(){
+  const t = localStorage.getItem(TSTORE);
+  if(t) bmRpc('bm_deconnecter', { p_token:t }).catch(()=>{});
+  localStorage.removeItem(SSTORE);
+  localStorage.removeItem(TSTORE);
+}
 /* clé de stockage propre à l'utilisateur connecté (sinon clé « invité ») */
 function skey(base){ const u = currentUser(); return u ? base + '::' + u : base; }
+
+/* ---- synchronisation automatique (avec léger différé pour grouper) ---- */
+let bmSyncTimer = null;
+function planifierSync(){
+  if(!localStorage.getItem(TSTORE)) return;          // invité : rien à pousser
+  localStorage.setItem(DSTORE, '1');
+  clearTimeout(bmSyncTimer);
+  bmSyncTimer = setTimeout(pousserProgression, 1200);
+}
+async function pousserProgression(){
+  const t = localStorage.getItem(TSTORE);
+  if(!t) return;
+  try{
+    await bmRpc('bm_sauvegarder', {
+      p_token:t,
+      p_vues: JSON.parse(localStorage.getItem(skey(STORE))||'[]'),
+      p_parcours: JSON.parse(localStorage.getItem(skey(PSTORE))||'{}')
+    });
+    localStorage.removeItem(DSTORE);
+  }catch(e){
+    if(String(e) === BM_ERREURS.SESSION_INVALIDE){ localStorage.removeItem(TSTORE); localStorage.removeItem(SSTORE); }
+    /* sinon : hors ligne → on réessaiera (drapeau bm_dirty) */
+  }
+}
+/* au démarrage : pousser ce qui n'a pas pu l'être */
+if(localStorage.getItem(DSTORE)) setTimeout(pousserProgression, 800);
+window.addEventListener('online', () => { if(localStorage.getItem(DSTORE)) pousserProgression(); });
 
 /* ---------- Progression (localStorage, par utilisateur) ---------- */
 const STORE = 'brevet_moliere_vues';
@@ -3912,7 +3967,7 @@ function getSeen(){
   try{ return new Set(JSON.parse(localStorage.getItem(skey(STORE)) || '[]')); }
   catch{ return new Set(); }
 }
-function setSeen(set){ localStorage.setItem(skey(STORE), JSON.stringify([...set])); }
+function setSeen(set){ localStorage.setItem(skey(STORE), JSON.stringify([...set])); planifierSync(); }
 function toggleSeen(id){
   const s = getSeen();
   s.has(id) ? s.delete(id) : s.add(id);
@@ -4157,7 +4212,7 @@ function renderNav(active){
    ============================================================ */
 function renderCompte(msg, nomPrefill){
   const u = currentUser();
-  const users = Object.keys(getUsers());
+  const users = knownUsers();
   if(u){
     const vues = getSeen().size;
     const scores = getParcoursScores();
@@ -4168,7 +4223,7 @@ function renderCompte(msg, nomPrefill){
       <div class="compte-card">
         <div class="compte-avatar">${u[0].toUpperCase()}</div>
         <h2>${u}</h2>
-        <p class="lead" style="margin:0 auto 4px">Progression enregistrée automatiquement sur cet appareil.</p>
+        <p class="lead" style="margin:0 auto 4px">☁️ Progression enregistrée automatiquement et <b>synchronisée entre tes appareils</b>.</p>
         <div class="compte-stats">
           <div><b>${vues}</b><span>fiches révisées</span></div>
           <div><b>${valides}/${totalSteps}</b><span>étapes du parcours</span></div>
@@ -4184,8 +4239,8 @@ function renderCompte(msg, nomPrefill){
   app.innerHTML = `
     <div class="section-title"><h1>👤 Connexion</h1></div>
     <div class="compte-card">
-      <p class="lead" style="margin:0 auto">Chaque utilisateur a <b>sa propre progression</b> (fiches révisées + parcours), enregistrée automatiquement.</p>
-      ${users.length?`<p class="compte-switch">Utilisateurs sur cet appareil : ${users.map(x=>`<span class="uchip" data-user="${x}">${x}</span>`).join(' ')}</p>`:''}
+      <p class="lead" style="margin:0 auto">Crée ton compte : ta progression (fiches + parcours) est <b>enregistrée automatiquement</b> et te suit <b>sur tous tes appareils</b>.</p>
+      ${users.length?`<p class="compte-switch">Déjà venus sur cet appareil : ${users.map(x=>`<span class="uchip" data-user="${x}">${x}</span>`).join(' ')}</p>`:''}
       <form id="authForm" autocomplete="off">
         <label>Pseudo<input id="authName" type="text" maxlength="20" placeholder="ex. adrian" value="${nomPrefill||''}" /></label>
         <label>Mot de passe<input id="authPass" type="password" placeholder="••••••" /></label>
@@ -4195,7 +4250,7 @@ function renderCompte(msg, nomPrefill){
           <button class="btn btn-random" data-register type="button">Créer un compte</button>
         </div>
       </form>
-      <p class="video-note">⚠️ Comptes locaux : le mot de passe protège ton profil sur <b>cet appareil</b> ; la progression n’est pas synchronisée entre appareils.</p>
+      <p class="video-note">Connexion internet nécessaire pour se connecter ; ensuite la progression est aussi gardée en local et poussée dès que possible.</p>
     </div>`;
   const val = id => document.getElementById(id).value;
   document.getElementById('authForm').addEventListener('submit', async e => {
@@ -4219,6 +4274,7 @@ function setParcoursScore(key, pct){
   const s = getParcoursScores();
   if(!(key in s) || pct > s[key]) s[key] = pct;
   localStorage.setItem(skey(PSTORE), JSON.stringify(s));
+  planifierSync();
 }
 const PASS = 60; // % minimum pour valider une étape
 
