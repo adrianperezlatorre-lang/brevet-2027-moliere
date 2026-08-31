@@ -57,13 +57,61 @@ function searchFiches(q){
     .map(x => x.f);
 }
 
-/* ---------- Progression (localStorage) ---------- */
+/* ============================================================
+   COMPTES UTILISATEURS (locaux à cet appareil)
+   Plusieurs profils ; mot de passe haché (SHA-256 + sel) ;
+   chaque utilisateur a sa propre progression (fiches + parcours),
+   enregistrée automatiquement. Sans compte → mode « invité ».
+   ============================================================ */
+const USTORE = 'bm_users';
+const SSTORE = 'bm_session';
+function getUsers(){ try{ return JSON.parse(localStorage.getItem(USTORE)||'{}'); }catch{ return {}; } }
+function saveUsers(u){ localStorage.setItem(USTORE, JSON.stringify(u)); }
+function currentUser(){ return localStorage.getItem(SSTORE) || null; }
+async function hashPass(pass, salt){
+  const data = new TextEncoder().encode(salt + '§' + pass);
+  if(window.crypto && crypto.subtle){
+    const buf = await crypto.subtle.digest('SHA-256', data);
+    return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  let h = 0; for(const c of (salt+pass)) h = (h*31 + c.charCodeAt(0)) >>> 0; // repli
+  return 'x' + h.toString(16);
+}
+async function registerUser(name, pass){
+  name = name.trim();
+  if(!/^[\wÀ-ÿ.-]{2,20}$/.test(name)) throw 'Pseudo : 2 à 20 caractères (lettres, chiffres, . ou -).';
+  if(pass.length < 4) throw 'Mot de passe : 4 caractères minimum.';
+  const users = getUsers();
+  if(users[name]) throw 'Ce pseudo existe déjà sur cet appareil.';
+  const salt = Math.random().toString(36).slice(2,10);
+  users[name] = { salt, hash: await hashPass(pass, salt) };
+  const premier = Object.keys(users).length === 1;
+  saveUsers(users);
+  // 1er compte créé sur l'appareil → il récupère la progression « invité » existante
+  if(premier){
+    const vues = localStorage.getItem(STORE), sc = localStorage.getItem(PSTORE);
+    if(vues) localStorage.setItem(STORE+'::'+name, vues);
+    if(sc) localStorage.setItem(PSTORE+'::'+name, sc);
+  }
+  localStorage.setItem(SSTORE, name);
+}
+async function loginUser(name, pass){
+  const u = getUsers()[name];
+  if(!u) throw 'Utilisateur inconnu sur cet appareil.';
+  if(await hashPass(pass, u.salt) !== u.hash) throw 'Mot de passe incorrect.';
+  localStorage.setItem(SSTORE, name);
+}
+function logoutUser(){ localStorage.removeItem(SSTORE); }
+/* clé de stockage propre à l'utilisateur connecté (sinon clé « invité ») */
+function skey(base){ const u = currentUser(); return u ? base + '::' + u : base; }
+
+/* ---------- Progression (localStorage, par utilisateur) ---------- */
 const STORE = 'brevet_moliere_vues';
 function getSeen(){
-  try{ return new Set(JSON.parse(localStorage.getItem(STORE) || '[]')); }
+  try{ return new Set(JSON.parse(localStorage.getItem(skey(STORE)) || '[]')); }
   catch{ return new Set(); }
 }
-function setSeen(set){ localStorage.setItem(STORE, JSON.stringify([...set])); }
+function setSeen(set){ localStorage.setItem(skey(STORE), JSON.stringify([...set])); }
 function toggleSeen(id){
   const s = getSeen();
   s.has(id) ? s.delete(id) : s.add(id);
@@ -292,13 +340,72 @@ function renderRecherche(q){
    NAVIGATION (hash router)
    ============================================================ */
 function renderNav(active){
+  const u = currentUser();
   $('#subjectnav').innerHTML =
     `<a href="#accueil" class="${active==='accueil'?'active':''}">🏠 Accueil</a>` +
     `<a href="#parcours" class="${active==='parcours'?'active':''}">🦉 Parcours</a>` +
     `<a href="#pratique" class="navpratique ${active==='pratique'?'active':''}">📝 Pratique</a>` +
     MATIERES.map(m =>
       `<a href="#matiere/${m.key}" class="${active===m.key?'active':''}">${m.emoji} ${m.nom}</a>`
-    ).join('');
+    ).join('') +
+    `<a href="#compte" class="navuser ${active==='compte'?'active':''}">👤 ${u || 'Se connecter'}</a>`;
+}
+
+/* ============================================================
+   COMPTE : connexion / création / profil
+   ============================================================ */
+function renderCompte(msg, nomPrefill){
+  const u = currentUser();
+  const users = Object.keys(getUsers());
+  if(u){
+    const vues = getSeen().size;
+    const scores = getParcoursScores();
+    const valides = Object.values(scores).filter(p=>p>=PASS).length;
+    const totalSteps = parcoursSteps().length;
+    app.innerHTML = `
+      <div class="section-title"><h1>👤 Mon compte</h1></div>
+      <div class="compte-card">
+        <div class="compte-avatar">${u[0].toUpperCase()}</div>
+        <h2>${u}</h2>
+        <p class="lead" style="margin:0 auto 4px">Progression enregistrée automatiquement sur cet appareil.</p>
+        <div class="compte-stats">
+          <div><b>${vues}</b><span>fiches révisées</span></div>
+          <div><b>${valides}/${totalSteps}</b><span>étapes du parcours</span></div>
+        </div>
+        <div class="compte-actions">
+          <button class="btn btn-ghost" data-logout>Se déconnecter</button>
+          <button class="btn btn-random" data-goto="parcours">Continuer le parcours →</button>
+        </div>
+        ${users.length>1?`<p class="compte-switch">Changer d’utilisateur : ${users.filter(x=>x!==u).map(x=>`<span class="uchip" data-user="${x}">${x}</span>`).join(' ')}</p>`:''}
+      </div>`;
+    return;
+  }
+  app.innerHTML = `
+    <div class="section-title"><h1>👤 Connexion</h1></div>
+    <div class="compte-card">
+      <p class="lead" style="margin:0 auto">Chaque utilisateur a <b>sa propre progression</b> (fiches révisées + parcours), enregistrée automatiquement.</p>
+      ${users.length?`<p class="compte-switch">Utilisateurs sur cet appareil : ${users.map(x=>`<span class="uchip" data-user="${x}">${x}</span>`).join(' ')}</p>`:''}
+      <form id="authForm" autocomplete="off">
+        <label>Pseudo<input id="authName" type="text" maxlength="20" placeholder="ex. adrian" value="${nomPrefill||''}" /></label>
+        <label>Mot de passe<input id="authPass" type="password" placeholder="••••••" /></label>
+        ${msg?`<p class="auth-msg">${msg}</p>`:''}
+        <div class="compte-actions">
+          <button class="btn btn-check" type="submit">Se connecter</button>
+          <button class="btn btn-random" data-register type="button">Créer un compte</button>
+        </div>
+      </form>
+      <p class="video-note">⚠️ Comptes locaux : le mot de passe protège ton profil sur <b>cet appareil</b> ; la progression n’est pas synchronisée entre appareils.</p>
+    </div>`;
+  const val = id => document.getElementById(id).value;
+  document.getElementById('authForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    try{ await loginUser(val('authName').trim(), val('authPass')); renderNav('compte'); renderCompte(); }
+    catch(err){ const n=val('authName'); renderCompte(String(err), n); }
+  });
+  document.querySelector('[data-register]').addEventListener('click', async () => {
+    try{ await registerUser(val('authName'), val('authPass')); renderNav('compte'); renderCompte(); }
+    catch(err){ const n=val('authName'); renderCompte(String(err), n); }
+  });
 }
 
 /* ============================================================
@@ -306,11 +413,11 @@ function renderNav(active){
    ============================================================ */
 const PARCOURS = window.PARCOURS || [];
 const PSTORE = 'brevet_moliere_parcours';   // { "bloc1/l1": 85, "bloc1/examen": 90, ... } meilleur score %
-function getParcoursScores(){ try{ return JSON.parse(localStorage.getItem(PSTORE)||'{}'); }catch{ return {}; } }
+function getParcoursScores(){ try{ return JSON.parse(localStorage.getItem(skey(PSTORE))||'{}'); }catch{ return {}; } }
 function setParcoursScore(key, pct){
   const s = getParcoursScores();
   if(!(key in s) || pct > s[key]) s[key] = pct;
-  localStorage.setItem(PSTORE, JSON.stringify(s));
+  localStorage.setItem(skey(PSTORE), JSON.stringify(s));
 }
 const PASS = 60; // % minimum pour valider une étape
 
@@ -553,6 +660,7 @@ function route(){
     else renderParcours();
   }
   else if(hash==='parcours'){ renderNav('parcours'); renderParcours(); }
+  else if(hash==='compte'){ renderNav('compte'); renderCompte(); }
   else if(hash.startsWith('q/')){ renderNav(''); renderRecherche(hash.slice(2)); }
   else { renderNav('accueil'); renderAccueil(); }
 }
@@ -565,6 +673,17 @@ $('#searchForm').addEventListener('submit', e => {
 });
 
 document.addEventListener('click', e => {
+  const lg = e.target.closest('[data-logout]');
+  if(lg){ logoutUser(); renderNav('compte'); renderCompte(); return; }
+
+  const uc = e.target.closest('.uchip[data-user]');
+  if(uc){
+    if(currentUser()) logoutUser();
+    renderNav('compte'); renderCompte(null, uc.dataset.user);
+    const p = document.getElementById('authPass'); if(p) p.focus();
+    return;
+  }
+
   const goto = e.target.closest('[data-goto]');
   if(goto){ location.hash = goto.dataset.goto; return; }
 

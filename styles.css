@@ -347,6 +347,29 @@ kbd{background:#eef1f9;border-radius:6px;padding:1px 7px;font-family:inherit;fon
 .quiz-resultat.win h1{color:#15803d}
 .quiz-fin-btns{display:flex;gap:12px;justify-content:center;margin-top:18px;flex-wrap:wrap}
 
+/* ---------- Compte utilisateur ---------- */
+.navuser{border-color:#cfd5ea !important;font-weight:700}
+.compte-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;max-width:540px;
+  margin:0 auto;box-shadow:var(--shadow);text-align:center;animation:pop .4s both}
+.compte-avatar{width:64px;height:64px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;
+  font-size:28px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--primary),#7c3aed);
+  box-shadow:0 8px 20px rgba(79,70,229,.35)}
+.compte-card h2{margin:0 0 6px;font-size:24px}
+.compte-stats{display:flex;gap:14px;justify-content:center;margin:16px 0;flex-wrap:wrap}
+.compte-stats div{background:#f7f9fc;border:1px solid var(--line);border-radius:14px;padding:12px 18px;min-width:130px}
+.compte-stats b{font-size:22px;display:block}
+.compte-stats span{color:var(--muted);font-size:12.5px}
+.compte-actions{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+#authForm{display:flex;flex-direction:column;gap:12px;margin-top:14px;text-align:left}
+#authForm label{font-weight:700;font-size:13.5px;display:flex;flex-direction:column;gap:6px;color:var(--ink)}
+#authForm input{border:1px solid var(--line);border-radius:12px;padding:11px 14px;font-size:15px;font-family:inherit;outline:none;transition:.15s}
+#authForm input:focus{border-color:#c3c8f0;box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+.auth-msg{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:10px;padding:9px 12px;margin:0;font-size:14px;font-weight:600}
+.uchip{display:inline-block;background:#eef1f9;border:1px solid var(--line);border-radius:999px;
+  padding:5px 13px;font-weight:700;font-size:13.5px;cursor:pointer;margin:2px;transition:.15s}
+.uchip:hover{background:var(--primary);color:#fff;transform:translateY(-1px)}
+.compte-switch{color:var(--muted);font-size:14px;margin-top:14px}
+
 .footer{max-width:1120px;margin:0 auto;padding:10px 22px 40px;color:var(--muted);font-size:13px;text-align:center}
 
 @media(max-width:640px){
