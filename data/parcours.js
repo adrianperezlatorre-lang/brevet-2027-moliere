@@ -436,8 +436,24 @@ window.PARCOURS = [
         (définition → terme ET terme → définition), toutes les notions. */
   function tronc(s){ s=(s||'').replace(/<[^>]+>/g,''); return s.length>110 ? s.slice(0,107)+'…' : s; }
   function fichesLecons(matieres, niveaux){
+    var EX = window.EXOS || { G:{}, B:{} };
     var pool = F.filter(function(f){ return matieres.indexOf(f.matiereKey)>=0 && niveaux.indexOf(f.niveau)>=0; });
     return pool.map(function(f, fi){
+      /* PRIORITÉ À LA PRATIQUE : générateur (exercices à nombres aléatoires)… */
+      var gen = EX.G[f.id];
+      if(gen){
+        var apercu = []; for(var ai=0; ai<6; ai++) apercu.push(gen());
+        return { id:'f-'+f.id, titre:'Entraînement : '+f.titre, matiereKey:f.matiereKey,
+                 gen: gen, tirage: 6, questions: apercu, fiche: f.id };
+      }
+      /* …ou banc de situations d'application… */
+      var banc = EX.B[f.id];
+      if(banc && banc.length){
+        var bt = Math.min(6, banc.length);
+        return { id:'f-'+f.id, titre:'Entraînement : '+f.titre, matiereKey:f.matiereKey,
+                 pool: banc, tirage: bt, questions: banc.slice(0, bt), fiche: f.id };
+      }
+      /* …sinon repli théorique (terme ↔ définition) */
       var notions = (f.contenu && f.contenu.notions) || [];
       var autres = F.filter(function(g){ return g.matiereKey===f.matiereKey && g!==f && g.contenu && g.contenu.notions && g.contenu.notions.length; });
       var qs = [];
@@ -503,7 +519,11 @@ window.PARCOURS = [
     manuelles.forEach(function(l){
       var lie = fiches.filter(function(f){ return f.matiereKey === l.matiereKey; });
       var ex = [];
-      lie.forEach(function(f){ ex = ex.concat(f.pool); });
+      lie.forEach(function(f){
+        if(f.pool) ex = ex.concat(f.pool);
+        else if(f.gen){ for(var gi=0; gi<3; gi++) ex.push(f.gen()); }
+        else ex = ex.concat(f.questions);
+      });
       if(ex.length) l.extra = ex;
     });
 

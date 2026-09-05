@@ -562,6 +562,13 @@ function varianteQuestion(q){
   return Object.assign({}, q, { choix: mel.map(p=>p.c), sol: mel.findIndex(p=>p.ok) });
 }
 function composerQuestions(src){
+  // leçon à générateur : exercices à nombres aléatoires, neufs à CHAQUE tentative
+  if(src.gen){
+    const n = src.tirage || 6;
+    const fraiches = [];
+    for(let i=0;i<n;i++) fraiches.push(src.gen());
+    return fraiches.map(varianteQuestion);
+  }
   const banc = melangerTableau(src.pool || src.questions);
   const cible = Math.min(src.tirage || src.questions.length, banc.length);
   let choisies = banc.slice(0, cible);
